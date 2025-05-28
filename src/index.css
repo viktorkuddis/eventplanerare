@@ -24,6 +24,8 @@ html {
 
   color: var(--fg-color-primary);
   background-color: var(--bg-color-base);
+  background-color: green;
+
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
