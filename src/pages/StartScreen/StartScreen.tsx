@@ -1,4 +1,3 @@
-import React from "react";
 // import "./Clerkkeanup.modules.css";
 
 import styles from "./StartScreen.module.css";
