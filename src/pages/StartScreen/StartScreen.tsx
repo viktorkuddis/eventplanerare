@@ -20,7 +20,9 @@ const Login = () => {
           <p>EVENTPLANERARE</p>
         </div>
 
-        <button className="btn-filled-primary btn-large">LOGGA IN</button>
+        <button className="btn-outlined-light-static btn-large">
+          <b>LOGGA IN</b>
+        </button>
 
         {/* <SignedIn>
         ANVÄNDAREN ÄR INLOGAD
