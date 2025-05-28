@@ -1,42 +1,125 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+/* size */
+
+
+
+.btn-small {
+    all: unset;
+    padding: 0.45rem 1.25rem;
+    border-radius: 0.40rem;
+    font-size: 80%;
+    cursor: pointer;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.btn-medium {
+    all: unset;
+    padding: 0.5rem 1.5rem;
+    border-radius: 0.5rem;
+    font-size: 95%;
+    cursor: pointer;
+
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.btn-large {
+    all: unset;
+    padding: 0.75rem 2rem;
+    border-radius: 0.75rem;
+    font-size: 105%;
+    cursor: pointer;
+
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+
+
+
+/* Style */
+
+.btn-filled-primary {
+    background-color: var(--brand-color-base);
+    color: var(--fg-color-light-static);
+
+    &:hover {
+        background-color: color-mix(in srgb, var(--brand-color-base), var(--fg-color-light-static) 10%)
+    }
+
+    &:active {
+
+        background-color: color-mix(in srgb, var(--brand-color-base), var(--fg-color-light-static) 20%);
+        outline: none;
+    }
 }
 
-.card {
-  padding: 2em;
+.btn-filled-strong {
+    background-color: var(--brand-color-strong);
+    color: var(--fg-color-light-static);
+
+    &:hover {
+        background-color: color-mix(in srgb, var(--brand-color-strong), var(--fg-color-light-static) 10%)
+    }
+
+    &:active {
+
+        background-color: color-mix(in srgb, var(--brand-color-strong), var(--fg-color-light-static) 20%);
+        outline: none;
+    }
 }
 
-.read-the-docs {
-  color: #888;
+.btn-filled-light-static {
+    background-color: var(--fg-color-light-static);
+    color: var(--brand-color-base);
+
+    &:hover {
+        background-color: color-mix(in srgb, var(--fg-color-light-static), var(--brand-color-base) 10%)
+    }
+
+    &:active {
+
+        background-color: color-mix(in srgb, var(--fg-color-light-static), var(--brand-color-base) 20%);
+        outline: none;
+    }
+
+}
+
+.btn-outlined-primary {
+    color: var(--brand-color-base);
+    border: 1.5px solid var(--brand-color-base);
+
+    &:hover {
+        background-color: color-mix(in srgb, var(--brand-color-base), transparent 90%)
+    }
+
+    &:active {
+
+        background-color: color-mix(in srgb, var(--brand-color-base), transparent 80%);
+        outline: none;
+    }
+}
+
+.btn-outlined-strong {
+    color: var(--brand-color-strong);
+    border: 1.5px solid var(--brand-color-strong);
+
+    &:hover {
+        background-color: color-mix(in srgb, var(--brand-color-strong), transparent 90%)
+    }
+
+    &:active {
+
+        background-color: color-mix(in srgb, var(--brand-color-strong), transparent 80%);
+        outline: none;
+    }
+}
+
+.btn-outlined-light-static {
+    color: var(--fg-color-light-static);
+    border: 1.5px solid var(--fg-color-light-static);
+
+    &:hover {
+        background-color: color-mix(in srgb, var(--fg-color-light-static), transparent 90%)
+    }
+
+    &:active {
+
+        background-color: color-mix(in srgb, var(--fg-color-light-static), transparent 80%);
+        outline: none;
+    }
 }

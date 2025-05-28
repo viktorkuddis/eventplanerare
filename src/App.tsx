@@ -1,9 +1,19 @@
-import {
-  SignedIn,
-  SignedOut,
-  SignInButton,
-  UserButton,
-} from "@clerk/clerk-react";
+// import {
+//   SignedIn,
+//   SignedOut,
+//   SignInButton,
+//   UserButton,
+// } from "@clerk/clerk-react";
+
+import "./App.css";
+import "./Variables.css";
+
+import { Route, BrowserRouter, Routes } from "react-router-dom";
+
+import Login from "./pages/StartScreen/StartScreen";
+import Home from "./pages/Home";
+import NoPage from "./pages/NoPage";
+import Style from "./pages/style";
 
 /* 
 LITE CLERKDOKUMENTATION:
@@ -25,16 +35,13 @@ LITE CLERKDOKUMENTATION:
 
 export default function App() {
   return (
-    <>
-      <header>
-        <SignedOut>
-          <SignInButton />
-        </SignedOut>
-        <SignedIn>
-          <UserButton />
-        </SignedIn>
-      </header>
-      Detta är starter app"
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/" element={<Home />} />
+        <Route path="*" element={<NoPage />} />
+        <Route path="/style" element={<Style />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
