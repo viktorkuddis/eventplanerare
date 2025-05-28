@@ -1,13 +1,12 @@
 .backdrop {
-    /* background-color: var(--brand-color-base); */
+    background-color: var(--brand-color-base);
+    background-color: var(--brand-color-strong);
     min-height: 100svh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    /* gap: 25vh; */
-    gap: 1rem;
-    background-color: color-mix(in srgb, var(--brand-color-base) 30%, white);
+    gap: 25vh;
 
     p,
     h1 {

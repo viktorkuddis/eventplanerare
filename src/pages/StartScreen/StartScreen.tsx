@@ -21,48 +21,7 @@ const Login = () => {
           <p>EVENTPLANERARE</p>
         </div>
 
-        <span style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-          <button className="btn-filled-primary btn-small">LOGGA IN</button>
-          <button className="btn-filled-primary btn-medium">LOGGA IN</button>
-          <button className="btn-filled-primary btn-large">LOGGA IN</button>
-        </span>
-        <span style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-          <button className="btn-outlined-primary btn-small">LOGGA IN</button>
-          <button className="btn-outlined-primary btn-medium">LOGGA IN</button>
-          <button className="btn-outlined-primary btn-large">LOGGA IN</button>
-        </span>
-        <span style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-          <button className="btn-filled-strong btn-small">LOGGA IN</button>
-          <button className="btn-filled-strong btn-medium">LOGGA IN</button>
-          <button className="btn-filled-strong btn-large">LOGGA IN</button>
-        </span>
-        <span style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-          <button className="btn-outlined-strong btn-small">LOGGA IN</button>
-          <button className="btn-outlined-strong btn-medium">LOGGA IN</button>
-          <button className="btn-outlined-strong btn-large">LOGGA IN</button>
-        </span>
-        <span style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-          <button className="btn-filled-light-static btn-small">
-            LOGGA IN
-          </button>
-          <button className="btn-filled-light-static btn-medium">
-            LOGGA IN
-          </button>
-          <button className="btn-filled-light-static btn-large">
-            LOGGA IN
-          </button>
-        </span>
-        <span style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-          <button className="btn-outlined-light-static btn-small">
-            LOGGA IN
-          </button>
-          <button className="btn-outlined-light-static btn-medium">
-            LOGGA IN
-          </button>
-          <button className="btn-outlined-light-static btn-large">
-            LOGGA IN
-          </button>
-        </span>
+        <button className="btn-filled-primary btn-large">LOGGA IN</button>
 
         {/* <SignedIn>
         ANVÄNDAREN ÄR INLOGAD
