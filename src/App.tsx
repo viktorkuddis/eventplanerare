@@ -41,7 +41,7 @@ export default function App() {
         {/* Förstasidan för oinloggade. leder användaren genom inloggningsprocessen. som en dynamisk sida med oliika steg */}
         <Route path="/" element={<Home />} />
         {/* Förstasidan för inloggade. här finns ett flöde med olika events.*/}
-        <Route path="/style" element={<Event />} />
+        {/* <Route path="/style" element={<Event />} /> */}
         {/* detta är sidan för eventet. den visar det valda eventet. den ska va omsluten av en laypoutfil så jag kan ha andra sidor här i ockås*/}
         <Route path="*" element={<NoPage />} /> {/* no page För alla */}
         <Route path="/style" element={<Style />} />
