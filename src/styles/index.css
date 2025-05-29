@@ -95,7 +95,7 @@ textarea {
   all: unset;
   background-color: hsla(0, 0%, 50%, 0.4);
 
-  padding: 0.5rem 1rem;
+  padding: 0.65rem 1rem;
   border-radius: 0.5rem;
   font-size: 110%;
   resize: vertical
