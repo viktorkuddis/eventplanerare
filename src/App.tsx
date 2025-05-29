@@ -5,8 +5,8 @@
 //   UserButton,
 // } from "@clerk/clerk-react";
 
-import "./App.css";
-import "./Variables.css";
+import "./styles/App.css";
+import "./styles/Variables.css";
 
 import { Route, BrowserRouter, Routes } from "react-router-dom";
 
