@@ -1,7 +1,7 @@
 // import "./Clerkkeanup.modules.css";
 
 import styles from "./Login.module.css";
-import "./Clerkkeanup.modules.css";
+import "./Clerkkeanup.module.css";
 import { useState } from "react";
 import { SignIn, SignUp } from "@clerk/clerk-react";
 

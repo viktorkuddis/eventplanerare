@@ -6,6 +6,10 @@
     text-align: center;
     color: var(--fg-color-light-static);
 
+    main {
+        margin-top: auto;
+        margin-bottom: auto;
+    }
 
 }
 
@@ -19,10 +23,7 @@
 
 }
 
-main {
-    margin-top: auto;
-    margin-bottom: auto;
-}
+
 
 .loginScreen {
     padding: 1rem 2rem;

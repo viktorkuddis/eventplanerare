@@ -5,17 +5,14 @@
     min-height: 100svh;
     color: var(--fg-color-light-static);
 
+    main {
+        padding: 2rem 1rem;
+        margin-top: auto;
+        margin-bottom: auto;
 
-}
-
-
-
-main {
-    padding: 2rem 1rem;
-    margin-top: auto;
-    margin-bottom: auto;
-
-    h2 {
-        font-size: var(--font-size-h3);
+        h2 {
+            font-size: var(--font-size-h3);
+        }
     }
+
 }

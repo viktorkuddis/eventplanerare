@@ -82,3 +82,27 @@ h5 {
 h6 {
   font-size: var(--font-size-h6);
 }
+
+
+label {
+  margin-top: 1rem;
+  font-weight: bold;
+  margin-bottom: 0.25rem;
+}
+
+input,
+textarea {
+  all: unset;
+  background-color: hsla(0, 0%, 50%, 0.4);
+
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  font-size: 110%;
+  resize: vertical
+}
+
+textarea {
+
+  height: 5rem;
+  resize: vertical;
+}
