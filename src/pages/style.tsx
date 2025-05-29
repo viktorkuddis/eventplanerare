@@ -6,10 +6,11 @@ const style = () => {
         flexDirection: "column",
         gap: "2rem",
         alignItems: "center",
+        backgroundColor: "var(--bg-color-base)",
       }}
     >
+      hjk
       <h1> KOMPONENTER</h1>
-
       <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
         <h2>KNAPPAR</h2>
         <span
@@ -66,6 +67,8 @@ const style = () => {
             alignItems: "center",
             justifyContent: "center",
             gap: "1rem",
+            padding: "1rem",
+            backgroundColor: "var(--brand-color-strong)",
           }}
         >
           <button className="btn-filled-light-static btn-small">
@@ -84,6 +87,8 @@ const style = () => {
             alignItems: "center",
             justifyContent: "center",
             gap: "1rem",
+            padding: "1rem",
+            backgroundColor: "var(--brand-color-strong)",
           }}
         >
           <button className="btn-outlined-light-static btn-small">
@@ -97,7 +102,6 @@ const style = () => {
           </button>
         </span>
       </div>
-
       <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
         <h2>Närsta komponent</h2>
         här är mer komponenter{" "}

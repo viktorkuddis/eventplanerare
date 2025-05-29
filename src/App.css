@@ -4,16 +4,16 @@
 
 .btn-small {
     all: unset;
-    padding: 0.45rem 1.25rem;
-    border-radius: 0.40rem;
+    padding: 0.45rem 0.90rem;
+    border-radius: 0.45rem;
     font-size: 80%;
     cursor: pointer;
 }
 
 .btn-medium {
     all: unset;
-    padding: 0.5rem 1.5rem;
-    border-radius: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.75rem;
     font-size: 95%;
     cursor: pointer;
 
@@ -21,9 +21,9 @@
 
 .btn-large {
     all: unset;
-    padding: 0.75rem 2rem;
-    border-radius: 0.75rem;
-    font-size: 105%;
+    padding: 0.87rem 1.75rem;
+    border-radius: 0.87rem;
+    font-size: 115%;
     cursor: pointer;
 
 }
