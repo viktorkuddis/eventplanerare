@@ -9,7 +9,6 @@ const style = () => {
         backgroundColor: "var(--bg-color-base)",
       }}
     >
-      hjk
       <h1> KOMPONENTER</h1>
       <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
         <h2>KNAPPAR</h2>
