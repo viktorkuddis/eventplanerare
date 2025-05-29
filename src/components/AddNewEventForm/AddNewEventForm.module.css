@@ -18,7 +18,12 @@
         display: grid;
         grid-template-columns: auto auto;
         gap: 1rem;
-        justify-items: stretch;
+        justify-items: center;
         align-items: center;
+    }
+
+    .timeSectionInputGroup {
+        display: flex;
+        gap: 0.5rem
     }
 }

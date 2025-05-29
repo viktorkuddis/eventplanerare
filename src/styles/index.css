@@ -103,6 +103,8 @@ textarea {
 
 input {
   min-height: 1.5rem;
+  display: flex;
+  align-items: center;
 }
 
 textarea {

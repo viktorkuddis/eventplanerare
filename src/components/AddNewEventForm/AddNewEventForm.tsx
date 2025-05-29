@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./AddNewEventForm.module.css";
 
 interface EventFormValues {
   title: string;
   description: string;
-  startDate: string; // Nu lagrar vi datetime-sträng
-  endDate: string; // Nu lagrar vi datetime-sträng
+  startDate: string; // YYYY-MM-DD
+  startTime: string; // HH:mm
+  endDate: string; // YYYY-MM-DD
+  endTime: string; // HH:mm
   location: string;
 }
 
@@ -13,13 +15,18 @@ const defaultFormValues: EventFormValues = {
   title: "",
   description: "",
   startDate: "",
+  startTime: "",
   endDate: "",
+  endTime: "",
   location: "",
 };
 
 const AddNewEventForm: React.FC = () => {
   const [eventData, setEventData] =
     useState<EventFormValues>(defaultFormValues);
+  const [combinedStartDateTime, setCombinedStartDateTime] =
+    useState<string>("");
+  const [combinedEndDateTime, setCombinedEndDateTime] = useState<string>("");
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -31,10 +38,35 @@ const AddNewEventForm: React.FC = () => {
     }));
   };
 
+  useEffect(() => {
+    if (eventData.startDate && eventData.startTime) {
+      setCombinedStartDateTime(`${eventData.startDate}T${eventData.startTime}`);
+    } else {
+      setCombinedStartDateTime("");
+    }
+
+    if (eventData.endDate && eventData.endTime) {
+      setCombinedEndDateTime(`${eventData.endDate}T${eventData.endTime}`);
+    } else {
+      setCombinedEndDateTime("");
+    }
+  }, [
+    eventData.startDate,
+    eventData.startTime,
+    eventData.endDate,
+    eventData.endTime,
+  ]);
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Event Data:", eventData);
-    // Här kan du hantera datan vidare
+    console.log("Start DateTime:", combinedStartDateTime);
+    console.log("End DateTime:", combinedEndDateTime);
+    console.log("Övrig Event Data:", {
+      title: eventData.title,
+      description: eventData.description,
+      location: eventData.location,
+    });
+    // Här skickar du combinedStartDateTime och combinedEndDateTime till din databas
   };
 
   return (
@@ -48,28 +80,47 @@ const AddNewEventForm: React.FC = () => {
         onChange={handleChange}
         required
       />
+
       <div className={styles.timeSection}>
         <label htmlFor="startDate">Startar:</label>
+        <div className={styles.timeSectionInputGroup}>
+          <input
+            type="date"
+            id="startDate"
+            name="startDate"
+            value={eventData.startDate}
+            onChange={handleChange}
+            required
+          />
+          <input
+            type="time"
+            id="startTime"
+            name="startTime"
+            value={eventData.startTime}
+            onChange={handleChange}
+            required
+          />
+        </div>
 
-        <input
-          type="datetime-local"
-          id="startDate"
-          name="startDate"
-          value={eventData.startDate}
-          onChange={handleChange}
-          required
-        />
-
-        <label htmlFor="endDate">Slutar :</label>
-
-        <input
-          type="datetime-local"
-          id="endDate"
-          name="endDate"
-          value={eventData.endDate}
-          onChange={handleChange}
-          required
-        />
+        <label htmlFor="endDate">Slutar:</label>
+        <div className={styles.timeSectionInputGroup}>
+          <input
+            type="date"
+            id="endDate"
+            name="endDate"
+            value={eventData.endDate}
+            onChange={handleChange}
+            required
+          />
+          <input
+            type="time"
+            id="endTime"
+            name="endTime"
+            value={eventData.endTime}
+            onChange={handleChange}
+            required
+          />
+        </div>
       </div>
 
       <label htmlFor="description">Beskrivning:</label>
@@ -81,7 +132,6 @@ const AddNewEventForm: React.FC = () => {
       />
 
       <label htmlFor="location">Plats:</label>
-
       <input
         type="text"
         id="location"
@@ -92,7 +142,7 @@ const AddNewEventForm: React.FC = () => {
 
       <div>
         <button type="submit">Skapa</button>
-        <button type="button">Avbryt</button> {/* Ändrade typ till button */}
+        <button type="button">Avbryt</button>
       </div>
     </form>
   );
