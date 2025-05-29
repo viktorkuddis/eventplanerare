@@ -1,0 +1,21 @@
+.backdrop {
+    background-color: var(--brand-color-base);
+    background-color: var(--brand-color-strong);
+
+    min-height: 100svh;
+    color: var(--fg-color-light-static);
+
+
+}
+
+
+
+main {
+    padding: 2rem 1rem;
+    margin-top: auto;
+    margin-bottom: auto;
+
+    h2 {
+        font-size: var(--font-size-h3);
+    }
+}

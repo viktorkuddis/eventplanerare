@@ -17,11 +17,11 @@ import {
 } from "react-router-dom";
 
 import Login from "./pages/Login/Login";
-import Home from "./pages/Home";
+import Home from "./pages/HomePage/Home";
 import NoPage from "./pages/NoPage";
 import Style from "./pages/style";
 import { SignedIn, SignedOut, useAuth } from "@clerk/clerk-react";
-import ProtectedPage from "./pages/protectedPage";
+import ProtectedPage from "./pages/ProtectedPage";
 
 /* 
 LITE CLERKDOKUMENTATION:
