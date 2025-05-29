@@ -3,12 +3,7 @@
 import styles from "./Login.module.css";
 import "./Clerkkeanup.modules.css";
 import { useState } from "react";
-import {
-  SignIn,
-  SignOutButton,
-  SignUp,
-  SignUpButton,
-} from "@clerk/clerk-react";
+import { SignIn, SignOutButton, SignUp } from "@clerk/clerk-react";
 
 // import {
 //   SignedIn,
@@ -83,12 +78,6 @@ const Login = () => {
               >
                 <b>Skapa konto</b>
               </button>
-            </p>
-
-            <p>
-              Behöver du ett konto? SKAPA MED VIDAREBEFODRING
-              <br />
-              <SignUpButton />
             </p>
           </div>
         )}
