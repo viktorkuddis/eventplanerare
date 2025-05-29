@@ -82,7 +82,7 @@ const AddNewEventForm: React.FC = () => {
       />
 
       <div className={styles.timeSection}>
-        <label htmlFor="startDate">Startar:</label>
+        <label>Startar:</label>
         <div className={styles.timeSectionInputGroup}>
           <input
             type="date"
@@ -100,9 +100,9 @@ const AddNewEventForm: React.FC = () => {
             onChange={handleChange}
             required
           />
+          <button className="btn-small btn-filled-strong">X</button>
         </div>
-
-        <label htmlFor="endDate">Slutar:</label>
+        <label>Slutar:</label>
         <div className={styles.timeSectionInputGroup}>
           <input
             type="date"
@@ -120,9 +120,9 @@ const AddNewEventForm: React.FC = () => {
             onChange={handleChange}
             required
           />
+          <button className="btn-small btn-filled-strong">X</button>
         </div>
       </div>
-
       <label htmlFor="description">Beskrivning:</label>
       <textarea
         id="description"

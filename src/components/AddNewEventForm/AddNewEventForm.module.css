@@ -7,32 +7,30 @@
 
     .timeSection {
 
-        margin-top: 1.5rem;
-        margin-bottom: 0.5rem;
-
-        label {
-            margin-top: unset;
-
-        }
-
-        display: grid;
-        grid-template-columns: auto auto;
-        gap: 1rem;
-        justify-items: center;
-        align-items: center;
+        display: flex;
+        flex-direction: column;
+        margin: 0.5rem 0;
     }
 
     .timeSectionInputGroup {
         display: flex;
+        flex-wrap: wrap;
+
+
+
 
         gap: 0.5rem;
 
         input[type="time"] {
             min-width: 2rem;
+            padding-left: 0.5rem;
+            padding-right: 0.5rem;
         }
 
         input[type="date"] {
             min-width: 6rem;
+            padding-left: 0.5rem;
+            padding-right: 0.5rem;
         }
     }
 }
