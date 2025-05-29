@@ -14,6 +14,7 @@ import Login from "./pages/Login/Login";
 import Home from "./pages/Home";
 import NoPage from "./pages/NoPage";
 import Style from "./pages/style";
+import { SignedIn, SignedOut } from "@clerk/clerk-react";
 
 /* 
 LITE CLERKDOKUMENTATION:
@@ -37,12 +38,19 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Login />} />
-        {/* Förstasidan för oinloggade. leder användaren genom inloggningsprocessen. som en dynamisk sida med oliika steg */}
-        <Route path="/" element={<Home />} />
-        {/* Förstasidan för inloggade. här finns ett flöde med olika events.*/}
-        {/* <Route path="/style" element={<Event />} /> */}
-        {/* detta är sidan för eventet. den visar det valda eventet. den ska va omsluten av en laypoutfil så jag kan ha andra sidor här i ockås*/}
+        <Route
+          path="/"
+          element={
+            <>
+              <SignedOut>
+                <Login />
+              </SignedOut>
+              <SignedIn>
+                <Home />
+              </SignedIn>
+            </>
+          }
+        />
         <Route path="*" element={<NoPage />} /> {/* no page För alla */}
         <Route path="/style" element={<Style />} />
         {/* denna är öppen för alla. det är bara lite designsystem demo. */}

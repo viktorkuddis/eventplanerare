@@ -3,7 +3,7 @@
 import styles from "./Login.module.css";
 import "./Clerkkeanup.modules.css";
 import { useState } from "react";
-import { SignIn, SignOutButton, SignUp } from "@clerk/clerk-react";
+import { SignIn, SignUp } from "@clerk/clerk-react";
 
 // import {
 //   SignedIn,
@@ -32,7 +32,6 @@ const Login = () => {
   }
   return (
     <>
-      <SignOutButton />
       <div className={styles.backdrop}>
         {activeScreen == "start" && (
           <div className={styles.startScreen}>
