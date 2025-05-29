@@ -13,13 +13,15 @@ const Home = () => {
         <h2>Pågår just nu(breda kort o sidoskroll)</h2>
         <p>Pågår just nu(breda kort o sidoskroll)</p>
         <br />
-
         <h2>Nästa event(lista)</h2>
         <br />
         <h2>Dina events (mindre kort sidoscroll)</h2>
-
-        <button>SKAPA ETT EVENT (ska öppna formulär som modal)</button>
-
+        <button className="btn-medium btn-outlined-light-static">
+          + <br />
+          SKAPA <br />
+          EVENT
+        </button>
+        (ska öppna formulär som modal)
         <AddNewEventForm />
         <br />
         <h2>Kommande Events (ännu mindre kort? sidoscroll)</h2>
