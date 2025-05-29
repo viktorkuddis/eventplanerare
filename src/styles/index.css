@@ -101,8 +101,11 @@ textarea {
   resize: vertical
 }
 
-textarea {
+input {
+  min-height: 1.5rem;
+}
 
-  height: 5rem;
+textarea {
+  min-height: 5rem;
   resize: vertical;
 }
