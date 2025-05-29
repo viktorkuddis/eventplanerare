@@ -64,8 +64,7 @@ button:focus-visible {
 
 /* rubriker */
 h1 {
-  font-size: var(--font-size-h1-strong);
-  line-height: 1.1;
+  font-size: var(--font-size-h1);
 }
 
 h2 {
