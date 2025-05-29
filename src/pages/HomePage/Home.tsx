@@ -18,7 +18,7 @@ const Home = () => {
         <br />
         <h2>Dina events (mindre kort sidoscroll)</h2>
 
-        <button>SKAPA ETT EVENT (ska äppna formulär som modal)</button>
+        <button>SKAPA ETT EVENT (ska öppna formulär som modal)</button>
 
         <AddNewEventForm />
         <br />
