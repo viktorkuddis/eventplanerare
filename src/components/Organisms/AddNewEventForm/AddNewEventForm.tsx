@@ -1,78 +1,74 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styles from "./AddNewEventForm.module.css";
 import ColorPickerButton from "../../atoms/colorPickerButton/ColorPickerButton";
 
 import { colors } from "../../../constants/eventColors";
 
-console.log(colors);
-
-interface EventFormValues {
+type Event = {
   title: string;
   description: string;
-  startDate: string; // YYYY-MM-DD
-  startTime: string; // HH:mm
-  endDate: string; // YYYY-MM-DD
-  endTime: string; // HH:mm
+  start: Date;
+  end: Date;
   location: string;
+  color: string;
 }
 
-const defaultFormValues: EventFormValues = {
-  title: "",
-  description: "",
-  startDate: "",
-  startTime: "",
-  endDate: "",
-  endTime: "",
-  location: "",
-};
 
 const AddNewEventForm: React.FC = () => {
-  const [eventData, setEventData] =
-    useState<EventFormValues>(defaultFormValues);
-  const [combinedStartDateTime, setCombinedStartDateTime] =
-    useState<string>("");
-  const [combinedEndDateTime, setCombinedEndDateTime] = useState<string>("");
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    const { name, value } = e.target;
-    setEventData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
+  const [title, setTitle] = useState<string>("");
+  const [description, setDescription] = useState<string>("");
+  const [startDate, setStartDate] = useState<string>("");
+  const [startTime, setStartTime] = useState<string>("");
+  const [endDate, setEndDate] = useState<string>("");
+  const [endTime, setEndTime] = useState<string>("");
+  const [location, setLocation] = useState<string>("");
+  const [color, setColor] = useState<string>("");
 
-  useEffect(() => {
-    if (eventData.startDate && eventData.startTime) {
-      setCombinedStartDateTime(`${eventData.startDate}T${eventData.startTime}`);
-    } else {
-      setCombinedStartDateTime("");
-    }
 
-    if (eventData.endDate && eventData.endTime) {
-      setCombinedEndDateTime(`${eventData.endDate}T${eventData.endTime}`);
-    } else {
-      setCombinedEndDateTime("");
-    }
-  }, [
-    eventData.startDate,
-    eventData.startTime,
-    eventData.endDate,
-    eventData.endTime,
-  ]);
 
-  const handleSubmit = (e: React.FormEvent) => {
+
+  // const [combinedStartDateTime, setCombinedStartDateTime] = useState<string>("");
+  // const [combinedEndDateTime, setCombinedEndDateTime] = useState<string>("");
+
+  // function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+  //   console.log("ändring skedde")
+
+  //   console.log("inputvärde:", e.target.value)
+
+
+
+  //   setEventData((prev) => ({ ...prev, bajs: "snopp" }))
+
+  //   console.log(eventData)
+  // }
+
+
+  function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    console.log("Start DateTime:", combinedStartDateTime);
-    console.log("End DateTime:", combinedEndDateTime);
-    console.log("Övrig Event Data:", {
-      title: eventData.title,
-      description: eventData.description,
-      location: eventData.location,
-    });
-    // Här skickar du combinedStartDateTime och combinedEndDateTime till din databas
-  };
+
+    const combinedStart = new Date(startDate + "T" + startTime + ":00");
+    const combinedEnd = new Date(endDate + "T" + endTime + ":00");
+
+
+    if (combinedEnd <= combinedStart) {
+      alert("Du kan inte sluta innan du börjat! LOO0oolZ 🙃");
+      return;
+    } else {
+      const newEventData: Event = {
+        title: title,
+        description: description,
+        location: location,
+        color: color,
+        start: combinedStart,
+        end: combinedEnd
+      }
+      console.log("försökte submitta detta :")
+      console.log(newEventData)
+    }
+
+
+  }
 
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
@@ -81,8 +77,8 @@ const AddNewEventForm: React.FC = () => {
         type="text"
         id="title"
         name="title"
-        value={eventData.title}
-        onChange={handleChange}
+        // value={eventData.title}
+        onChange={(e) => setTitle(e.target.value)}
         required
       />
       <div className={styles.timeSection}>
@@ -92,8 +88,7 @@ const AddNewEventForm: React.FC = () => {
             type="date"
             id="startDate"
             name="startDate"
-            value={eventData.startDate}
-            onChange={handleChange}
+            onChange={(e) => setStartDate(e.target.value)}
             required
           />
           <div
@@ -107,8 +102,7 @@ const AddNewEventForm: React.FC = () => {
               type="time"
               id="startTime"
               name="startTime"
-              value={eventData.startTime}
-              onChange={handleChange}
+              onChange={(e) => setStartTime(e.target.value)}
               required
             />
             <button className="btn-small btn-filled-strong">X</button>
@@ -120,8 +114,7 @@ const AddNewEventForm: React.FC = () => {
             type="date"
             id="endDate"
             name="endDate"
-            value={eventData.endDate}
-            onChange={handleChange}
+            onChange={(e) => setEndDate(e.target.value)}
             required
           />
           <div
@@ -135,8 +128,7 @@ const AddNewEventForm: React.FC = () => {
               type="time"
               id="endTime"
               name="endTime"
-              value={eventData.endTime}
-              onChange={handleChange}
+              onChange={(e) => setEndTime(e.target.value)}
               required
             />
             <button className="btn-small btn-filled-strong">X</button>
@@ -147,28 +139,27 @@ const AddNewEventForm: React.FC = () => {
       <textarea
         id="description"
         name="description"
-        value={eventData.description}
-        onChange={handleChange}
+        onChange={(e) => setDescription(e.target.value)}
       />
       <label htmlFor="location">Plats:</label>
       <input
         type="text"
         id="location"
         name="location"
-        value={eventData.location}
-        onChange={handleChange}
+        onChange={(e) => setLocation(e.target.value)}
+
       />
-      <div>
-        <button type="submit">Skapa</button>
-        <button type="button">Avbryt</button>
-      </div>
-      <hr />
+
 
       <div className={styles.colorPickerSectionWrapper}>
         <div className={styles.colorPickerGrid}>
           {colors.map((color, index) => {
             return (
               <ColorPickerButton
+                onClick={() => {
+                  setColor(color.colorValue)
+                  console.log("KLICKK")
+                }}
                 key={index}
                 colorValue={color.colorValue}
                 colorName={color.colorName}
@@ -176,6 +167,11 @@ const AddNewEventForm: React.FC = () => {
             );
           })}
         </div>
+      </div>
+
+      <div>
+        <button type="submit">Skapa</button>
+        <button type="button">Avbryt</button>
       </div>
     </form>
   );
