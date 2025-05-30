@@ -105,7 +105,7 @@ const AddNewEventForm: React.FC = () => {
               onChange={(e) => setStartTime(e.target.value)}
               required
             />
-            <button className="btn-small btn-filled-strong">X</button>
+            {/* <button className="btn-small btn-filled-strong">X</button> */}
           </div>
         </div>
         <label>Slutar:</label>
@@ -131,7 +131,7 @@ const AddNewEventForm: React.FC = () => {
               onChange={(e) => setEndTime(e.target.value)}
               required
             />
-            <button className="btn-small btn-filled-strong">X</button>
+            {/* <button className="btn-small btn-filled-strong">X</button> */}
           </div>
         </div>
       </div>

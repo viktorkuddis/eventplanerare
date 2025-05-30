@@ -21,7 +21,7 @@ export const colors = [
     },
     {
         colorValue: "#009BFF",
-        colorName: "Whater"
+        colorName: "Water"
     },
 
     {
