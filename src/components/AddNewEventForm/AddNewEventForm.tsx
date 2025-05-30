@@ -92,7 +92,13 @@ const AddNewEventForm: React.FC = () => {
             onChange={handleChange}
             required
           />
-          <div>
+          <div
+            style={{
+              display: "flex",
+              gap: "0.5rem",
+              alignItems: "center",
+            }}
+          >
             <input
               type="time"
               id="startTime"
@@ -100,9 +106,8 @@ const AddNewEventForm: React.FC = () => {
               value={eventData.startTime}
               onChange={handleChange}
               required
-              style={{ display: "inline-block", marginRight: "0.5rem" }}
             />
-            <button className="btn-medium btn-filled-strong">X</button>
+            <button className="btn-small btn-filled-strong">X</button>
           </div>
         </div>
         <label>Slutar:</label>
@@ -115,7 +120,13 @@ const AddNewEventForm: React.FC = () => {
             onChange={handleChange}
             required
           />
-          <div>
+          <div
+            style={{
+              display: "flex",
+              gap: "0.5rem",
+              alignItems: "center",
+            }}
+          >
             <input
               type="time"
               id="endTime"
@@ -123,9 +134,8 @@ const AddNewEventForm: React.FC = () => {
               value={eventData.endTime}
               onChange={handleChange}
               required
-              style={{ display: "inline-block", marginRight: "0.5rem" }}
             />
-            <button className="btn-medium btn-filled-strong">X</button>
+            <button className="btn-small btn-filled-strong">X</button>
           </div>
         </div>
       </div>

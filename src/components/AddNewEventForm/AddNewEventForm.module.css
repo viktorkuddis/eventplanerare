@@ -21,16 +21,6 @@
 
         gap: 0.5rem;
 
-        input[type="time"] {
-            min-width: 2rem;
-            padding-left: 0.5rem;
-            padding-right: 0.5rem;
-        }
 
-        input[type="date"] {
-            min-width: 6rem;
-            padding-left: 0.5rem;
-            padding-right: 0.5rem;
-        }
     }
 }
