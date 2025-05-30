@@ -24,3 +24,24 @@
 
     }
 }
+
+
+.colorPickerSectionWrapper {
+    container-type: inline-size;
+
+}
+
+.colorPickerGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+
+
+}
+
+
+@container (min-width:375px) {
+    .colorPickerGrid {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}

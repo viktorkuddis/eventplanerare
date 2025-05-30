@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from "react";
 import styles from "./AddNewEventForm.module.css";
+import ColorPickerButton from "../../atoms/colorPickerButton/ColorPickerButton";
+
+import { colors } from "../../../constants/eventColors";
+
+console.log(colors);
 
 interface EventFormValues {
   title: string;
@@ -80,7 +85,6 @@ const AddNewEventForm: React.FC = () => {
         onChange={handleChange}
         required
       />
-
       <div className={styles.timeSection}>
         <label>Startar:</label>
         <div className={styles.timeSectionInputGroup}>
@@ -146,7 +150,6 @@ const AddNewEventForm: React.FC = () => {
         value={eventData.description}
         onChange={handleChange}
       />
-
       <label htmlFor="location">Plats:</label>
       <input
         type="text"
@@ -155,10 +158,24 @@ const AddNewEventForm: React.FC = () => {
         value={eventData.location}
         onChange={handleChange}
       />
-
       <div>
         <button type="submit">Skapa</button>
         <button type="button">Avbryt</button>
+      </div>
+      <hr />
+
+      <div className={styles.colorPickerSectionWrapper}>
+        <div className={styles.colorPickerGrid}>
+          {colors.map((color, index) => {
+            return (
+              <ColorPickerButton
+                key={index}
+                colorValue={color.colorValue}
+                colorName={color.colorName}
+              />
+            );
+          })}
+        </div>
       </div>
     </form>
   );

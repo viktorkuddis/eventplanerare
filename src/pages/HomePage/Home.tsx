@@ -1,7 +1,7 @@
 import { UserButton } from "@clerk/clerk-react";
 import styles from "./Home.module.css";
 
-import AddNewEventForm from "../../components/AddNewEventForm/AddNewEventForm";
+import AddNewEventForm from "../../components/Organisms/AddNewEventForm/AddNewEventForm";
 
 const Home = () => {
   return (
