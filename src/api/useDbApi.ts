@@ -1,6 +1,9 @@
 import axios from "axios";
 import { useAuth } from "@clerk/clerk-react";
 
+const apiUrl = import.meta.env.VITE_API_URL;
+
+
 export function useDbApi() {
     const { getToken } = useAuth();
 
@@ -10,7 +13,7 @@ export function useDbApi() {
             console.log("token:")
             console.log(token)
 
-            const response = await axios.post(`http://localhost:4000/api/event`, eventData, {
+            const response = await axios.post(`${apiUrl}/event`, eventData, {
                 headers: { Authorization: `Bearer ${token}` }
             });
 
@@ -29,7 +32,7 @@ export function useDbApi() {
             console.log("token:")
             console.log(token)
 
-            const response = await axios.get(`http://localhost:4000/api/event/${userId}`, {
+            const response = await axios.get(`${apiUrl}/event/${userId}`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
 
