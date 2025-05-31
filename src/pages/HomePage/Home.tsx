@@ -1,9 +1,39 @@
 import { UserButton } from "@clerk/clerk-react";
 import styles from "./Home.module.css";
 
+
+
 import AddNewEventForm from "../../components/Organisms/AddNewEventForm/AddNewEventForm";
 
+import { getData } from "../../api/dbApi"
+import { useEffect } from "react";
+
+import { useAuth } from "@clerk/clerk-react";
+
 const Home = () => {
+  const { getToken } = useAuth();
+
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const token = await getToken(); // hämtar JWT från Clerk
+        const data = await getData("http://localhost:4000/api", token);
+
+        console.log(token)
+
+        console.log("Svar från API:", data);
+      } catch (err) {
+        console.error("❌ Error:", err);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+
+
+
   return (
     <div className={styles.backdrop}>
       Detta är feedet Home DU ÄR INLOGGAD BÄSTA du

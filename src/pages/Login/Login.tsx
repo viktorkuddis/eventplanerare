@@ -5,14 +5,7 @@ import "./Clerkkeanup.module.css";
 import { useState } from "react";
 import { SignIn, SignUp } from "@clerk/clerk-react";
 
-// import {
-//   SignedIn,
-//   SignedOut,
-//   SignIn,
-//   SignInButton,
-//   SignOutButton,
-//   SignUp,
-// } from "@clerk/clerk-react";
+
 
 type Screen = "start" | "loginForm" | "RegisterForm";
 
@@ -30,8 +23,12 @@ const Login = () => {
   function showRegisterScreen() {
     setActiveScreen("RegisterForm");
   }
+
+
+
   return (
     <>
+
       <div className={styles.backdrop}>
         {activeScreen == "start" && (
           <div className={styles.startScreen}>
@@ -108,30 +105,7 @@ const Login = () => {
           </div>
         )}
 
-        {/* <SignedIn>
-        ANVÄNDAREN ÄR INLOGAD
-        <br />
-        <SignOutButton />
-      </SignedIn>
 
-      <br />
-      <SignedOut>
-        ANVÄNDAREN ÄR UTLOGGAD
-        <br />
-        <div
-          style={{
-            margin: "0, auto",
-            backgroundColor: "green",
-            width: "100vw",
-          }}
-        >
-          <SignIn />
-          <SignUp />
-        </div>
-        <br />
-        <br />
-        <SignInButton />
-      </SignedOut> */}
       </div>
     </>
   );
