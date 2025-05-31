@@ -4,17 +4,23 @@ import ColorPickerButton from "../../atoms/colorPickerButton/ColorPickerButton";
 
 import { colors } from "../../../constants/eventColors";
 
-type Event = {
-  title: string;
-  description: string;
-  start: Date;
-  end: Date;
-  location: string;
-  color: string;
-}
+
+import { useDbApi } from "../../../api/useDbApi";
+import { useAuth } from "@clerk/clerk-react";
+import type { EventType } from "../../../types";
+
+
+
+
+
 
 
 const AddNewEventForm: React.FC = () => {
+
+  const { createNewEvent } = useDbApi();
+  const { userId } = useAuth();
+
+
 
   const [title, setTitle] = useState<string>("");
   const [description, setDescription] = useState<string>("");
@@ -44,7 +50,7 @@ const AddNewEventForm: React.FC = () => {
   // }
 
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
 
     const combinedStart = new Date(startDate + "T" + startTime + ":00");
@@ -55,16 +61,24 @@ const AddNewEventForm: React.FC = () => {
       alert("Du kan inte sluta innan du börjat! LOO0oolZ 🙃");
       return;
     } else {
-      const newEventData: Event = {
+      const newEventData: EventType = {
         title: title,
         description: description,
         location: location,
         color: color,
         start: combinedStart,
-        end: combinedEnd
+        end: combinedEnd,
+        ownerUserAuthId: userId
       }
       console.log("försökte submitta detta :")
       console.log(newEventData)
+
+      try {
+        const response = await createNewEvent(newEventData);
+        console.log(response);
+      } catch (error) {
+        console.error(error);
+      }
     }
 
 
@@ -72,7 +86,7 @@ const AddNewEventForm: React.FC = () => {
 
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
-      <label htmlFor="title">Eventets Namn:</label>
+      <label htmlFor="title">Eventets Namn: </label>
       <input
         type="text"
         id="title"
@@ -82,7 +96,7 @@ const AddNewEventForm: React.FC = () => {
         required
       />
       <div className={styles.timeSection}>
-        <label>Startar:</label>
+        <label>Startar: </label>
         <div className={styles.timeSectionInputGroup}>
           <input
             type="date"
@@ -108,7 +122,7 @@ const AddNewEventForm: React.FC = () => {
             {/* <button className="btn-small btn-filled-strong">X</button> */}
           </div>
         </div>
-        <label>Slutar:</label>
+        <label>Slutar: </label>
         <div className={styles.timeSectionInputGroup}>
           <input
             type="date"
@@ -135,13 +149,13 @@ const AddNewEventForm: React.FC = () => {
           </div>
         </div>
       </div>
-      <label htmlFor="description">Beskrivning:</label>
+      <label htmlFor="description">Beskrivning: </label>
       <textarea
         id="description"
         name="description"
         onChange={(e) => setDescription(e.target.value)}
       />
-      <label htmlFor="location">Plats:</label>
+      <label htmlFor="location">Plats: </label>
       <input
         type="text"
         id="location"
