@@ -153,16 +153,17 @@ const AddNewEventForm: React.FC = () => {
 
       <div className={styles.colorPickerSectionWrapper}>
         <div className={styles.colorPickerGrid}>
-          {colors.map((color, index) => {
+          {colors.map((c, index) => {
             return (
               <ColorPickerButton
                 onClick={() => {
-                  setColor(color.colorValue)
+                  setColor(c.colorValue)
                   console.log("KLICKK")
                 }}
                 key={index}
-                colorValue={color.colorValue}
-                colorName={color.colorName}
+                colorValue={c.colorValue}
+                colorName={c.colorName}
+                isSelected={c.colorValue == color}
               />
             );
           })}
