@@ -65,8 +65,8 @@ const Home = () => {
         <h2>Dina events (mindre kort sidoscroll)</h2>
 
 
-        {ownEvents.map((event, index) => {
-          return <div key={index} style={{ backgroundColor: event.color, marginBottom: "0.25rem", border: "1px solid white", padding: "0.5rem 1rem", borderRadius: "0.25rem" }}>
+        {Array.isArray(ownEvents) && ownEvents.map((event, index) => (
+          <div key={index} style={{ backgroundColor: event.color, marginBottom: "0.25rem", border: "1px solid white", padding: "0.5rem 1rem", borderRadius: "0.25rem" }}>
             <h3>{event.title}</h3>
             {event.description && (<small><p>{event.description}</p></small>)}
             <small>
@@ -77,7 +77,9 @@ const Home = () => {
             {event.location && <p><small>{event.location}</small></p>}
 
           </div>
-        })}
+        ))}
+
+
         <button className="btn-medium btn-outlined-light-static">
           + <br />
           SKAPA <br />
