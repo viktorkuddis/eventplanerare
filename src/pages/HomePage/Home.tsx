@@ -32,6 +32,8 @@ const Home = () => {
   const [ownEvents, setOwnEvents] = useState<EventType[]>([]);
 
   useEffect(() => {
+    console.log("Skickar userId till API:", userId);
+
     (async () => {
       try {
         const response = await getEventsByUserId(userId);
