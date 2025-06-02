@@ -60,7 +60,7 @@ const Home = () => {
         title={"Överskrift vänligen "}
         footerContent={null}
         type={"drawer"}
-      >
+        size={"large"}>
         Detta är innehåll i modalen här kan man ha till exempel ett fiormulär :)
       </Modal >
 

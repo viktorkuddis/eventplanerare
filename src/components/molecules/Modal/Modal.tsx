@@ -13,6 +13,7 @@ interface ModalProps {
     title: string | null;
     closeModal: () => void;
     type: "standard" | "drawer"
+    size: "small" | "large"
 }
 
 // ***** INSTRUKTIONER *****
@@ -27,7 +28,8 @@ const Modal: React.FC<ModalProps> = ({
     closeModal,
     title,
     footerContent,
-    type = "standard"
+    type = "standard",
+    size = "small"
 }) => {
     // spara dialogelementet i en variabel
     const dialogElement = useRef<HTMLDialogElement | null>(null);
@@ -79,27 +81,40 @@ const Modal: React.FC<ModalProps> = ({
 
     return (
         <dialog ref={dialogElement} className={` ${styles.dialog}  `}>
-            <div className={`  ${styles.contentContainer} ${type == "drawer" && styles.drawer}`}>
+            <div className={`${styles.contentContainer} ${type == "drawer" && styles.drawer}`}>
+
                 <div className={styles.header}>
 
-                    <span className={styles.title}><h3 >{title}</h3></span>
+                    <span className={`${styles.title} ${size == "small"
+                        ? styles.small
+                        : size == "large"
+                            ? styles.large
+                            : ""
+                        }`}>
+                        <h3>{title}</h3>
+                    </span>
                     <button className={styles.closeButton} onClick={closeModal}>
                         <X size={"1.5rem"} />
                     </button>
                 </div>
-                <div className={styles.main}>
+
+
+                <div className={`
+                ${styles.main} ${size == "small"
+                        ? styles.small
+                        : size == "large"
+                            ? styles.large
+                            : ""
+                    }`} >
                     {children}
+
+                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Vel dolorum ducimus, officia qui voluptatibus nihil quas, dolore quod impedit aspernatur repellendus. Qui exercitationem repudiandae ipsa voluptates alias eum ex sit?
                 </div>
 
                 {footerContent && <div className={styles.footer}>
                     {footerContent}
                 </div>}
 
-                {/* extra marginal ner mot enhetens  kand om det är en wrawer vi har att göra med :) */}
-                {type == "drawer" &&
-                    <div style={{
-                        height: "2rem"
-                    }} />}
 
 
 

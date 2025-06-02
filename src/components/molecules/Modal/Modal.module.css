@@ -41,42 +41,35 @@
     border-radius: 1rem;
 }
 
-
 dialog::backdrop {
     background-color: rgba(0, 0, 0, 0.5);
 }
-
-
 
 
 .contentContainer {
     background-color: var(--bg-color-elevated);
     color: var(--fg-color-primary);
 
-    /* overflow: hidden; */
     display: flex;
     flex-direction: column;
     max-height: 90svh;
     max-width: 90svw;
     padding: 1rem 0rem 1rem 0rem;
-
 }
 
-.drawer {
-    position: fixed;
-    bottom: 0px;
-    width: 100svw;
-    left: 50%;
-    transform: translateX(-50%);
 
-    max-height: 90svh;
-    max-height: 95svh;
-    max-width: 100svw;
-
-    border-radius: 1rem 1rem 0 0;
-
-    animation: slideUp 0.2s ease;
+/* storlekar för innehåållet i modalen.*/
+.small {
+    max-width: var(--modal-content-max-width-small);
+    margin: 0 auto
 }
+
+.large {
+    max-width: var(--modal--content-max-width-large);
+    margin: 0 auto
+}
+
+
 
 .header {
     /* background-color: aqua; */
@@ -88,19 +81,23 @@ dialog::backdrop {
     justify-content: space-between;
     gap: 1rem;
 
+
     .title {
         display: flex;
         align-items: center;
-
+        flex-grow: 1;
+        /* background-color: aquamarine; */
     }
 
     .closeButton {
         all: unset;
         display: grid;
         place-content: center;
-        height: 2.5rem;
+
         border-radius: 2rem;
         aspect-ratio: 1/1;
+
+        height: 2.5rem;
 
         &:hover {
             background-color: hsla(0, 0%, 50%, 0.10);
@@ -121,6 +118,32 @@ dialog::backdrop {
 .footer {
     overflow: auto;
     flex-shrink: 0;
+    padding: 0rem 1rem;
+    /* background-color: aqua; */
+}
 
-    background-color: aqua;
+
+/* Drawer ska bara fungera på små skärmar. på stora skärmar gäller vanlig modal. */
+@media screen and (max-width: 576px) {
+    .drawer {
+        position: fixed;
+        bottom: 0px;
+        left: 50%;
+        transform: translateX(-50%);
+
+        max-height: 95svh;
+
+        /* både bredd och max-bredd behövs */
+        /* sätter bredden */
+        width: 100svw;
+        /* skriver över den maxbredd som standardmodalen har annars */
+        max-width: 100svw;
+
+        border-radius: 1rem 1rem 0 0;
+
+        animation: slideUp 0.2s ease;
+
+        /* extra padding mot telefonens botten och navigeringsfält och så. */
+        padding-bottom: 3rem;
+    }
 }
