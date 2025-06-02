@@ -1,6 +1,8 @@
 import React, { useEffect, useRef } from "react";
 
 import styles from "./Modal.module.css";
+import "./noScroll.css";
+
 
 import { X } from 'react-feather';
 
@@ -40,12 +42,12 @@ const Modal: React.FC<ModalProps> = ({
 
         if (isOpen && !dialog.open) {
             dialog.showModal();
-            // Blockera scroll på body
-            document.body.style.overflow = "hidden";
+            // Blockera scroll på body (global klass)
+            document.body.classList.add("no-scroll");
         } else if (!isOpen && dialog.open) {
             dialog.close();
-            // Återställ scroll på body
-            document.body.style.overflow = "";
+            // Återställ scroll på body (global klass)
+            document.body.classList.remove("no-scroll");
         }
 
 

@@ -1,0 +1,10 @@
+/* 
+
+  Den här klassen används för att stoppa scroll på bakgrunden när modalen är öppen. 
+  Eftersom vi lägger den på <body> måste den finnas i en global CSS-fil (inte modulär). 
+  Klassen läggs till och tas bort från <body> för att slå av och på scrollen på sidan.
+*/
+
+.no-scroll {
+  overflow: hidden;
+}

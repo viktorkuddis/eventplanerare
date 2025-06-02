@@ -47,6 +47,8 @@ dialog::backdrop {
 }
 
 
+
+
 .contentContainer {
     background-color: var(--bg-color-elevated);
     color: var(--fg-color-primary);
