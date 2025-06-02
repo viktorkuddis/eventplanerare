@@ -94,8 +94,6 @@ dialog::backdrop {
 
     .closeButton {
         all: unset;
-
-        font-size: 1.25rem;
         display: grid;
         place-content: center;
         height: 2.5rem;

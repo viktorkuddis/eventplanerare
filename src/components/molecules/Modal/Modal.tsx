@@ -2,6 +2,8 @@ import React, { useEffect, useRef } from "react";
 
 import styles from "./Modal.module.css";
 
+import { X } from 'react-feather';
+
 interface ModalProps {
     isOpen: boolean;
     children: React.ReactNode;
@@ -79,7 +81,9 @@ const Modal: React.FC<ModalProps> = ({
                 <div className={styles.header}>
 
                     <span className={styles.title}><h3 >{title}</h3></span>
-                    <button className={styles.closeButton} onClick={closeModal}> &#10005;</button>
+                    <button className={styles.closeButton} onClick={closeModal}>
+                        <X size={"1.5rem"} />
+                    </button>
                 </div>
                 <div className={styles.main}>
                     {children}
@@ -95,7 +99,11 @@ const Modal: React.FC<ModalProps> = ({
                         height: "2rem"
                     }} />}
 
+
+
+
             </div>
+
         </dialog >
     );
 };
