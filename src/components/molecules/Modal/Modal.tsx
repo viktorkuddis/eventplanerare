@@ -3,7 +3,6 @@ import React, { useEffect, useRef } from "react";
 import styles from "./Modal.module.css";
 import "./noScroll.css";
 
-
 import { X } from 'react-feather';
 
 interface ModalProps {
@@ -19,6 +18,10 @@ interface ModalProps {
 // ***** INSTRUKTIONER *****
 // *** - Man hanterar denna modalen utifrån med ett state *isOpen* (bolean)
 // *** - closeModal är funktonen som bör sätta statet till False.
+// ***
+// ***  [Info:]
+// ***   Drawer är bara drawer i mobil-breakpoint.
+// ***   Size avgör hur brett innehållet tillåts bli.
 // *************************
 
 // Funktionell React-komponent för en modal
@@ -52,7 +55,6 @@ const Modal: React.FC<ModalProps> = ({
             document.body.classList.remove("no-scroll");
         }
 
-
         // Stänger modal vid klick utanför innehållet, dvs dialogelementet.
         function handleClickOutside(event: MouseEvent) {
             if (event.target === dialog) {
@@ -63,8 +65,6 @@ const Modal: React.FC<ModalProps> = ({
         function handleCancel() {
             closeModal();
         }
-
-
 
         // lyssnare:
         dialog.addEventListener("click", handleClickOutside);
@@ -79,45 +79,35 @@ const Modal: React.FC<ModalProps> = ({
         };
     }, [closeModal, isOpen]);
 
+    // klass att sätta bredden på  innehållet med:
+    const sizeClass = size === "small"
+        ? styles.small
+        : size === "large"
+            ? styles.large
+            : "";
+
+
     return (
         <dialog ref={dialogElement} className={` ${styles.dialog}  `}>
             <div className={`${styles.contentContainer} ${type == "drawer" && styles.drawer}`}>
 
                 <div className={styles.header}>
-
-                    <span className={`${styles.title} ${size == "small"
-                        ? styles.small
-                        : size == "large"
-                            ? styles.large
-                            : ""
-                        }`}>
+                    <span className={`${styles.title}`}>
                         <h3>{title}</h3>
                     </span>
+
                     <button className={styles.closeButton} onClick={closeModal}>
                         <X size={"1.5rem"} />
                     </button>
                 </div>
 
-
-                <div className={`
-                ${styles.main} ${size == "small"
-                        ? styles.small
-                        : size == "large"
-                            ? styles.large
-                            : ""
-                    }`} >
+                <div className={`${styles.main} ${sizeClass}`} >
                     {children}
-
-                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Vel dolorum ducimus, officia qui voluptatibus nihil quas, dolore quod impedit aspernatur repellendus. Qui exercitationem repudiandae ipsa voluptates alias eum ex sit?
                 </div>
 
-                {footerContent && <div className={styles.footer}>
+                {footerContent && <div className={`${styles.footer} ${sizeClass}`} >
                     {footerContent}
                 </div>}
-
-
-
-
 
             </div>
 

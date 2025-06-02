@@ -57,11 +57,21 @@ const Home = () => {
       <Modal
         isOpen={modalIsShowing}
         closeModal={() => setModalIsShowing(false)}
-        title={"Överskrift vänligen "}
-        footerContent={null}
+        title={"Vill du sälja din själ?"}
+        footerContent={<div style={{ textAlign: "right" }}><button>jatack snälla</button></div>}
         type={"drawer"}
-        size={"large"}>
-        Detta är innehåll i modalen här kan man ha till exempel ett fiormulär :)
+        size={"large"} >
+        Vänligen tryck på fortsätt för att bekräfta att du vill det.  <br /> Vänligen, tack så mycket!
+        <br />
+        <br />
+        <small>
+
+
+          Legal text:
+          <br />
+          <i> Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi ullam esse, placeat vero harum reiciendis officiis iste. Quia, blanditiis nisi. Laudantium, sequi. Fuga vero ad, pariatur earum vel hic repudiandae.</i>
+
+        </small>
       </Modal >
 
 

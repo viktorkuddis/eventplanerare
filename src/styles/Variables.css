@@ -1,77 +1,81 @@
 html {
-        /* _____________________________________
+    /* _____________________________________
     - - - T E X T S T O R L E K A R - - - */
 
-        /* Storlekarna är standardstorlekar för rubriker baserat på rem storlek.
+    /* Storlekarna är standardstorlekar för rubriker baserat på rem storlek.
     Use case: Då en heading ska ha ett annat visuellt utseende än den ska semantiskt. Exempelvis h2 med visuell storlek av heading 3. */
 
-        --font-size-base: 1rem;
-        --font-size-h1: calc(var(--font-size-base) * 2);
-        /* font size strong är större!! */
-        --font-size-h1-strong: calc(var(--font-size-base) * 3.2);
-        --font-size-h2: calc(var(--font-size-base) * 1.5);
-        --font-size-h3: calc(var(--font-size-base) * 1.17);
-        --font-size-h4: var(--font-size-base);
-        --font-size-h5: calc(var(--font-size-base) * 0.83);
-        --font-size-h6: calc(var(--font-size-base) * 0.67);
+    --font-size-base: 1rem;
+    --font-size-h1: calc(var(--font-size-base) * 2);
+    /* font size strong är större!! */
+    --font-size-h1-strong: calc(var(--font-size-base) * 3.2);
+    --font-size-h2: calc(var(--font-size-base) * 1.5);
+    --font-size-h3: calc(var(--font-size-base) * 1.17);
+    --font-size-h4: var(--font-size-base);
+    --font-size-h5: calc(var(--font-size-base) * 0.83);
+    --font-size-h6: calc(var(--font-size-base) * 0.67);
 
-        /* _______________________________________
+    /* _______________________________________
     - - - - - - - F Ä R G E R - - - - - - - */
 
-        --bg-color-base: color-mix(in srgb, var(--brand-color-strong) 10%, white);
-        --bg-color-elevated: #ffffff;
+    --bg-color-base: color-mix(in srgb, var(--brand-color-strong) 10%, white);
+    --bg-color-elevated: #ffffff;
 
-        /* --bg-color-base-inverted: #f5f5f5;
+    /* --bg-color-base-inverted: #f5f5f5;
     --bg-color-elevated-inverted: #ffffff; */
 
-        --fg-color-primary: #000b0f;
-        --fg-color-secondary: color-mix(in srgb, var(--fg-color-primary) 70%, white);
+    --fg-color-primary: #000b0f;
+    --fg-color-secondary: color-mix(in srgb, var(--fg-color-primary) 70%, white);
 
-        --fg-color-light-static: #ffffff;
+    --fg-color-light-static: #ffffff;
 
-        --brand-color-strong: #165973;
-        --brand-color-base: #2D7B85;
+    --brand-color-strong: #165973;
+    --brand-color-base: #2D7B85;
 
-        --brand-color-strong-subtle: color-mix(in srgb,
-                        var(--brand-color-strong) 20%,
-                        var(--bg-color-base));
-        --brand-color-base-subtle: color-mix(in srgb,
-                        var(--brand-color-base) 20%,
-                        var(--bg-color-base));
+    --brand-color-strong-subtle: color-mix(in srgb,
+            var(--brand-color-strong) 20%,
+            var(--bg-color-base));
+    --brand-color-base-subtle: color-mix(in srgb,
+            var(--brand-color-base) 20%,
+            var(--bg-color-base));
 
-        /* --border-color-strong: rgb(255, 255, 255);
+    /* --border-color-strong: rgb(255, 255, 255);
     --border-color-subtle: rgba(255, 255, 255, 0.487); */
 
-        /* --shadow-color-base: rgb(0, 0, 0); */
+    /* --shadow-color-base: rgb(0, 0, 0); */
 
-        /* _____________________________________
+    /* _____________________________________
     - - - - - - - U N I T S - - - - - - - */
 
-        /* border */
-        --border-radius-base: 1rem;
-        --border-radius-lg: 2rem;
-        --border-radius-sm: 0.5rem;
+    /* border */
+    --border-radius-base: 1rem;
+    --border-radius-lg: 2rem;
+    --border-radius-sm: 0.5rem;
 
 
+    /* _______________________________________
+    - - - - - B R E D D E R - - - - - */
+    /* SIDAN */
+    --page-width: 1000px;
 
-        /* Max-bredderpå olika sidor. */
-        --page-width: 1000px;
-        --modal-content-max-width-small: 500px;
-        --modal--content-max-width-large: 800px;
+    /* MODALINNEHÅLL*/
+    /* maxbredd small är samma som minsta brytpunkt */
+    --modal-content-max-width-small: 576px;
+    --modal--content-max-width-large: 800px;
 
-        /* Breakpoints */
-        /* https://getbootstrap.com/docs/5.3/layout/breakpoints/ */
-        /* css variablar funkar inte i media wuerys :(  */
-        /* ---------------------------------------- */
-        /* BOOTRAPS BREAKPOINTS:                    */
-        /* Breakpoint       Class   Dimensions      */
-        /* Extra small      None	<576px      */
-        /* Small	        sm      ≥576px      */
-        /* Medium	        md      ≥768px      */
-        /* Large	        lg      ≥992px      */
-        /* Extra large          xl      ≥1200px     */
-        /* XX large	        xl      ≥1400px    */
-        /* ---------------------------------------- */
+    /* Breakpoints */
+    /* https://getbootstrap.com/docs/5.3/layout/breakpoints/ */
+    /* css variablar funkar inte i media wuerys :(  */
+    /* ---------------------------------------- */
+    /* BOOTRAPS BREAKPOINTS:                    */
+    /* Breakpoint       Class   Dimensions      */
+    /* Extra small      None	<576px      */
+    /* Small	        sm      ≥576px      */
+    /* Medium	        md      ≥768px      */
+    /* Large	        lg      ≥992px      */
+    /* Extra large          xl      ≥1200px     */
+    /* XX large	        xl      ≥1400px    */
+    /* ---------------------------------------- */
 
 
 

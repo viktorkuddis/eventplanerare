@@ -58,7 +58,7 @@ dialog::backdrop {
 }
 
 
-/* storlekar för innehåållet i modalen.*/
+/* storlekar för innehållet i modalen.*/
 .small {
     max-width: var(--modal-content-max-width-small);
     margin: 0 auto
@@ -113,12 +113,15 @@ dialog::backdrop {
     padding: 0rem 1rem;
     overflow: auto;
     /* background-color: aqua; */
+    width: 100%;
 }
 
 .footer {
     overflow: auto;
     flex-shrink: 0;
+    width: 100%;
     padding: 0rem 1rem;
+    padding-top: 0.5rem;
     /* background-color: aqua; */
 }
 
