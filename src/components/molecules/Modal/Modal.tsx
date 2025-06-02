@@ -89,6 +89,12 @@ const Modal: React.FC<ModalProps> = ({
                     {footerContent}
                 </div>}
 
+                {/* extra marginal ner mot enhetens  kand om det är en wrawer vi har att göra med :) */}
+                {type == "drawer" &&
+                    <div style={{
+                        height: "2rem"
+                    }} />}
+
             </div>
         </dialog >
     );

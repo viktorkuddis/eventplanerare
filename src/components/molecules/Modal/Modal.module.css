@@ -37,7 +37,7 @@
 }
 
 .dialog {
-    box-shadow: 0 0 3rem rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 3rem rgba(0, 0, 0, 0.3);
     border-radius: 1rem;
 }
 
@@ -56,7 +56,7 @@ dialog::backdrop {
     flex-direction: column;
     max-height: 90svh;
     max-width: 90svw;
-    padding: 1rem 0rem 2rem 0rem;
+    padding: 1rem 0rem 1rem 0rem;
 
 }
 
