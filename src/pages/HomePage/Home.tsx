@@ -5,7 +5,7 @@ import styles from "./Home.module.css";
 
 import AddNewEventForm from "../../components/Organisms/AddNewEventForm/AddNewEventForm";
 
-
+import Modal from "../../components/molecules/Modal/Modal";
 
 import { useDbApi } from "../../api/useDbApi";
 import { useEffect, useState } from "react";
@@ -47,16 +47,28 @@ const Home = () => {
   }, []);
 
 
+  const [modalIsShowing, setModalIsShowing] = useState(false)
   return (
-
 
 
     <div className={styles.backdrop}>
 
+      <button onClick={() => { setModalIsShowing(true) }}>VISAMODAL</button>
+      <Modal
+        isOpen={modalIsShowing}
+        closeModal={() => setModalIsShowing(false)}
+        title={"Överskrift vänligen "}
+        footerContent={null}
+        type={"drawer"}
+      >
+        Detta är innehåll i modalen här kan man ha till exempel ett fiormulär :)
+      </Modal >
+
+
       <button onClick={testfunction}> KLICKA PÅ TESTKNAPPEN</button>
 
       Detta är feedet Home DU ÄR INLOGGAD BÄSTA du
-      <UserButton />
+      < UserButton />
       <hr />
       <main>
         <h2>Pågår just nu(breda kort o sidoskroll)</h2>
