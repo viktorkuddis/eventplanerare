@@ -15,7 +15,7 @@ const AddNewEventModal = ({ isOpen, onCloseModal }: Props) => {
             title={"Skapa nytt event"}
             onCloseModal={onCloseModal}
             type={"drawer"}
-            size={'small'} />
+            size={'large'} />
     )
 }
 

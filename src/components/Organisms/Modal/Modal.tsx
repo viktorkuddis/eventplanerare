@@ -101,7 +101,11 @@ const Modal: React.FC<ModalProps> = ({
                     </button>
                 </div>
 
-                <div className={`${styles.main} ${sizeClass}`} >
+                <div className={`${styles.main} ${sizeClass} ${size === "small"
+                    ? styles.small
+                    : size === "large"
+                        ? styles.large
+                        : ""}`} >
                     {children}
                 </div>
 

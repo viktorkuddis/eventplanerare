@@ -1,7 +1,6 @@
 .form {
     display: flex;
     flex-direction: column;
-    /* background-color: green; */
 
 
 
@@ -16,11 +15,21 @@
         display: flex;
         flex-wrap: wrap;
 
-
-
-
         gap: 0.5rem;
 
+
+    }
+
+
+}
+
+/* Vid brytpunkt från mobil till desktop sätts en minsta bredd på formuläret. annars blire så smalt :)   */
+@media screen and (min-width: 576px) {
+    form {
+
+        min-width: 450px;
+
+        /* background-color: antiquewhite; */
 
     }
 }
