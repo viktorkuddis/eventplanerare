@@ -75,7 +75,7 @@ const Modal: React.FC<ModalProps> = ({
         dialog.addEventListener("click", handleClickOutside);
         dialog.addEventListener("cancel", handleCancel);
 
-        console.log("en use effekt kördes")
+
 
 
         // Cleanup

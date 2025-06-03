@@ -3,7 +3,7 @@ import type { EventType } from '../types';
 
 export type AppContextType = {
     ownEvents: EventType[];
-    setOwnEvents: (events: EventType[]) => void;
+    setOwnEvents: React.Dispatch<React.SetStateAction<EventType[]>>;
 };
 
 

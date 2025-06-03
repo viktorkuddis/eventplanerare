@@ -68,6 +68,9 @@ const Home = () => {
 
     <div className={styles.backdrop}>
 
+      {context?.ownEvents?.map((event) => (event.title))}
+
+
       {/* MODAL */}
       <AddNewEventModal isOpen={showNewEventFormModal} onCloseModal={() => setShowNewEventFormModal(false)} />
 

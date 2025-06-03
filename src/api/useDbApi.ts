@@ -3,9 +3,13 @@ import { useAuth } from "@clerk/clerk-react";
 
 const apiUrl = import.meta.env.VITE_API_URL;
 
+import { AppContext } from "../context /AppContext";
+import { useContext } from "react";
+
 
 export function useDbApi() {
     const { getToken } = useAuth();
+    const context = useContext(AppContext)
 
     async function createNewEvent(eventData: object) {
         try {
@@ -17,31 +21,37 @@ export function useDbApi() {
                 headers: { Authorization: `Bearer ${token}` }
             });
 
-
+            // lägger till data till context
+            context?.setOwnEvents((prev) => [...prev, response.data]);
             return response.data;
+
         } catch (error) {
             console.error("Fel vid axios.post:", error);
             throw error;
         }
     }
 
-
+    // HÄMTAR ALLA EVENT SOM TILLHÖR EN SPECIFFIK ANVÄNDARE
     async function getEventsByUserId(userId: string | null | undefined) {
         try {
             const token = await getToken();
-            console.log("token:")
-            console.log(token)
+            // console.log("token:")
+            // console.log(token)
 
             const response = await axios.get(`${apiUrl}/event/${userId}`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
 
+            // sätter data till context
+            context?.setOwnEvents(response.data)
 
             return response.data;
         } catch (error) {
             console.error("Fel vid axios.post:", error);
             throw error;
         }
+
+
     }
 
 
