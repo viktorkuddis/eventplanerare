@@ -39,6 +39,15 @@ const Modal: React.FC<ModalProps> = ({
 
     // useEffect(() => console.log(dialogElement.current))
 
+
+
+    // hanterar en modalstängning. gör bodyn skrollbakr igen
+    // och kallar och extern händelse.
+    function handleCloseModal() {
+        onCloseModal()
+        document.body.classList.remove("no-scroll")
+    }
+
     // när isopen förändras kollar vi av om modalen ska vara öppen synlig eller ej:
     useEffect(() => {
         if (!dialogElement.current) return;
@@ -55,20 +64,26 @@ const Modal: React.FC<ModalProps> = ({
             document.body.classList.remove("no-scroll");
         }
 
+
+
         // Stänger modal vid klick utanför innehållet, dvs dialogelementet.
         function handleClickOutside(event: MouseEvent) {
             if (event.target === dialog) {
-                onCloseModal();
+                handleCloseModal()
             }
         }
         // Stänger nollställer state vis cancel så att stat inte fortfarande tror att modalen är öppen :)
         function handleCancel() {
-            onCloseModal();
+            handleCloseModal()
         }
+
 
         // lyssnare:
         dialog.addEventListener("click", handleClickOutside);
         dialog.addEventListener("cancel", handleCancel);
+
+        console.log("en use effekt kördes")
+
 
         // Cleanup
         return () => {
@@ -77,6 +92,8 @@ const Modal: React.FC<ModalProps> = ({
             // Återställ alltid scroll när cleanup sker
             document.body.style.overflow = "";
         };
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [onCloseModal, isOpen]);
 
     // klass att sätta bredden på  innehållet med:
@@ -88,51 +105,54 @@ const Modal: React.FC<ModalProps> = ({
 
 
     return (
-
-        <dialog ref={dialogElement} className={` ${styles.dialog}  `}>
-            {/* //detta fixar en bug som finns i mobil safari att bakgrunden ibland kan skrollas ändå. */}
-            <div className={styles.oldSchoolBackDrop}>
-                <div className={`${styles.contentContainer} ${type == "drawer" && styles.drawer}`}>
+        <>
+            {isOpen && <div className={styles.oldSchoolBackDrop}>
 
 
-                    <div className={styles.header}>
-                        <span className={`${styles.title}`}>
-                            <h3>{title}</h3>
-                        </span>
+                <dialog ref={dialogElement} className={` ${styles.dialog}  `}>
+                    {/* //detta fixar en bug som finns i mobil safari att bakgrunden ibland kan skrollas ändå. */}
 
-                        <button className={styles.closeButton} onClick={onCloseModal}>
-                            <X size={"1.5rem"} />
-                        </button>
-                    </div>
+                    <div className={`${styles.contentContainer} ${type == "drawer" && styles.drawer}`}>
 
 
-                    <div className={`${styles.mainOuterContainer} ${sizeClass} ${size === "small"
-                        ? styles.small
-                        : size === "large"
-                            ? styles.large
-                            : ""}`} >
-                        {/* outer containers uppgift är att skrolla Innercontainern och hålla fast fadern sticky vid sina kanter */}
-                        <div className={styles.faderTop}></div>
-                        <div className={styles.mainInnerContainer}>
-                            {children}
+                        <div className={styles.header}>
+                            <span className={`${styles.title}`}>
+                                <h3>{title}</h3>
+                            </span>
+
+                            <button className={styles.closeButton} onClick={handleCloseModal}>
+                                <X size={"1.5rem"} />
+                            </button>
                         </div>
-                        <div className={styles.faderBottom}></div>
+
+
+                        <div className={`${styles.mainOuterContainer} ${sizeClass} ${size === "small"
+                            ? styles.small
+                            : size === "large"
+                                ? styles.large
+                                : ""}`} >
+                            {/* outer containers uppgift är att skrolla Innercontainern och hålla fast fadern sticky vid sina kanter */}
+                            <div className={styles.faderTop}></div>
+                            <div className={styles.mainInnerContainer}>
+                                {children}
+                            </div>
+                            <div className={styles.faderBottom}></div>
+                        </div>
+
+
+                        {footerContent && <div className={`${styles.footer} ${sizeClass}`} >
+                            {footerContent}
+                        </div>}
+
+
+
                     </div>
 
 
-                    {footerContent && <div className={`${styles.footer} ${sizeClass}`} >
-                        {footerContent}
-                    </div>}
 
-
-
-                </div>
-
-
-            </div >
-        </dialog >
-
-
+                </dialog >
+            </div >}
+        </>
     );
 };
 
