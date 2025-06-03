@@ -54,15 +54,20 @@ const Home = () => {
 
     <div className={styles.backdrop}>
 
+
       {/* MODAL */}
       <AddNewEventModal isOpen={showNewEventFormModal} onCloseModal={() => setShowNewEventFormModal(false)} />
 
-      <button onClick={testfunction}> KLICKA PÅ TESTKNAPPEN</button>
 
-      Detta är feedet Home DU ÄR INLOGGAD BÄSTA du
-      < UserButton />
+      <div className="content-container-width-wrapper">
+        <button onClick={testfunction}> KLICKA PÅ TESTKNAPPEN</button>
+
+        Detta är feedet Home DU ÄR INLOGGAD BÄSTA du
+        < UserButton />
+
+      </div>
       <hr />
-      <main>
+      <main className="content-container-width-wrapper">
         <h2>Pågår just nu(breda kort o sidoskroll)</h2>
         <p>Pågår just nu(breda kort o sidoskroll)</p>
         <br />
