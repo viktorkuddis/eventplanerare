@@ -2,9 +2,6 @@ import { useAuth, UserButton } from "@clerk/clerk-react";
 import styles from "./Home.module.css";
 
 
-
-import AddNewEventForm from "../../components/Organisms/AddNewEventForm/AddNewEventForm";
-
 import AddNewEventModal from "../../components/Organisms/Modaler med innehåll/AddNewEventModal";
 
 // import Modal from "../../components/Organisms/Modal/Modal";
@@ -57,31 +54,8 @@ const Home = () => {
 
     <div className={styles.backdrop}>
 
+      {/* MODAL */}
       <AddNewEventModal isOpen={showNewEventFormModal} onCloseModal={() => setShowNewEventFormModal(false)} />
-
-      {`modalIsshowing är ${showNewEventFormModal}`} <br /> <br />
-
-      {/* <button onClick={() => { setModalIsShowing(true) }}>VISAMODAL</button>
-      <Modal
-        isOpen={modalIsShowing}
-        closeModal={() => setModalIsShowing(false)}
-        title={"Vill du sälja din själ?"}
-        footerContent={<div style={{ textAlign: "right" }}><button>jatack snälla</button></div>}
-        type={"drawer"}
-        size={"large"} >
-        Vänligen tryck på fortsätt för att bekräfta att du vill det.  <br /> Vänligen, tack så mycket!
-        <br />
-        <br />
-        <small>
-
-
-          Legal text:
-          <br />
-          <i> Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi ullam esse, placeat vero harum reiciendis officiis iste. Quia, blanditiis nisi. Laudantium, sequi. Fuga vero ad, pariatur earum vel hic repudiandae.</i>
-
-        </small>
-      </Modal > */}
-
 
       <button onClick={testfunction}> KLICKA PÅ TESTKNAPPEN</button>
 
@@ -122,7 +96,7 @@ const Home = () => {
           EVENT
         </button>
         (ska öppna formulär som modal)
-        <AddNewEventForm />
+        {/* <AddNewEventForm /> */}
         <br />
         <h2>Kommande Events (ännu mindre kort? sidoscroll)</h2>
       </main >

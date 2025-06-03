@@ -10,12 +10,15 @@ import { useAuth } from "@clerk/clerk-react";
 import type { EventType } from "../../../types";
 
 
+type Props = {
+  onCancel: () => void | null
+  onEventCreated: () => void | null
+}
 
 
 
 
-
-const AddNewEventForm: React.FC = () => {
+const AddNewEventForm: React.FC<Props> = ({ onCancel, onEventCreated }) => {
 
   const { createNewEvent } = useDbApi();
   const { userId } = useAuth();
@@ -31,23 +34,6 @@ const AddNewEventForm: React.FC = () => {
   const [location, setLocation] = useState<string>("");
   const [color, setColor] = useState<string>("");
 
-
-
-
-  // const [combinedStartDateTime, setCombinedStartDateTime] = useState<string>("");
-  // const [combinedEndDateTime, setCombinedEndDateTime] = useState<string>("");
-
-  // function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
-  //   console.log("ändring skedde")
-
-  //   console.log("inputvärde:", e.target.value)
-
-
-
-  //   setEventData((prev) => ({ ...prev, bajs: "snopp" }))
-
-  //   console.log(eventData)
-  // }
 
 
   async function handleSubmit(e: React.FormEvent) {
@@ -81,12 +67,19 @@ const AddNewEventForm: React.FC = () => {
       }
     }
 
+    //kör onEventCreated om den finns definerad utifrån:) 
+    if (onEventCreated) onEventCreated()
 
+  }
+
+  function handleCancel() {
+    //kör onCancel om den finns definerad utifrån:) 
+    if (onCancel) onCancel()
   }
 
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
-      <label htmlFor="title">Eventets Namn: </label>
+      <label htmlFor="title">Eventets Namn: * </label>
       <input
         type="text"
         id="title"
@@ -96,7 +89,7 @@ const AddNewEventForm: React.FC = () => {
         required
       />
       <div className={styles.timeSection}>
-        <label>Startar: </label>
+        <label>Startar: * </label>
         <div className={styles.timeSectionInputGroup}>
           <input
             type="date"
@@ -122,7 +115,7 @@ const AddNewEventForm: React.FC = () => {
             {/* <button className="btn-small btn-filled-strong">X</button> */}
           </div>
         </div>
-        <label>Slutar: </label>
+        <label>Slutar: *</label>
         <div className={styles.timeSectionInputGroup}>
           <input
             type="date"
@@ -186,7 +179,7 @@ const AddNewEventForm: React.FC = () => {
 
       <div>
         <button type="submit">Skapa</button>
-        <button type="button">Avbryt</button>
+        <button type="button" onClick={handleCancel}>Avbryt</button>
       </div>
     </form>
   );
