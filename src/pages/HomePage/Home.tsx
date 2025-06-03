@@ -1,4 +1,4 @@
-import { useAuth, UserButton } from "@clerk/clerk-react";
+import { useAuth } from "@clerk/clerk-react";
 import styles from "./Home.module.css";
 
 
@@ -28,15 +28,7 @@ const Home = () => {
 
   const { getEventsByUserId } = useDbApi();
 
-  async function testfunction() {
-    console.log("testfunktoin klickad")
-    try {
-      const response = await getEventsByUserId(userId);
-      console.log(response);
-    } catch (error) {
-      console.error(error);
-    }
-  }
+
 
 
   const [ownEvents, setOwnEvents] = useState<EventType[]>([]);
@@ -59,27 +51,26 @@ const Home = () => {
 
 
   console.log(context)
-  // const [modalIsShowing, setModalIsShowing] = useState(false)
-  return (
 
+
+  // async function testfunction() {
+  //   console.log("testfunktoin klickad")
+  //   try {
+  //     const response = await getEventsByUserId(userId);
+  //     console.log(response);
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // }
+
+  return (<>
+    {/* <button onClick={testfunction}> KLICKA PÅ TESTKNAPPEN</button> */}
 
     <div className={styles.backdrop}>
-      {context?.ownEvents?.[0]?.color}
-
-
 
       {/* MODAL */}
       <AddNewEventModal isOpen={showNewEventFormModal} onCloseModal={() => setShowNewEventFormModal(false)} />
 
-
-      <div className="content-container-width-wrapper">
-        <button onClick={testfunction}> KLICKA PÅ TESTKNAPPEN</button>
-
-        Detta är feedet Home DU ÄR INLOGGAD BÄSTA du
-        < UserButton />
-
-      </div>
-      <hr />
       <main className="content-container-width-wrapper">
         <h2>Pågår just nu(breda kort o sidoskroll)</h2>
         <p>Pågår just nu(breda kort o sidoskroll)</p>
@@ -119,6 +110,7 @@ const Home = () => {
         <h2>Kommande Events (ännu mindre kort? sidoscroll)</h2>
       </main >
     </div >
+  </>
   );
 };
 
