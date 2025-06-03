@@ -115,7 +115,7 @@ dialog::backdrop {
 /* outer containers uppgift är att skrolla Innercontainern och hålla fast fadern sticky vid sina kanter */
 .mainOuterContainer {
     overflow: auto;
-    overscroll-behavior: smooth;
+    /* overscroll-behavior: smooth; */
     /* Förhindrar scroll chaining */
     /* background-color: aqua; */
     width: 100%;
