@@ -59,6 +59,13 @@ const AddNewEventForm: React.FC<Props> = ({ onCancel, onEventCreated }) => {
       console.log("försökte submitta detta :")
       console.log(newEventData)
 
+
+      clearForm()
+
+      //kör onEventCreated om den finns definerad utifrån:) 
+      if (onEventCreated) onEventCreated()
+
+
       try {
         const response = await createNewEvent(newEventData);
         console.log(response);
@@ -67,14 +74,25 @@ const AddNewEventForm: React.FC<Props> = ({ onCancel, onEventCreated }) => {
       }
     }
 
-    //kör onEventCreated om den finns definerad utifrån:) 
-    if (onEventCreated) onEventCreated()
+
 
   }
 
   function handleCancel() {
+    clearForm()
     //kör onCancel om den finns definerad utifrån:) 
     if (onCancel) onCancel()
+  }
+
+  function clearForm() {
+    setTitle("")
+    setDescription("")
+    setStartDate("")
+    setStartTime("")
+    setEndDate("")
+    setEndTime("")
+    setLocation("")
+    setColor("")
   }
 
   return (
@@ -84,6 +102,7 @@ const AddNewEventForm: React.FC<Props> = ({ onCancel, onEventCreated }) => {
         type="text"
         id="title"
         name="title"
+        value={title}
         // value={eventData.title}
         onChange={(e) => setTitle(e.target.value)}
         required
@@ -95,6 +114,7 @@ const AddNewEventForm: React.FC<Props> = ({ onCancel, onEventCreated }) => {
             type="date"
             id="startDate"
             name="startDate"
+            value={startDate}
             onChange={(e) => setStartDate(e.target.value)}
             required
           />
@@ -109,6 +129,7 @@ const AddNewEventForm: React.FC<Props> = ({ onCancel, onEventCreated }) => {
               type="time"
               id="startTime"
               name="startTime"
+              value={startTime}
               onChange={(e) => setStartTime(e.target.value)}
               required
             />
@@ -121,6 +142,7 @@ const AddNewEventForm: React.FC<Props> = ({ onCancel, onEventCreated }) => {
             type="date"
             id="endDate"
             name="endDate"
+            value={endDate}
             onChange={(e) => setEndDate(e.target.value)}
             required
           />
@@ -135,6 +157,7 @@ const AddNewEventForm: React.FC<Props> = ({ onCancel, onEventCreated }) => {
               type="time"
               id="endTime"
               name="endTime"
+              value={endTime}
               onChange={(e) => setEndTime(e.target.value)}
               required
             />
@@ -146,6 +169,7 @@ const AddNewEventForm: React.FC<Props> = ({ onCancel, onEventCreated }) => {
       <textarea
         id="description"
         name="description"
+        value={description}
         onChange={(e) => setDescription(e.target.value)}
       />
       <label htmlFor="location">Plats: </label>
@@ -153,6 +177,7 @@ const AddNewEventForm: React.FC<Props> = ({ onCancel, onEventCreated }) => {
         type="text"
         id="location"
         name="location"
+        value={location}
         onChange={(e) => setLocation(e.target.value)}
 
       />
@@ -174,12 +199,24 @@ const AddNewEventForm: React.FC<Props> = ({ onCancel, onEventCreated }) => {
               />
             );
           })}
+          <ColorPickerButton
+            onClick={() => {
+              setColor("")
+              console.log("KLICKK")
+            }}
+
+            colorValue={"hsla(0, 0%, 50%, 0.1)"}
+            colorName={"Ingen "}
+
+          />
         </div>
       </div>
 
       <div>
         <button type="submit">Skapa</button>
         <button type="button" onClick={handleCancel}>Avbryt</button>
+        {/* <button type="button" onClick={clearForm}>rens</button> */}
+
       </div>
     </form>
   );
