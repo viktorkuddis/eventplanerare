@@ -7,8 +7,8 @@
 
 .no-scroll {
   overflow: hidden !important;
-  height: 100vh !important;
-  width: 100vw !important;
+  height: 100svh !important;
+  width: 100svw !important;
   overscroll-behavior: none !important;
   /* Förhindrar scroll chaining */
 }
