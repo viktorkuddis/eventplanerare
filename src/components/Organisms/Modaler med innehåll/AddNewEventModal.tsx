@@ -11,7 +11,7 @@ const AddNewEventModal = ({ isOpen, onCloseModal }: Props) => {
     return (
         <Modal isOpen={isOpen}
             children={<AddNewEventForm onCancel={onCloseModal} onEventCreated={onCloseModal} />}
-            footerContent={undefined}
+            footerContent={null}
             title={"Skapa nytt event"}
             onCloseModal={onCloseModal}
             type={"drawer"}

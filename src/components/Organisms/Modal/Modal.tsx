@@ -91,6 +91,7 @@ const Modal: React.FC<ModalProps> = ({
         <dialog ref={dialogElement} className={` ${styles.dialog}  `}>
             <div className={`${styles.contentContainer} ${type == "drawer" && styles.drawer}`}>
 
+
                 <div className={styles.header}>
                     <span className={`${styles.title}`}>
                         <h3>{title}</h3>
@@ -101,19 +102,30 @@ const Modal: React.FC<ModalProps> = ({
                     </button>
                 </div>
 
-                <div className={`${styles.main} ${sizeClass} ${size === "small"
+
+                <div className={`${styles.mainOuterContainer} ${sizeClass} ${size === "small"
                     ? styles.small
                     : size === "large"
                         ? styles.large
                         : ""}`} >
-                    {children}
+                    {/* outer containers uppgift är att skrolla Innercontainern och hålla fast fadern sticky vid sina kanter */}
+                    <div className={styles.faderTop}></div>
+                    <div className={styles.mainInnerContainer}>
+                        {children}
+                    </div>
+                    <div className={styles.faderBottom}></div>
                 </div>
+
 
                 {footerContent && <div className={`${styles.footer} ${sizeClass}`} >
                     {footerContent}
                 </div>}
 
+
+
             </div>
+
+
 
         </dialog >
     );

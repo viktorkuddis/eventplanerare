@@ -75,7 +75,6 @@ dialog::backdrop {
 .header {
     /* background-color: aqua; */
     padding: 0rem 1rem;
-    padding-bottom: 1rem;
     flex-shrink: 0;
 
     display: flex;
@@ -110,11 +109,42 @@ dialog::backdrop {
     }
 }
 
-.main {
-    padding: 0rem 1rem;
+/* outer containers uppgift är att skrolla Innercontainern och hålla fast fadern sticky vid sina kanter */
+.mainOuterContainer {
     overflow: auto;
     /* background-color: aqua; */
     width: 100%;
+
+
+    /* Fader ligger sticky till outer container och skrollas därför inte */
+    .faderTop {
+        position: sticky;
+        top: 0rem;
+        height: 0.5rem;
+        width: 100%;
+        /* background-color: rgba(128, 128, 128, 0.422); */
+        background: linear-gradient(360deg, rgba(255, 255, 255, 0) 0%, var(--bg-color-elevated) 100%);
+    }
+
+    .faderBottom {
+        position: sticky;
+        bottom: 0rem;
+        height: 0.5rem;
+        width: 100%;
+        /* background-color: rgba(128, 128, 128, 0.422); */
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, var(--bg-color-elevated) 100%);
+    }
+}
+
+/* häri ligger själva innehållet */
+.mainInnerContainer {
+    padding: 0 1rem;
+    /* background-color: red; */
+    width: 100%;
+    /* marginal ner mot fader
+    margin-bottom: 0.5rem;
+
+
 }
 
 .footer {
@@ -122,7 +152,7 @@ dialog::backdrop {
     flex-shrink: 0;
     width: 100%;
     padding: 0rem 1rem;
-    padding-top: 0.5rem;
+
     /* background-color: aqua; */
 }
 
@@ -148,6 +178,10 @@ dialog::backdrop {
         animation: slideUp 0.2s ease;
 
         /* extra padding mot telefonens botten och navigeringsfält och så. */
-        padding-bottom: 3rem;
+        padding-bottom: 2rem;
+
+        /* background-color: green; */
     }
+
+
 }
