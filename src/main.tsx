@@ -14,10 +14,8 @@ if (!PUBLISHABLE_KEY) {
   throw new Error("Missing Publishable Key");
 }
 
-
-
-
-
+// CONTEXT
+import { AppContextProvider } from "./context /AppContextProvider.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
@@ -26,7 +24,9 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
       localization={svSE}
       afterSignOutUrl="/"
     >
-      <App />
+      <AppContextProvider >
+        <App />
+      </AppContextProvider>
     </ClerkProvider>
   </React.StrictMode>
 );

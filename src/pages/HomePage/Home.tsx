@@ -7,11 +7,20 @@ import AddNewEventModal from "../../components/Organisms/Modaler med innehåll/A
 // import Modal from "../../components/Organisms/Modal/Modal";
 
 import { useDbApi } from "../../api/useDbApi";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import type { EventType } from "../../types";
 
+
+import { AppContext } from "../../context /AppContext";
+
 const Home = () => {
+
+
+  const context = useContext(AppContext)
+
+
+
 
   const [showNewEventFormModal, setShowNewEventFormModal] = useState(false)
 
@@ -48,11 +57,15 @@ const Home = () => {
   }, []);
 
 
+
+  console.log(context)
   // const [modalIsShowing, setModalIsShowing] = useState(false)
   return (
 
 
     <div className={styles.backdrop}>
+      {context?.ownEvents?.[0]?.color}
+
 
 
       {/* MODAL */}
