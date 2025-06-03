@@ -5,7 +5,9 @@ import styles from "./Home.module.css";
 
 import AddNewEventForm from "../../components/Organisms/AddNewEventForm/AddNewEventForm";
 
-import Modal from "../../components/molecules/Modal/Modal";
+import AddNewEventModal from "../../components/Organisms/Modaler med innehåll/AddNewEventModal";
+
+// import Modal from "../../components/Organisms/Modal/Modal";
 
 import { useDbApi } from "../../api/useDbApi";
 import { useEffect, useState } from "react";
@@ -13,6 +15,8 @@ import { useEffect, useState } from "react";
 import type { EventType } from "../../types";
 
 const Home = () => {
+
+  const [showNewEventFormModal, setShowNewEventFormModal] = useState(false)
 
   const { userId } = useAuth();
 
@@ -47,13 +51,17 @@ const Home = () => {
   }, []);
 
 
-  const [modalIsShowing, setModalIsShowing] = useState(false)
+  // const [modalIsShowing, setModalIsShowing] = useState(false)
   return (
 
 
     <div className={styles.backdrop}>
 
-      <button onClick={() => { setModalIsShowing(true) }}>VISAMODAL</button>
+      <AddNewEventModal isOpen={showNewEventFormModal} onCloseModal={() => setShowNewEventFormModal(false)} />
+
+      {`modalIsshowing är ${showNewEventFormModal}`} <br /> <br />
+
+      {/* <button onClick={() => { setModalIsShowing(true) }}>VISAMODAL</button>
       <Modal
         isOpen={modalIsShowing}
         closeModal={() => setModalIsShowing(false)}
@@ -72,7 +80,7 @@ const Home = () => {
           <i> Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi ullam esse, placeat vero harum reiciendis officiis iste. Quia, blanditiis nisi. Laudantium, sequi. Fuga vero ad, pariatur earum vel hic repudiandae.</i>
 
         </small>
-      </Modal >
+      </Modal > */}
 
 
       <button onClick={testfunction}> KLICKA PÅ TESTKNAPPEN</button>
@@ -104,7 +112,11 @@ const Home = () => {
         ))}
 
 
-        <button className="btn-medium btn-outlined-light-static">
+        <button className="btn-medium btn-outlined-light-static" onClick={() => {
+
+          setShowNewEventFormModal(true); console.log();
+        }
+        }>
           + <br />
           SKAPA <br />
           EVENT

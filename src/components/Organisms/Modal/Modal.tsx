@@ -10,14 +10,14 @@ interface ModalProps {
     children: React.ReactNode;
     footerContent: React.ReactNode | null;
     title: string | null;
-    closeModal: () => void;
+    onCloseModal: () => void;
     type: "standard" | "drawer"
     size: "small" | "large"
 }
 
 // ***** INSTRUKTIONER *****
 // *** - Man hanterar denna modalen utifrån med ett state *isOpen* (bolean)
-// *** - closeModal är funktonen som bör sätta statet till False.
+// *** - onCloseModal är funktonen som bör sätta statet till False (och eventuellt annat som ska ske vid stängning).
 // ***
 // ***  [Info:]
 // ***   Drawer är bara drawer i mobil-breakpoint.
@@ -28,7 +28,7 @@ interface ModalProps {
 const Modal: React.FC<ModalProps> = ({
     isOpen,
     children,
-    closeModal,
+    onCloseModal,
     title,
     footerContent,
     type = "standard",
@@ -58,12 +58,12 @@ const Modal: React.FC<ModalProps> = ({
         // Stänger modal vid klick utanför innehållet, dvs dialogelementet.
         function handleClickOutside(event: MouseEvent) {
             if (event.target === dialog) {
-                closeModal();
+                onCloseModal();
             }
         }
         // Stänger nollställer state vis cancel så att stat inte fortfarande tror att modalen är öppen :)
         function handleCancel() {
-            closeModal();
+            onCloseModal();
         }
 
         // lyssnare:
@@ -77,7 +77,7 @@ const Modal: React.FC<ModalProps> = ({
             // Återställ alltid scroll när cleanup sker
             document.body.style.overflow = "";
         };
-    }, [closeModal, isOpen]);
+    }, [onCloseModal, isOpen]);
 
     // klass att sätta bredden på  innehållet med:
     const sizeClass = size === "small"
@@ -96,7 +96,7 @@ const Modal: React.FC<ModalProps> = ({
                         <h3>{title}</h3>
                     </span>
 
-                    <button className={styles.closeButton} onClick={closeModal}>
+                    <button className={styles.closeButton} onClick={onCloseModal}>
                         <X size={"1.5rem"} />
                     </button>
                 </div>
