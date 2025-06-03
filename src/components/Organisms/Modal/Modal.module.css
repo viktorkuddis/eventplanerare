@@ -10,22 +10,7 @@
     }
 }
 
-/* detta fixar en bug som finns i mobil safari att bakgrunden ibland kan skrollas ändå. */
-.oldSchoolBackDrop {
-    /* background-color: rgba(219, 216, 26, 0.5); */
 
-    position: fixed;
-
-    /* overflow: hidden; */
-    /* display: grid; */
-    /* place-items: center; */
-
-    background-color: rgba(255, 105, 180, 0.659);
-    height: 100svh;
-    width: 100svw;
-
-
-}
 
 /* DIALOG STIL RESET: */
 .dialog {

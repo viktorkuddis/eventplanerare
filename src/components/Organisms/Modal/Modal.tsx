@@ -41,13 +41,6 @@ const Modal: React.FC<ModalProps> = ({
 
 
 
-    // hanterar en modalstängning. gör bodyn skrollbakr igen
-    // och kallar och extern händelse.
-    function handleCloseModal() {
-        onCloseModal()
-        document.body.classList.remove("no-scroll")
-    }
-
     // när isopen förändras kollar vi av om modalen ska vara öppen synlig eller ej:
     useEffect(() => {
         if (!dialogElement.current) return;
@@ -96,6 +89,14 @@ const Modal: React.FC<ModalProps> = ({
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [onCloseModal, isOpen]);
 
+
+    // hanterar en modalstängning. Gör bodyn skrollbar igen
+    // och kallar om onClose funktoinen som kommer som prop utifrån.
+    function handleCloseModal() {
+        onCloseModal()
+        document.body.classList.remove("no-scroll")
+    }
+
     // klass att sätta bredden på  innehållet med:
     const sizeClass = size === "small"
         ? styles.small
@@ -105,54 +106,52 @@ const Modal: React.FC<ModalProps> = ({
 
 
     return (
-        <>
-            {isOpen && <div className={styles.oldSchoolBackDrop}>
-
-
-                <dialog ref={dialogElement} className={` ${styles.dialog}  `}>
-                    {/* //detta fixar en bug som finns i mobil safari att bakgrunden ibland kan skrollas ändå. */}
-
-                    <div className={`${styles.contentContainer} ${type == "drawer" && styles.drawer}`}>
-
-
-                        <div className={styles.header}>
-                            <span className={`${styles.title}`}>
-                                <h3>{title}</h3>
-                            </span>
-
-                            <button className={styles.closeButton} onClick={handleCloseModal}>
-                                <X size={"1.5rem"} />
-                            </button>
-                        </div>
-
-
-                        <div className={`${styles.mainOuterContainer} ${sizeClass} ${size === "small"
-                            ? styles.small
-                            : size === "large"
-                                ? styles.large
-                                : ""}`} >
-                            {/* outer containers uppgift är att skrolla Innercontainern och hålla fast fadern sticky vid sina kanter */}
-                            <div className={styles.faderTop}></div>
-                            <div className={styles.mainInnerContainer}>
-                                {children}
-                            </div>
-                            <div className={styles.faderBottom}></div>
-                        </div>
-
-
-                        {footerContent && <div className={`${styles.footer} ${sizeClass}`} >
-                            {footerContent}
-                        </div>}
 
 
 
+        <dialog ref={dialogElement} className={` ${styles.dialog}  `}>
+            {/* //detta fixar en bug som finns i mobil safari att bakgrunden ibland kan skrollas ändå. */}
+
+            <div className={`${styles.contentContainer} ${type == "drawer" && styles.drawer}`}>
+
+
+                <div className={styles.header}>
+                    <span className={`${styles.title}`}>
+                        <h3>{title}</h3>
+                    </span>
+
+                    <button className={styles.closeButton} onClick={handleCloseModal}>
+                        <X size={"1.5rem"} />
+                    </button>
+                </div>
+
+
+                <div className={`${styles.mainOuterContainer} ${sizeClass} ${size === "small"
+                    ? styles.small
+                    : size === "large"
+                        ? styles.large
+                        : ""}`} >
+                    {/* outer containers uppgift är att skrolla Innercontainern och hålla fast fadern sticky vid sina kanter */}
+                    <div className={styles.faderTop}></div>
+                    <div className={styles.mainInnerContainer}>
+                        {children}
                     </div>
+                    <div className={styles.faderBottom}></div>
+                </div>
+
+
+                {footerContent && <div className={`${styles.footer} ${sizeClass}`} >
+                    {footerContent}
+                </div>}
 
 
 
-                </dialog >
-            </div >}
-        </>
+            </div>
+
+
+
+        </dialog >
+
     );
 };
 
