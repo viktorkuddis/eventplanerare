@@ -1,9 +1,14 @@
-import { Outlet } from 'react-router-dom';
+// import { Outlet } from 'react-router-dom';
 
 import styles from './HomeLayout.module.css';
 import { UserButton } from '@clerk/clerk-react';
+import type { ReactNode } from 'react';
 
-const HomeLayout = () => {
+
+type Props = {
+    children?: ReactNode;
+};
+const HomeLayout = ({ children }: Props) => {
     return (
         <>
             <div className="content-container-width-wrapper">
@@ -22,7 +27,7 @@ const HomeLayout = () => {
                 </header >
             </div >
             <main>
-                <Outlet /> {/* Här renderas barnrouten */}
+                {children}
             </main>
 
 

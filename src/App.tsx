@@ -14,6 +14,7 @@ import {
   Route,
   BrowserRouter,
   Routes,
+  Navigate,
   // Navigate,
 } from "react-router-dom";
 
@@ -47,19 +48,51 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<SignedOut><Login /></SignedOut>} />
-        <Route path="/" element={<SignedIn><HomeLayout /></SignedIn>}>
-          <Route index element={<Home />} />
-        </Route>
-        <Route path="*" element={<NoPage />} /> {/* no page För alla */}
+
+        {/* Root path "/" redirectar beroende på inloggningsstatus */}
+        <Route
+          path="/"
+          element={
+            <>
+              <SignedOut>
+                <Navigate to="/login" replace />
+              </SignedOut>
+
+              <SignedIn>
+                <Navigate to="/home" replace />
+              </SignedIn>
+            </>
+          }
+        />
+
+        {/* Login-sidan (bara synlig för SignedOut) */}
+        <Route
+          path="/login"
+          element={
+            <SignedOut>
+              <Login />
+            </SignedOut>
+          }
+        />
+
+        {/* Home-sidan (bara synlig för SignedIn) */}
+        <Route
+          path="/home"
+          element={
+            <SignedIn>
+              <HomeLayout>
+                <Home />
+              </HomeLayout>
+            </SignedIn>
+          }
+        />
+
+        {/* Öppen sida, synlig för alla */}
         <Route path="/style" element={<Style />} />
-        {/* denna är öppen för alla. det är bara lite designsystem demo. */}
+
+        {/* 404 för alla */}
+        <Route path="*" element={<NoPage />} />
+
       </Routes>
-    </BrowserRouter>
-
-
-
-
-
-  );
+    </BrowserRouter>);
 }
