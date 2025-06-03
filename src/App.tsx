@@ -68,22 +68,29 @@ export default function App() {
         {/* Login-sidan (bara synlig för SignedOut) */}
         <Route
           path="/login"
-          element={
+          element={<>
             <SignedOut>
               <Login />
             </SignedOut>
+            <SignedIn>
+              <Navigate to="/home" replace />
+            </SignedIn></>
           }
         />
 
         {/* Home-sidan (bara synlig för SignedIn) */}
         <Route
           path="/home"
-          element={
+          element={<>
             <SignedIn>
               <HomeLayout>
                 <Home />
               </HomeLayout>
             </SignedIn>
+            <SignedOut>
+              <Navigate to="/login" replace />
+            </SignedOut>
+          </>
           }
         />
 
