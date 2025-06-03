@@ -88,46 +88,51 @@ const Modal: React.FC<ModalProps> = ({
 
 
     return (
+
         <dialog ref={dialogElement} className={` ${styles.dialog}  `}>
-            <div className={`${styles.contentContainer} ${type == "drawer" && styles.drawer}`}>
+            {/* //detta fixar en bug som finns i mobil safari att bakgrunden ibland kan skrollas ändå. */}
+            <div className={styles.oldSchoolBackDrop}>
+                <div className={`${styles.contentContainer} ${type == "drawer" && styles.drawer}`}>
 
 
-                <div className={styles.header}>
-                    <span className={`${styles.title}`}>
-                        <h3>{title}</h3>
-                    </span>
+                    <div className={styles.header}>
+                        <span className={`${styles.title}`}>
+                            <h3>{title}</h3>
+                        </span>
 
-                    <button className={styles.closeButton} onClick={onCloseModal}>
-                        <X size={"1.5rem"} />
-                    </button>
-                </div>
-
-
-                <div className={`${styles.mainOuterContainer} ${sizeClass} ${size === "small"
-                    ? styles.small
-                    : size === "large"
-                        ? styles.large
-                        : ""}`} >
-                    {/* outer containers uppgift är att skrolla Innercontainern och hålla fast fadern sticky vid sina kanter */}
-                    <div className={styles.faderTop}></div>
-                    <div className={styles.mainInnerContainer}>
-                        {children}
+                        <button className={styles.closeButton} onClick={onCloseModal}>
+                            <X size={"1.5rem"} />
+                        </button>
                     </div>
-                    <div className={styles.faderBottom}></div>
+
+
+                    <div className={`${styles.mainOuterContainer} ${sizeClass} ${size === "small"
+                        ? styles.small
+                        : size === "large"
+                            ? styles.large
+                            : ""}`} >
+                        {/* outer containers uppgift är att skrolla Innercontainern och hålla fast fadern sticky vid sina kanter */}
+                        <div className={styles.faderTop}></div>
+                        <div className={styles.mainInnerContainer}>
+                            {children}
+                        </div>
+                        <div className={styles.faderBottom}></div>
+                    </div>
+
+
+                    {footerContent && <div className={`${styles.footer} ${sizeClass}`} >
+                        {footerContent}
+                    </div>}
+
+
+
                 </div>
 
 
-                {footerContent && <div className={`${styles.footer} ${sizeClass}`} >
-                    {footerContent}
-                </div>}
-
-
-
-            </div>
-
-
-
+            </div >
         </dialog >
+
+
     );
 };
 
