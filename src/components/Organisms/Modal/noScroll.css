@@ -9,6 +9,6 @@
   overflow: hidden !important;
   height: 100vh !important;
   width: 100vw !important;
-  overscroll-behavior: none !important;
+  /* overscroll-behavior: none !important; */
   /* Förhindrar scroll chaining */
 }
