@@ -79,21 +79,22 @@ const Home = () => {
 
       <main className="content-container-width-wrapper">
         <EventCard color={"#FFBF00"}
-          title={""}
+          title={"Min event"}
           start={new Date}
-          location={""}
-          description={""} />
+          location={"hemma hos mig"}
+          description={" lite beskrivning här med och hej och hå. jag hoppas alla vill komma på kalas "} layout={"portrait"} size={"small"} />
 
 
         {context?.ownEvents?.map((event, i) =>
-          <EventCard key={i}
-            color={event.color}
-            title={event.title}
-            start={event.start}
-            location={event.location}
-            description={event.description} />)}
+          <div key={i}><br />
+            <EventCard key={i}
+              color={event.color}
+              title={event.title}
+              start={event.start}
+              location={event.location}
+              description={event.description} layout={"landscape"} size={"large"} /></div>)}
 
-
+        <br />
         <h2>Pågår just nu(breda kort o sidoskroll)</h2>
         <p>Pågår just nu(breda kort o sidoskroll)</p>
         <br />
@@ -102,19 +103,7 @@ const Home = () => {
         <h2>Dina events (mindre kort sidoscroll)</h2>
 
 
-        {Array.isArray(ownEvents) && ownEvents.map((event, index) => (
-          <div key={index} style={{ backgroundColor: event.color, marginBottom: "0.25rem", border: "1px solid white", padding: "0.5rem 1rem", borderRadius: "0.25rem" }}>
-            <h3>{event.title}</h3>
-            {event.description && (<small><p>{event.description}</p></small>)}
-            <small>
-              <small>
-                {event.start && event.start.toString()} - {event.end && event.end.toString()}
-              </small>
-            </small>
-            {event.location && <p><small>{event.location}</small></p>}
 
-          </div>
-        ))}
 
 
         <button className="btn-medium btn-outlined-light-static" onClick={() => {

@@ -1,27 +1,29 @@
-/* EventCard.module.css */
-
 .card {
     position: relative;
     border-radius: 0.5rem;
     padding: 1rem 2rem;
     display: flex;
-    gap: 1rem;
+
     overflow: hidden;
-
-
     align-items: center;
 
-}
-
-.mainContainer {
-
-
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-
-    gap: 0.5rem;
     line-height: 1.2;
+
+    .dateStamp {
+        flex-shrink: 0;
+
+        line-height: 1;
+
+        height: 3rem;
+        aspect-ratio: 1/1;
+        border: 1px solid white;
+        border-radius: 0.5rem;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
 
     .title,
     .description {
@@ -36,9 +38,56 @@
         line-clamp: 2;
     }
 
-
-
 }
+
+.small {
+    padding: 1rem 1rem;
+
+    .dateStamp {
+        font-size: 80%;
+        height: 2.5rem;
+    }
+
+    .title {
+        font-size: var(--font-size-h4);
+        margin-bottom: 0.25rem;
+    }
+}
+
+/* båda selektiorerna närvarande: */
+.cardLandScape.small {
+    gap: 0.5rem;
+}
+
+.cardLandScape {
+    flex-direction: row;
+    gap: 1rem;
+
+    .dateStamp {
+        align-self: flex-start;
+    }
+
+    .mainContainer {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        gap: 0.25rem;
+
+    }
+}
+
+.cardPortrait {
+    gap: 0.25rem;
+    flex-direction: column;
+    align-items: start;
+
+
+    .dateStamp {}
+}
+
+
+
 
 .locationSection {
     /* background-color: aqua; */
@@ -49,32 +98,6 @@
     gap: 0.5rem;
 
 }
-
-.dateStamp {
-
-    flex-shrink: 0;
-
-    line-height: 1;
-    height: 3rem;
-    aspect-ratio: 1/1;
-    border-radius: 0.5rem;
-
-    border: 1px solid white;
-
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
-    align-self: flex-start;
-
-}
-
-
-
-
-
 
 
 

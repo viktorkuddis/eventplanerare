@@ -8,19 +8,18 @@ type Props = {
     color: string,
     title: string,
     start: Date,
-    location: string,
-    description: string
+    location?: string,
+    description?: string,
+
+    layout: "landscape" | "portrait",
+    size: "large" | "small",
+
 }
-const EventCard = ({ color, title, start, location, description }: Props) => {
+const EventCard = ({ color, title, start, location, description, layout, size }: Props) => {
 
     if (!color) color = "#80a6b6"
 
     const dateObject = new Date(start);
-
-
-
-
-
 
     const day = dateObject.getDate();
     const month = dateObject.toLocaleDateString('sv-SE', { month: 'short' });
@@ -28,10 +27,16 @@ const EventCard = ({ color, title, start, location, description }: Props) => {
 
 
     return (
-        <div className={`${styles.card}`}
+        <div className={`${styles.card} 
+        ${layout == "landscape" && styles.cardLandScape} 
+        ${layout == "portrait" && styles.cardPortrait}
+        ${size == "small" && styles.small}`}
             style={{
                 backgroundColor: color,
             }}>
+
+
+
 
             <div className={`${styles.dateStamp}`} >
                 <div><b>{day}</b></div>
@@ -49,7 +54,7 @@ const EventCard = ({ color, title, start, location, description }: Props) => {
                     {title}
                 </h3>
 
-                {location && <small><p className={`${styles.description}`}>{description}</p></small>}
+                {description && <small><p className={`${styles.description}`}>{description}</p></small>}
 
 
 
