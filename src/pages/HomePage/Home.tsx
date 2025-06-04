@@ -1,6 +1,7 @@
 import { useAuth } from "@clerk/clerk-react";
 import styles from "./Home.module.css";
 
+import EventCard from "../../components/molecules/EventCard";
 
 import AddNewEventModal from "../../components/Organisms/Modaler med innehåll/AddNewEventModal";
 
@@ -68,6 +69,8 @@ const Home = () => {
 
     <div className={styles.backdrop}>
 
+
+
       {context?.ownEvents?.map((event) => (event.title))}
 
 
@@ -75,6 +78,22 @@ const Home = () => {
       <AddNewEventModal isOpen={showNewEventFormModal} onCloseModal={() => setShowNewEventFormModal(false)} />
 
       <main className="content-container-width-wrapper">
+        <EventCard color={"#FFBF00"}
+          title={""}
+          start={new Date}
+          location={""}
+          description={""} />
+
+
+        {context?.ownEvents?.map((event, i) =>
+          <EventCard key={i}
+            color={event.color}
+            title={event.title}
+            start={event.start}
+            location={event.location}
+            description={event.description} />)}
+
+
         <h2>Pågår just nu(breda kort o sidoskroll)</h2>
         <p>Pågår just nu(breda kort o sidoskroll)</p>
         <br />
