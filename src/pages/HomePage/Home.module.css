@@ -6,7 +6,7 @@
     color: var(--fg-color-light-static);
 
     main {
-        padding: 2rem 1rem;
+        padding: 1rem 0rem;
         margin-top: auto;
         margin-bottom: auto;
 
@@ -17,17 +17,20 @@
         /* background-color: aqua; */
     }
 
+    /* för container query */
+    container-type: inline-size;
+
 }
 
 
 
 .rightNowSection {
 
+    padding: 0 1rem;
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-    /* för container query */
-    container-type: inline-size;
+
 
     .cardsContainer {
         display: flex;
@@ -49,5 +52,8 @@
 }
 
 .yourEventsSection {
-    background-color: rgba(245, 245, 220, 0.164);
+
+    .yourEventsSectionHeading {
+        padding: 0 1rem;
+    }
 }

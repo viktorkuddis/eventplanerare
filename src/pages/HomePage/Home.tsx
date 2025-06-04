@@ -1,6 +1,8 @@
 import { useAuth } from "@clerk/clerk-react";
 import styles from "./Home.module.css";
 
+import { PlusCircle } from "react-feather";
+
 import Carousel from "../../components/Organisms/Carousel/Carousel";
 
 import EventCard from "../../components/molecules/EventCard";
@@ -12,7 +14,7 @@ import { isEventActive } from "../../utils/evenTimeStatusUtil";
 // import Modal from "../../components/Organisms/Modal/Modal";
 
 import { useDbApi } from "../../api/useDbApi";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 
 import type { EventType } from "../../types";
 
@@ -23,7 +25,6 @@ const Home = () => {
 
 
   const context = useContext(AppContext)
-
 
 
 
@@ -55,7 +56,25 @@ const Home = () => {
 
 
 
-  console.log(context)
+  const myEventsContainer = useRef(null);
+  const [myEventsContainerWidth, setMyEventsContainer] = useState<number>()
+
+  useEffect(() => {
+    if (!myEventsContainer.current) return;
+
+    // skapa lyssnare som kör när storleksförändring upptäcks
+    const resizeObserver = new ResizeObserver(([entry]) => {// entry är det observerade elementet.
+      console.log("Bredden är nu:", entry.contentRect.width);
+      setMyEventsContainer(entry.contentRect.width)
+    });
+
+    // pekar på element att börja hala lyssnaren på
+    resizeObserver.observe(myEventsContainer.current);
+
+    // cleanup:
+    return () => resizeObserver.disconnect();
+  }, []);
+
 
 
   // async function testfunction() {
@@ -143,36 +162,40 @@ const Home = () => {
 
 
 
-        <div className={`${styles.yourEventsSection}`}>
-          <h2>Dina events (mindre kort sidoscroll)</h2>
+        <div className={`${styles.yourEventsSection}`} ref={myEventsContainer}>
+          <h2 className={`${styles.yourEventsSectionHeading}`}>Dina events (mindre kort sidoscroll)</h2>
+
 
 
           <Carousel
+            width={myEventsContainerWidth !== undefined && myEventsContainerWidth < 576 ? 8 : 4}
+            paddingX={"1rem"}
+            gap={"0.5rem"}
+            firstItemWidth={myEventsContainerWidth !== undefined && myEventsContainerWidth < 576 ? 4 : 2}
             items={[
               // första itemet är alltid SKAPAKNAPPEN
-              <button
+              <button style={{ padding: "1rem", lineHeight: "1", textAlign: "center" }}
                 key="create-button"
                 className="btn-medium btn-outlined-light-static"
                 onClick={() => setShowNewEventFormModal(true)}
               >
-                + <br />SKAPA <br />EVENT
+                <PlusCircle size={18} /> <br /><small>
+                  SKAPA
+                </small>
               </button>,
-
-              // Mappar igenom arrayen av events och sprider ut den i den nya listan
+              //Mappar igenom arrayen av events och sprider ut den i den nya listan
               ...(context?.ownEvents?.map((e, i) => (
                 <EventCard
                   key={i}
                   color={e.color}
                   title={e.title}
                   start={e.start}
-                  location={e.location}
-                  description={e.description}
+                  // location={e.location}
+                  // description={e.description}
                   layout="landscape"
-                  size="large"
-                />
+                  size="small" />
               )) || [])
-            ]}
-          />
+            ]} />
 
           <div className={styles.cardsContainer}>
 
@@ -184,7 +207,7 @@ const Home = () => {
         </div>
 
         <div>
-          <h2>Kommande Events (ännu mindre kort? sidoscroll)</h2>
+          <h2>Andra events (ännu mindre kort? sidoscroll)</h2>
 
         </div>
 

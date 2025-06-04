@@ -1,21 +1,21 @@
 // KOLLAR OM HÄNDELSE ÄR PÅGÅENDE
 
 export function isEventActive(startTimeStr: string | number | Date, endTimeStr: string | number | Date) {
-    console.log("Jämförelse sker...(lokkar om event pågår)")
+    // console.log("Jämförelse sker...(lokkar om event pågår)")
 
     const now = new Date();
     const start = new Date(startTimeStr)
     const end = new Date(endTimeStr)
 
-    console.log("start från datan: ", startTimeStr)
-    console.log("start som dateobjekt:", start)
-    console.log("end från datan: ", endTimeStr)
-    console.log("end som dateobjekt:", end)
+    // console.log("start från datan: ", startTimeStr)
+    // console.log("start som dateobjekt:", start)
+    // console.log("end från datan: ", endTimeStr)
+    // console.log("end som dateobjekt:", end)
 
     // är NU efter startdatum och innan slutdatum? isåfall pågår det.
     const isOngoing = now >= start && now <= end;
 
-    console.log("pågår?", isOngoing)
+    // console.log("pågår?", isOngoing)
 
     return isOngoing
 }
