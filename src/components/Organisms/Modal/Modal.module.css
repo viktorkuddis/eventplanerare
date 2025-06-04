@@ -69,7 +69,7 @@ dialog::backdrop {
 }
 
 .large {
-    max-width: var(--modal--content-max-width-large);
+    max-width: var(--modal-content-max-width-large);
     margin: 0 auto
 }
 

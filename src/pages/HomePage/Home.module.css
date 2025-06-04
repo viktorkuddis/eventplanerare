@@ -12,3 +12,30 @@
     }
 
 }
+
+.rightNowSection {
+    padding: 1rem;
+
+
+    /* för container query */
+    container-type: inline-size;
+
+    .cardsContainer {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    @container (min-width: 576px) {
+        .cardsContainer {
+
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-auto-rows: 1fr;
+
+
+        }
+    }
+
+
+}

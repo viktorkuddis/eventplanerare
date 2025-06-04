@@ -1,11 +1,13 @@
 import { useAuth } from "@clerk/clerk-react";
 import styles from "./Home.module.css";
 
-import Carousel from "../../components/Organisms/Carousel/Carousel";
+// import Carousel from "../../components/Organisms/Carousel/Carousel";
 
 import EventCard from "../../components/molecules/EventCard";
 
 import AddNewEventModal from "../../components/Organisms/Modaler med innehåll/AddNewEventModal";
+
+import { isEventActive } from "../../utils/evenTimeStatusUtil";
 
 // import Modal from "../../components/Organisms/Modal/Modal";
 
@@ -71,9 +73,46 @@ const Home = () => {
 
     <div className={styles.backdrop}>
 
-      <br /><br />
 
-      <Carousel items={context?.ownEvents?.map((event, i) =>
+
+      {/* kolla om något event pågår nu: */}
+      {/* kollar igenom Egna events: */}
+
+
+
+      <div className={`content-container-width-wrapper ${styles.rightNowSection}`}>
+        <h2>Pågår just nu</h2>
+        <div className={styles.cardsContainer}>
+          {
+            // Finns det minst ett aktivt event?
+            context?.ownEvents?.some(e => isEventActive(e.start, e.end))
+              ? (
+                // Ja, rendera kort för alla aktiva event
+                context.ownEvents.map((e, i) =>
+                  isEventActive(e.start, e.end) && (
+                    <EventCard
+                      key={i}
+                      color={e.color}
+                      title={e.title}
+                      start={e.start}
+                      location={e.location}
+                      description={e.description}
+                      layout="landscape"
+                      size="large"
+                    />
+                  )
+                )
+              ) : (
+                // Nej, visa fallback-text
+                <p>Inga aktiva evenemang just nu.</p>
+              )
+          }
+
+        </div>
+      </div>
+
+
+      {/* <Carousel items={context?.ownEvents?.map((event, i) =>
         <EventCard
           color={event.color}
           title={event.title}
@@ -84,13 +123,7 @@ const Home = () => {
           size={"large"}
           key={i}
         />
-      )} />
-
-      <br />
-      <br />
-
-
-      {context?.ownEvents?.map((event) => (event.title))}
+      )} /> */}
 
 
       {/* MODAL */}
@@ -114,7 +147,7 @@ const Home = () => {
               description={event.description} layout={"landscape"} size={"large"} /></div>)}
 
         <br />
-        <h2>Pågår just nu(breda kort o sidoskroll)</h2>
+
         <p>Pågår just nu(breda kort o sidoskroll)</p>
         <br />
         <h2>Nästa event(lista)</h2>
