@@ -1,0 +1,36 @@
+.carouselContainer {
+    display: flex;
+
+    overflow-x: scroll;
+
+    /* background-color: rgba(240, 248, 255, 0.195); */
+    /* border: 2px solid hotpink; */
+
+
+
+    /* dölja skroll */
+    -ms-overflow-style: none;
+    /* IE och Edge */
+    scrollbar-width: none;
+}
+
+/* Firefox */
+.carouselContainer::-webkit-scrollbar {
+    display: none;
+    /* Chrome, Safari och nya Edge */
+}
+
+.itemContainer {
+
+
+    flex-shrink: 0;
+    overflow: hidden;
+
+    /* background-color: rgb(252, 52, 255); */
+
+    display: grid;
+    /*innehållet fyller ut hela itemContainer som är 1 gridcell*/
+
+
+
+}

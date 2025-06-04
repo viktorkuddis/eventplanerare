@@ -25,16 +25,25 @@
         justify-content: center;
     }
 
+
+    /* * TRUNKERING* */
     .title,
     .description {
-        display: -webkit-box;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 2;
-        /* För Webkit-baserade webbläsare */
-        overflow: hidden;
-        text-overflow: ellipsis;
+        /* Bryter ord på raden. */
+        word-break: break-word;
 
-        /* Denna kommer att överstyra -webkit-versionen om webbläsaren stöder den bättre */
+        /* WebKit: Aktiverar flerlinjes-trunkering. */
+        display: -webkit-box;
+        /* WebKit: Ställer in textriktning vertikalt. */
+        -webkit-box-orient: vertical;
+        /* WebKit: Begränsar till 2 rader. */
+        -webkit-line-clamp: 2;
+
+        /* Döljer överflödig text. */
+        overflow: hidden;
+        /* Lägger till "..." vid avklippt text. */
+        text-overflow: ellipsis;
+        /* Standard: Begränsar till 2 rader. */
         line-clamp: 2;
     }
 
@@ -63,6 +72,7 @@
     flex-direction: row;
     gap: 1rem;
 
+
     .dateStamp {
         align-self: flex-start;
     }
@@ -70,7 +80,13 @@
     .mainContainer {
         display: flex;
         flex-direction: column;
-        justify-content: center;
+
+        /* background-color: aqua; */
+        height: 100%;
+        justify-content: space-around;
+
+
+
 
         gap: 0.25rem;
 

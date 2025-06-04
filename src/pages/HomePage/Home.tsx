@@ -1,6 +1,8 @@
 import { useAuth } from "@clerk/clerk-react";
 import styles from "./Home.module.css";
 
+import Carousel from "../../components/Organisms/Carousel/Carousel";
+
 import EventCard from "../../components/molecules/EventCard";
 
 import AddNewEventModal from "../../components/Organisms/Modaler med innehåll/AddNewEventModal";
@@ -69,6 +71,23 @@ const Home = () => {
 
     <div className={styles.backdrop}>
 
+      <br /><br />
+
+      <Carousel items={context?.ownEvents?.map((event, i) =>
+        <EventCard
+          color={event.color}
+          title={event.title}
+          start={event.start}
+          location={event.location}
+          description={event.description}
+          layout={"landscape"}
+          size={"large"}
+          key={i}
+        />
+      )} />
+
+      <br />
+      <br />
 
 
       {context?.ownEvents?.map((event) => (event.title))}
