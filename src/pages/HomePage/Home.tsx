@@ -174,7 +174,7 @@ const Home = () => {
             firstItemWidth={myEventsContainerWidth !== undefined && myEventsContainerWidth < 576 ? 4 : 2}
             items={[
               // första itemet är alltid SKAPAKNAPPEN
-              <button style={{ padding: "0.5rem", lineHeight: "1", textAlign: "center" }}
+              <button style={{ padding: "0.5rem", lineHeight: "1", textAlign: "center", minHeight: "4rem" }}
                 key="create-button"
                 className="btn-medium btn-outlined-light-static"
                 onClick={() => setShowNewEventFormModal(true)}
