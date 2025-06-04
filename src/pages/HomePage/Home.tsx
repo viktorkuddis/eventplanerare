@@ -32,7 +32,7 @@ const Home = () => {
 
 
 
-  const [ownEvents, setOwnEvents] = useState<EventType[]>([]);
+  const [, setOwnEvents] = useState<EventType[]>([]);
 
   useEffect(() => {
     console.log("Skickar userId till API:", userId);
