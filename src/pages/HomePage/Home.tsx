@@ -163,18 +163,18 @@ const Home = () => {
 
 
         <div className={`${styles.yourEventsSection}`} ref={myEventsContainer}>
-          <h2 className={`${styles.yourEventsSectionHeading}`}>Dina events (mindre kort sidoscroll)</h2>
+          <h2 className={`${styles.yourEventsSectionHeading}`}>Dina events</h2>
 
 
-
+          <p>liggande kort (slmall) med bara titel. <br />också liite lite card-slip motsvarande marginalen</p>
           <Carousel
-            width={myEventsContainerWidth !== undefined && myEventsContainerWidth < 576 ? 8 : 4}
+            width={myEventsContainerWidth !== undefined && myEventsContainerWidth < 576 ? 8 : 5}
             paddingX={"1rem"}
             gap={"0.5rem"}
             firstItemWidth={myEventsContainerWidth !== undefined && myEventsContainerWidth < 576 ? 4 : 2}
             items={[
               // första itemet är alltid SKAPAKNAPPEN
-              <button style={{ padding: "1rem", lineHeight: "1", textAlign: "center" }}
+              <button style={{ padding: "0.5rem", lineHeight: "1", textAlign: "center" }}
                 key="create-button"
                 className="btn-medium btn-outlined-light-static"
                 onClick={() => setShowNewEventFormModal(true)}
@@ -192,8 +192,87 @@ const Home = () => {
                   start={e.start}
                   // location={e.location}
                   // description={e.description}
+                  layout="landscape"
+                  size="small" />
+              )) || [])
+            ]} />
+
+
+          <br />
+
+
+          <p>Stående kort (large) med titel, beskrivning och plats <br /> cardslip = 1 column</p>
+
+          <Carousel
+            width={myEventsContainerWidth !== undefined && myEventsContainerWidth < 576 ? 7 : 5}
+            paddingX={"1rem"}
+            gap={"0.5rem"}
+            firstItemWidth={myEventsContainerWidth !== undefined && myEventsContainerWidth < 576 ? 4 : 2}
+            items={[
+              // första itemet är alltid SKAPAKNAPPEN
+              <button style={{ padding: "0.5rem", lineHeight: "1", textAlign: "center" }}
+                key="create-button"
+                className="btn-medium btn-outlined-light-static"
+                onClick={() => setShowNewEventFormModal(true)}
+              >
+                <PlusCircle size={18} /> <br /><small>
+                  SKAPA
+                </small>
+              </button>,
+              //Mappar igenom arrayen av events och sprider ut den i den nya listan
+              ...(context?.ownEvents?.map((e, i) => (
+                <EventCard
+                  key={i}
+                  color={e.color}
+                  title={e.title}
+                  start={e.start}
+                  location={e.location}
+                  description={e.description}
                   layout="portrait"
                   size="large" />
+              )) || [])
+            ]} />
+
+
+
+
+
+
+          <br />
+          <p>Stående kort (small) med bara titel.
+            <br />
+            Denna tänkte jag ha under "andra events"
+            <br />
+            cardslip = 2columner
+          </p>
+
+          <Carousel
+            width={myEventsContainerWidth !== undefined && myEventsContainerWidth < 576 ? 5 : 4}
+            paddingX={"1rem"}
+            gap={"0.5rem"}
+            firstItemWidth={null}
+            items={[
+              // // första itemet är alltid SKAPAKNAPPEN
+              // <button style={{ padding: "1rem", lineHeight: "1", textAlign: "center" }}
+              //   key="create-button"
+              //   className="btn-medium btn-outlined-light-static"
+              //   onClick={() => setShowNewEventFormModal(true)}
+              // >
+              //   <PlusCircle size={18} /> <br /><small>
+              //     SKAPA
+              //   </small>
+              // </button>,
+              //Mappar igenom arrayen av events och sprider ut den i den nya listan
+              ...(context?.ownEvents?.map((e, i) => (
+                <EventCard
+                  key={i}
+                  color={e.color}
+                  title={e.title}
+                  start={e.start}
+                  // location={e.location}
+                  // description={e.description}
+                  layout="portrait"
+                  size="small" />
               )) || [])
             ]} />
 
