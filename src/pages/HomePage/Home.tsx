@@ -1,7 +1,7 @@
 import { useAuth } from "@clerk/clerk-react";
 import styles from "./Home.module.css";
 
-// import Carousel from "../../components/Organisms/Carousel/Carousel";
+import Carousel from "../../components/Organisms/Carousel/Carousel";
 
 import EventCard from "../../components/molecules/EventCard";
 
@@ -140,23 +140,47 @@ const Home = () => {
         </div>
 
 
-        <div>
+
+
+
+        <div className={`${styles.yourEventsSection}`}>
           <h2>Dina events (mindre kort sidoscroll)</h2>
 
-          <button className="btn-medium btn-outlined-light-static" onClick={() => {
 
-            setShowNewEventFormModal(true); console.log();
-          }
-          }>
-            + <br />
-            SKAPA <br />
-            EVENT
-          </button>
-          (ska öppna formulär som modal)
-          {/* <AddNewEventForm /> */}
-          <br />
+          <Carousel
+            items={[
+              // första itemet är alltid SKAPAKNAPPEN
+              <button
+                key="create-button"
+                className="btn-medium btn-outlined-light-static"
+                onClick={() => setShowNewEventFormModal(true)}
+              >
+                + <br />SKAPA <br />EVENT
+              </button>,
+
+              // Mappar igenom arrayen av events och sprider ut den i den nya listan
+              ...(context?.ownEvents?.map((e, i) => (
+                <EventCard
+                  key={i}
+                  color={e.color}
+                  title={e.title}
+                  start={e.start}
+                  location={e.location}
+                  description={e.description}
+                  layout="landscape"
+                  size="large"
+                />
+              )) || [])
+            ]}
+          />
+
+          <div className={styles.cardsContainer}>
 
 
+
+
+
+          </div>
         </div>
 
         <div>
