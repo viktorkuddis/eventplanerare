@@ -9,14 +9,23 @@
         padding: 2rem 1rem;
         margin-top: auto;
         margin-bottom: auto;
+
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+
+        /* background-color: aqua; */
     }
 
 }
 
+
+
 .rightNowSection {
-    padding: 1rem;
 
-
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
     /* för container query */
     container-type: inline-size;
 
