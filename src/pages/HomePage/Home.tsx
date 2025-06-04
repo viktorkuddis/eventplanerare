@@ -192,8 +192,8 @@ const Home = () => {
                   start={e.start}
                   // location={e.location}
                   // description={e.description}
-                  layout="landscape"
-                  size="small" />
+                  layout="portrait"
+                  size="large" />
               )) || [])
             ]} />
 
