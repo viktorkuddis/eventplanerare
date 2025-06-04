@@ -7,6 +7,8 @@
     /* border: 2px solid hotpink; */
 
 
+    scroll-snap-type: x mandatory;
+
 
     /* dölja skroll */
     -ms-overflow-style: none;
@@ -22,6 +24,7 @@
 
 .itemContainer {
 
+    scroll-snap-align: center;
 
     flex-shrink: 0;
     overflow: hidden;
