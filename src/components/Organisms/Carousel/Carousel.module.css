@@ -9,7 +9,6 @@
 
     scroll-snap-type: x mandatory;
 
-
     /* dölja skroll */
     -ms-overflow-style: none;
     /* IE och Edge */
@@ -23,9 +22,9 @@
 }
 
 .itemContainer {
+    /* background-color: aqua; */
 
-    scroll-snap-align: center;
-
+    scroll-snap-align: start;
     flex-shrink: 0;
     overflow: hidden;
 

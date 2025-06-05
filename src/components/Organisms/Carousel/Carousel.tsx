@@ -54,6 +54,7 @@ const Carousel = ({ items, width, paddingX, gap, firstItemWidth, aspectRatioH, a
             style={{
                 paddingLeft: paddingX,
                 paddingRight: paddingX,
+                scrollPaddingLeft: paddingX,
                 gap: gap,
 
             }}>

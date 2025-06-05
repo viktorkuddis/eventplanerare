@@ -1,7 +1,7 @@
 // import { useAuth } from "@clerk/clerk-react";
 import styles from "./Home.module.css";
 
-import { PlusCircle } from "react-feather";
+import { PlusCircle, Link } from "react-feather";
 
 import Carousel from "../../components/Organisms/Carousel/Carousel";
 
@@ -150,13 +150,14 @@ const Home = () => {
           <Carousel
             width={myEventsContainerWidth !== undefined && myEventsContainerWidth < 576 ? 8 : 8}
             aspectRatioH={1}
-            aspectRatioW={4}
+            aspectRatioW={3}
             paddingX={"1rem"}
             gap={"0.5rem"}
-            firstItemWidth={myEventsContainerWidth !== undefined && myEventsContainerWidth < 576 ? 4 : 4}
+            firstItemWidth={myEventsContainerWidth !== undefined && myEventsContainerWidth < 576 ? 3 : 4}
             items={[
               // första itemet är alltid SKAPAKNAPPEN
-              <button style={{ padding: "unset", lineHeight: "1", textAlign: "center", }}
+
+              <button style={{ padding: "unset", lineHeight: "1", textAlign: "center" }}
                 key="create-button"
                 className="btn-medium btn-outlined-light-static"
                 onClick={() => setShowNewEventFormModal(true)}
@@ -164,7 +165,8 @@ const Home = () => {
                 <PlusCircle size={18} /> <br /><small>
                   SKAPA
                 </small>
-              </button>,
+              </button>
+              ,
               //Mappar igenom arrayen av events och sprider ut den i den nya listan
               ...(context?.ownEvents?.map((e, i) => (
                 <EventCard
@@ -195,7 +197,10 @@ const Home = () => {
             firstItemWidth={myEventsContainerWidth !== undefined && myEventsContainerWidth < 576 ? 4 : 4}
             items={[
               // första itemet är alltid SKAPAKNAPPEN
-              <button style={{ padding: "unset", lineHeight: "1", textAlign: "center", }}
+
+              <button style={{
+                padding: "unset", lineHeight: "1", textAlign: "center", background: "rgba(0, 0, 0, 0.2)", border: "none"
+              }}
                 key="create-button"
                 className="btn-medium btn-outlined-light-static"
                 onClick={() => setShowNewEventFormModal(true)}
@@ -203,7 +208,8 @@ const Home = () => {
                 <PlusCircle size={18} /> <br /><small>
                   SKAPA
                 </small>
-              </button>,
+              </button>
+              ,
               //Mappar igenom arrayen av events och sprider ut den i den nya listan
               ...(context?.ownEvents?.map((e, i) => (
                 <EventCard
@@ -240,16 +246,16 @@ const Home = () => {
             gap={"0.5rem"}
             firstItemWidth={null}
             items={[
-              // // första itemet är alltid SKAPAKNAPPEN
-              // <button style={{ padding: "1rem", lineHeight: "1", textAlign: "center" }}
-              //   key="create-button"
-              //   className="btn-medium btn-outlined-light-static"
-              //   onClick={() => setShowNewEventFormModal(true)}
-              // >
-              //   <PlusCircle size={18} /> <br /><small>
-              //     SKAPA
-              //   </small>
-              // </button>,
+              // första itemet är alltid SKAPAKNAPPEN
+              <button style={{ padding: "unset", lineHeight: "1", textAlign: "center", }}
+                key="create-button"
+                className="btn-medium btn-outlined-light-static"
+                onClick={() => setShowNewEventFormModal(true)}
+              >
+                <Link size={18} /> <br /><small>
+                  ANSLUT
+                </small>
+              </button>,
               //Mappar igenom arrayen av events och sprider ut den i den nya listan
               ...(context?.ownEvents?.map((e, i) => (
                 <EventCard
@@ -271,7 +277,7 @@ const Home = () => {
 
 
           </div>
-        </div>
+        </div >
 
         <div>
           <h2>Andras event (ännu mindre kort? sidoscroll)</h2>
