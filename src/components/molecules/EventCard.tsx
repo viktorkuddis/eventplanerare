@@ -59,10 +59,13 @@ const EventCard = ({ color, title, start, location, description, layout, size }:
 
 
                 {location &&
-                    <p className={styles.locationSection}>
-                        <MapPin size={"1rem"} />
-                        <small>{location}</small>
-                    </p>}
+                    <div className={styles.locationSection}>
+                        <MapPin size={"1rem"} className={styles.pinIcon} />
+
+                        <small className={styles.locationText}>{location}</small>
+
+                    </div>
+                }
             </div>
 
 

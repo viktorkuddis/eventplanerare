@@ -148,13 +148,15 @@ const Home = () => {
 
           <p>liggande kort (slmall) med bara titel. <br />också liite lite card-slip motsvarande marginalen</p>
           <Carousel
-            width={myEventsContainerWidth !== undefined && myEventsContainerWidth < 576 ? 8 : 5}
+            width={myEventsContainerWidth !== undefined && myEventsContainerWidth < 576 ? 8 : 8}
+            aspectRatioH={1}
+            aspectRatioW={4}
             paddingX={"1rem"}
             gap={"0.5rem"}
-            firstItemWidth={myEventsContainerWidth !== undefined && myEventsContainerWidth < 576 ? 4 : 2}
+            firstItemWidth={myEventsContainerWidth !== undefined && myEventsContainerWidth < 576 ? 4 : 4}
             items={[
               // första itemet är alltid SKAPAKNAPPEN
-              <button style={{ padding: "0.5rem", lineHeight: "1", textAlign: "center", minHeight: "4rem" }}
+              <button style={{ padding: "unset", lineHeight: "1", textAlign: "center", }}
                 key="create-button"
                 className="btn-medium btn-outlined-light-static"
                 onClick={() => setShowNewEventFormModal(true)}
@@ -175,7 +177,8 @@ const Home = () => {
                   layout="landscape"
                   size="small" />
               )) || [])
-            ]} />
+            ]}
+          />
 
 
           <br />
@@ -184,13 +187,15 @@ const Home = () => {
           <p>Stående kort (large) med titel, beskrivning och plats <br /> cardslip = 1 column</p>
 
           <Carousel
-            width={myEventsContainerWidth !== undefined && myEventsContainerWidth < 576 ? 7 : 5}
+            width={myEventsContainerWidth !== undefined && myEventsContainerWidth < 576 ? 7 : 7}
+            aspectRatioH={4}
+            aspectRatioW={3}
             paddingX={"1rem"}
             gap={"0.5rem"}
-            firstItemWidth={myEventsContainerWidth !== undefined && myEventsContainerWidth < 576 ? 4 : 2}
+            firstItemWidth={myEventsContainerWidth !== undefined && myEventsContainerWidth < 576 ? 4 : 4}
             items={[
               // första itemet är alltid SKAPAKNAPPEN
-              <button style={{ padding: "0.5rem", lineHeight: "1", textAlign: "center" }}
+              <button style={{ padding: "unset", lineHeight: "1", textAlign: "center", }}
                 key="create-button"
                 className="btn-medium btn-outlined-light-static"
                 onClick={() => setShowNewEventFormModal(true)}
@@ -218,6 +223,7 @@ const Home = () => {
 
 
 
+
           <br />
           <p>Stående kort (small) med bara titel.
             <br />
@@ -228,6 +234,8 @@ const Home = () => {
 
           <Carousel
             width={myEventsContainerWidth !== undefined && myEventsContainerWidth < 576 ? 5 : 4}
+            aspectRatioH={1}
+            aspectRatioW={1}
             paddingX={"1rem"}
             gap={"0.5rem"}
             firstItemWidth={null}

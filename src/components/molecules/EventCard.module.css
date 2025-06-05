@@ -2,12 +2,11 @@
     position: relative;
     border-radius: 0.5rem;
     padding: 1rem 1.5rem;
-    display: flex;
-
     overflow: hidden;
-    align-items: center;
+
 
     line-height: 1.2;
+    /* ♥️ DENNA ÄR SJÄLVA KORTET*/
 
     .dateStamp {
         flex-shrink: 0;
@@ -25,6 +24,24 @@
         justify-content: center;
     }
 
+
+
+
+    .mainContainer {
+        /* background-color: rgba(255, 255, 255, 0.147); */
+        display: flex;
+        flex-direction: column;
+
+        /* background-color: aqua; */
+
+
+
+
+
+        gap: 0.25rem;
+        /* background-color: aliceblue; */
+
+    }
 
     /* * TRUNKERING* */
     .title,
@@ -47,6 +64,26 @@
         line-clamp: 2;
     }
 
+    /* * TRUNKERING* */
+    .locationText {
+        /* Bryter ord på raden. */
+        word-break: break-word;
+
+        /* WebKit: Aktiverar flerlinjes-trunkering. */
+        display: -webkit-box;
+        /* WebKit: Ställer in textriktning vertikalt. */
+        -webkit-box-orient: vertical;
+        /* WebKit: Begränsar till 2 rader. */
+        -webkit-line-clamp: 1;
+
+        /* Döljer överflödig text. */
+        overflow: hidden;
+        /* Lägger till "..." vid avklippt text. */
+        text-overflow: ellipsis;
+        /* Standard: Begränsar till 2 rader. */
+        line-clamp: 1;
+    }
+
 }
 
 .small {
@@ -66,42 +103,38 @@
     }
 }
 
-/* båda selektiorerna närvarande: */
-.cardLandScape.small {
-    gap: 1rem;
-}
 
 .cardLandScape {
-    flex-direction: row;
-    gap: 1rem;
+    /* gap: 1rem; */
 
 
     .dateStamp {
         /* align-self: flex-start; */
     }
 
+    /* 
     .mainContainer {
         display: flex;
         flex-direction: column;
 
         /* background-color: aqua; */
 
-        justify-content: center;
+    /* justify-content: center; */
 
-        gap: 0.25rem;
-        /* background-color: aliceblue; */
+    /* gap: 0.25rem; */
+    /* background-color: aliceblue; */
 
-    }
+    /* }  */
 }
 
 .cardPortrait {
-    display: flex;
+    /* display: flex; */
     /* <-- viktigt! */
 
-    gap: 0.25rem;
+    /* gap: 0.25rem;
     flex-direction: column;
     align-items: start;
-    justify-content: space-around;
+    justify-content: space-around; */
 
 
 
@@ -115,15 +148,21 @@
 
 
 
-
 .locationSection {
-    /* background-color: aqua; */
 
+    /* background-color: aqua; */
+    width: 100%;
     margin-top: 0.5rem;
     display: flex;
     align-items: center;
     gap: 0.5rem;
 
+
+
+
+    .pinIcon {
+        flex-shrink: 0;
+    }
 }
 
 
@@ -150,4 +189,35 @@ som before pga Mixed mode påverkar annars också texten */
             rgba(0, 0, 0, 0.7) 0%,
             rgba(255, 255, 254, 0.4) 100%);
     mix-blend-mode: overlay;
+}
+
+/* FLEX I KORT SOM ÄR LANDSKAP */
+.card.cardLandScape {
+    flex-direction: row;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* FLEX I KORT SOM ÄR LANDSKAP */
+.card.cardPortrait {
+
+    flex-direction: column;
+
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+    gap: 0.5rem;
+
+    .mainContainer {
+        /* background-color: aliceblue; */
+        min-height: 33%;
+        justify-content: space-evenly;
+        width: 100%;
+        /*för positionering av locationsection*/
+
+
+    }
+
+
 }
