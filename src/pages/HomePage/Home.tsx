@@ -267,7 +267,7 @@ const Home = () => {
                   color={e.color}
                   title={e.title}
                   start={e.start}
-                  // location={e.location}
+                  location={e.location}
                   // description={e.description}
                   layout="portrait"
                   size="small" />

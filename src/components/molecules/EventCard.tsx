@@ -30,7 +30,8 @@ const EventCard = ({ color, title, start, location, description, layout, size }:
         <div className={`${styles.card} 
         ${layout == "landscape" && styles.cardLandScape} 
         ${layout == "portrait" && styles.cardPortrait}
-        ${size == "small" && styles.small}`}
+        ${size == "small" && styles.small} 
+        ${size == "large" && styles.large}`}
             style={{
                 backgroundColor: color,
             }}>
@@ -60,7 +61,7 @@ const EventCard = ({ color, title, start, location, description, layout, size }:
 
                 {location &&
                     <div className={styles.locationSection}>
-                        <MapPin size={"1rem"} className={styles.pinIcon} />
+                        <MapPin size={size == "small" ? "0.75rem" : "1rem"} className={styles.pinIcon} />
 
                         <small className={styles.locationText}>{location}</small>
 
