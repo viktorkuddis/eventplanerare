@@ -147,7 +147,7 @@ const Home = () => {
 
           <br />
           <Carousel
-            width={myEventsContainerWidth !== undefined && myEventsContainerWidth < 576 ? 11 : 5}
+            width={myEventsContainerWidth !== undefined && myEventsContainerWidth < 576 ? 10 : 5.5}
             aspectRatioH={1}
             aspectRatioW={5}
             paddingX={"1rem"}
