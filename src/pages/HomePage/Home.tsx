@@ -145,8 +145,7 @@ const Home = () => {
         <div className={`${styles.yourEventsSection}`} ref={myEventsContainer}>
           <h2 className={`${styles.yourEventsSectionHeading}`}>Dina event</h2>
 
-
-          <p>liggande kort (slmall) med bara titel. <br />också liite lite card-slip motsvarande marginalen</p>
+          <br />
           <Carousel
             width={myEventsContainerWidth !== undefined && myEventsContainerWidth < 576 ? 8 : 8}
             aspectRatioH={1}
@@ -182,11 +181,14 @@ const Home = () => {
             ]}
           />
 
+          <br />
+
+          <h2 className={`${styles.yourEventsSectionHeading}`}>Dina event</h2>
 
           <br />
 
 
-          <p>Stående kort (large) med titel, beskrivning och plats <br /> cardslip = 1 column</p>
+
 
           <Carousel
             width={myEventsContainerWidth !== undefined && myEventsContainerWidth < 576 ? 7 : 7}
@@ -231,12 +233,10 @@ const Home = () => {
 
 
           <br />
-          <p>Stående kort (small) med bara titel.
-            <br />
-            Denna tänkte jag ha under "andra events"
-            <br />
-            cardslip = 2columner
-          </p>
+
+          <h2 className={`${styles.yourEventsSectionHeading}`}>Dina event</h2>
+
+          <br />
 
           <Carousel
             width={myEventsContainerWidth !== undefined && myEventsContainerWidth < 576 ? 5 : 4}
@@ -247,7 +247,9 @@ const Home = () => {
             firstItemWidth={null}
             items={[
               // första itemet är alltid SKAPAKNAPPEN
-              <button style={{ padding: "unset", lineHeight: "1", textAlign: "center", }}
+              <button style={{
+                padding: "unset", lineHeight: "1", textAlign: "center", background: "rgba(255, 255, 255, 0.1)", border: "none"
+              }}
                 key="create-button"
                 className="btn-medium btn-outlined-light-static"
                 onClick={() => setShowNewEventFormModal(true)}
