@@ -135,7 +135,7 @@ const Home = () => {
 
 
         <div>
-          <h2>Nästa event(lista)</h2>
+          <h2>Nästa event</h2>
         </div>
 
 
@@ -147,25 +147,25 @@ const Home = () => {
 
           <br />
           <Carousel
-            width={myEventsContainerWidth !== undefined && myEventsContainerWidth < 576 ? 8 : 8}
+            width={myEventsContainerWidth !== undefined && myEventsContainerWidth < 576 ? 11 : 5}
             aspectRatioH={1}
-            aspectRatioW={3}
+            aspectRatioW={5}
             paddingX={"1rem"}
             gap={"0.5rem"}
-            firstItemWidth={myEventsContainerWidth !== undefined && myEventsContainerWidth < 576 ? 3 : 4}
+            firstItemWidth={null}
             items={[
               // första itemet är alltid SKAPAKNAPPEN
 
-              <button style={{ padding: "unset", lineHeight: "1", textAlign: "center" }}
-                key="create-button"
-                className="btn-medium btn-outlined-light-static"
-                onClick={() => setShowNewEventFormModal(true)}
-              >
-                <PlusCircle size={18} /> <br /><small>
-                  SKAPA
-                </small>
-              </button>
-              ,
+              // <button style={{ padding: "unset", lineHeight: "1", textAlign: "center" }}
+              //   key="create-button"
+              //   className="btn-medium btn-outlined-light-static"
+              //   onClick={() => setShowNewEventFormModal(true)}
+              // >
+              //   <PlusCircle size={18} /> <br /><small>
+              //     SKAPA
+              //   </small>
+              // </button>
+              // ,
               //Mappar igenom arrayen av events och sprider ut den i den nya listan
               ...(context?.ownEvents?.map((e, i) => (
 
@@ -182,7 +182,45 @@ const Home = () => {
               )) || [])
             ]}
           />
+          <br />
 
+          <h2 className={`${styles.yourEventsSectionHeading}`}>Dina event</h2>
+
+          <br />
+
+          <Carousel
+            width={myEventsContainerWidth !== undefined && myEventsContainerWidth < 576 ? 5 : 3}
+            aspectRatioH={1}
+            aspectRatioW={1}
+            paddingX={"1rem"}
+            gap={"0.5rem"}
+            firstItemWidth={myEventsContainerWidth !== undefined && myEventsContainerWidth < 576 ? 5 : 3}
+            items={[
+              // första itemet är alltid SKAPAKNAPPEN
+              <button style={{
+                padding: "unset", lineHeight: "1", textAlign: "center", background: "rgba(255, 255, 255, 0.1)", border: "none"
+              }}
+                key="create-button"
+                className="btn-medium btn-outlined-light-static"
+                onClick={() => setShowNewEventFormModal(true)}
+              >
+                <PlusCircle size={18} /> <br /><small>
+                  SKAPA
+                </small>
+              </button>,
+              //Mappar igenom arrayen av events och sprider ut den i den nya listan
+              ...(context?.ownEvents?.map((e, i) => (
+                <EventCard
+                  key={i}
+                  color={e.color}
+                  title={e.title}
+                  start={e.start}
+                  location={e.location}
+                  // description={e.description}
+                  layout="portrait"
+                  size="small" />
+              )) || [])
+            ]} />
           <br />
 
           <h2 className={`${styles.yourEventsSectionHeading}`}>Dina event</h2>
@@ -193,24 +231,25 @@ const Home = () => {
 
 
           <Carousel
-            width={myEventsContainerWidth !== undefined && myEventsContainerWidth < 576 ? 7 : 7}
+            width={myEventsContainerWidth !== undefined && myEventsContainerWidth < 576 ? 7 : 4}
             aspectRatioH={4}
             aspectRatioW={3}
             paddingX={"1rem"}
             gap={"0.5rem"}
-            firstItemWidth={myEventsContainerWidth !== undefined && myEventsContainerWidth < 576 ? 4 : 4}
+            firstItemWidth={myEventsContainerWidth !== undefined && myEventsContainerWidth < 576 ? 4 : 2}
             items={[
               // första itemet är alltid SKAPAKNAPPEN
 
+
               <button style={{
-                padding: "unset", lineHeight: "1", textAlign: "center", background: "rgba(0, 0, 0, 0.2)", border: "none"
+                padding: "unset", lineHeight: "1", textAlign: "center", background: "rgba(255, 255, 255, 0.1)", border: "none"
               }}
                 key="create-button"
                 className="btn-medium btn-outlined-light-static"
                 onClick={() => setShowNewEventFormModal(true)}
               >
-                <PlusCircle size={18} /> <br /><small>
-                  SKAPA
+                <Link size={18} /> <br /><small>
+                  ANSLUT
                 </small>
               </button>
               ,
@@ -234,45 +273,7 @@ const Home = () => {
 
 
 
-          <br />
 
-          <h2 className={`${styles.yourEventsSectionHeading}`}>Dina event</h2>
-
-          <br />
-
-          <Carousel
-            width={myEventsContainerWidth !== undefined && myEventsContainerWidth < 576 ? 5 : 4}
-            aspectRatioH={1}
-            aspectRatioW={1}
-            paddingX={"1rem"}
-            gap={"0.5rem"}
-            firstItemWidth={null}
-            items={[
-              // första itemet är alltid SKAPAKNAPPEN
-              <button style={{
-                padding: "unset", lineHeight: "1", textAlign: "center", background: "rgba(255, 255, 255, 0.1)", border: "none"
-              }}
-                key="create-button"
-                className="btn-medium btn-outlined-light-static"
-                onClick={() => setShowNewEventFormModal(true)}
-              >
-                <Link size={18} /> <br /><small>
-                  ANSLUT
-                </small>
-              </button>,
-              //Mappar igenom arrayen av events och sprider ut den i den nya listan
-              ...(context?.ownEvents?.map((e, i) => (
-                <EventCard
-                  key={i}
-                  color={e.color}
-                  title={e.title}
-                  start={e.start}
-                  location={e.location}
-                  // description={e.description}
-                  layout="portrait"
-                  size="small" />
-              )) || [])
-            ]} />
 
           <div className={styles.cardsContainer}>
 
