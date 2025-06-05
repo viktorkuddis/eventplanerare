@@ -184,10 +184,13 @@ som before pga Mixed mode påverkar annars också texten */
 
     /* samma som kortet */
 
-
+    /* 
     background: linear-gradient(90deg,
             rgba(0, 0, 0, 0.7) 0%,
-            rgba(255, 255, 254, 0.4) 100%);
+            rgba(255, 255, 254, 0.4) 100%); */
+    background: linear-gradient(90deg,
+            rgba(0, 0, 0, 0.7) 0%,
+            rgba(255, 255, 254, 0.2) 100%);
     mix-blend-mode: overlay;
 }
 
