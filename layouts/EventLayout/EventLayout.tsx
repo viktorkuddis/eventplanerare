@@ -12,28 +12,30 @@ type Props = {
 const EventLayout = ({ children }: Props) => {
     return (
         <>
-            <div className="content-container-width-wrapper">
-                <header className={styles.header}>
-                    <Home />
+            <div className={`${styles.pageWrapper}`}>
+
+                <div className={`content-container-width-wrapper`}>
+                    <header className={styles.header}>
+                        <Home />
 
 
 
-                    <div>{ }</div>
-                    {/* <div> <small><mark>362 notis(er)</mark></small></div> */}
+                        <div>{ }</div>
+                        {/* <div> <small><mark>362 notis(er)</mark></small></div> */}
 
-                    {/* <div className={styles.logoContainer}>
+                        {/* <div className={styles.logoContainer}>
                         <h1>VADSKER?</h1>
                         <span><small><small>EVENTPLANERARE</small></small></span>
                     </div> */}
 
 
-                    < UserButton />
-                </header >
-            </div >
-            <main>
-                {children}
-            </main>
-
+                        < UserButton />
+                    </header >
+                </div >
+                <main>
+                    {children}
+                </main>
+            </div>
 
         </>
     );
