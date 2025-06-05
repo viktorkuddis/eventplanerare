@@ -5,6 +5,7 @@ const apiUrl = import.meta.env.VITE_API_URL;
 
 import { AppContext } from "../context /AppContext";
 import { useContext } from "react";
+import type { EventType } from "../types";
 
 
 export function useDbApi() {
@@ -23,6 +24,10 @@ export function useDbApi() {
 
             // lägger till data till context
             context?.setOwnEvents((prev) => [...prev, response.data]);
+            context?.setAllEvents((prev) => [...prev, response.data]);
+
+            console.log("Event tillagd :) ")
+
             return response.data;
 
         } catch (error) {
@@ -42,8 +47,23 @@ export function useDbApi() {
                 headers: { Authorization: `Bearer ${token}` }
             });
 
-            // sätter data till context
+            // sätter egna event till context
             context?.setOwnEvents(response.data)
+
+            // Uppdatera alla events i context
+            context?.setAllEvents((existingEvents) => {
+                const eventsToAdd = response.data.filter((newEvent: EventType) =>
+                    !existingEvents.some(existingEvent => existingEvent._id === newEvent._id)
+                );
+                return [...existingEvents, ...eventsToAdd];
+            });
+
+
+
+
+
+            console.log("context ocnEvents Uppdaterad", response.data)
+
 
             return response.data;
         } catch (error) {

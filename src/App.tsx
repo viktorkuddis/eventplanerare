@@ -9,6 +9,8 @@ import "./styles/App.css";
 import "./styles/Variables.css";
 
 import HomeLayout from "../layouts/HomeLayout"
+import EventLayout from "../layouts/EventLayout/EventLayout"
+
 
 import {
   Route,
@@ -20,9 +22,13 @@ import {
 
 import Login from "./pages/Login/Login";
 import Home from "./pages/HomePage/Home";
+import Event from './pages/EventPage/Event'
 import NoPage from "./pages/NoPage";
 import Style from "./pages/style";
-import { SignedIn, SignedOut } from "@clerk/clerk-react";
+import { SignedIn, SignedOut, useAuth } from "@clerk/clerk-react";
+import { useEffect } from "react";
+// import type { EventType } from "./types";
+import { useDbApi } from "./api/useDbApi";
 
 /* 
 LITE CLERKDOKUMENTATION:
@@ -44,7 +50,41 @@ LITE CLERKDOKUMENTATION:
 
 
 
+
+
+
+
 export default function App() {
+
+
+  const { userId } = useAuth();
+
+  const { getEventsByUserId } = useDbApi();
+
+
+
+
+  // INITIAL DATAHÄMTNING:
+  useEffect(() => {
+
+    // hämtar bara om det finns en användare. annars crashar hämtningen ju :) 
+    if (userId) {
+      console.log("Skickar userId till API:", userId);
+
+      (async () => {
+        try {
+          await getEventsByUserId(userId);
+
+        } catch (error) {
+          console.error(error);
+        }
+      })();
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [userId]);
+
+
   return (
     <BrowserRouter>
       <Routes>
@@ -93,6 +133,22 @@ export default function App() {
           </>
           }
         />
+        <Route
+          path="/event/:eventId"
+          element={<>
+            <SignedIn>
+              <EventLayout>
+                <Event />
+              </EventLayout>
+            </SignedIn>
+            <SignedOut>
+              <Navigate to="/login" replace />
+            </SignedOut>
+          </>
+          }
+        />
+
+
 
         {/* Öppen sida, synlig för alla */}
         <Route path="/style" element={<Style />} />
@@ -103,3 +159,4 @@ export default function App() {
       </Routes>
     </BrowserRouter>);
 }
+

@@ -11,8 +11,8 @@ type Props = {
 const HomeLayout = ({ children }: Props) => {
     return (
         <>
-            <div className="content-container-width-wrapper">
-                <header className={styles.header}>
+            <div className={`${styles.headerBG}`}>
+                <header className={`content-container-width-wrapper ${styles.header}`}>
 
 
                     <div> <small><mark>362 notis(er)</mark></small></div>

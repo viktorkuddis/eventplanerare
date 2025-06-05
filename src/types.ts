@@ -1,4 +1,5 @@
 export type EventType = {
+    _id: string | undefined
     title: string,
     description: string,
     color: string,

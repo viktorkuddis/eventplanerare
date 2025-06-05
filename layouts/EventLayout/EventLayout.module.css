@@ -1,9 +1,12 @@
-.headerBG {
-    background-color: var(--brand-color-strong);
-}
+/* body {
+    margin: 0;
+    min-height: 100svh;
+    background-color: var(--bg-color-base);
+
+} */
 
 .header {
-    color: var(--fg-color-light-static);
+    color: var(--fg-color-primary);
 
     display: grid;
     grid-template-columns: 1fr auto 1fr;
@@ -12,6 +15,7 @@
 
     padding: 1rem;
 
+    /* background-color: lightblue; */
 }
 
 .logoContainer {

@@ -1,4 +1,4 @@
-import { useAuth } from "@clerk/clerk-react";
+// import { useAuth } from "@clerk/clerk-react";
 import styles from "./Home.module.css";
 
 import { PlusCircle } from "react-feather";
@@ -13,10 +13,10 @@ import { isEventActive } from "../../utils/evenTimeStatusUtil";
 
 // import Modal from "../../components/Organisms/Modal/Modal";
 
-import { useDbApi } from "../../api/useDbApi";
+// import { useDbApi } from "../../api/useDbApi";
 import { useContext, useEffect, useRef, useState } from "react";
 
-import type { EventType } from "../../types";
+// import type { EventType } from "../../types";
 
 
 import { AppContext } from "../../context /AppContext";
@@ -30,29 +30,9 @@ const Home = () => {
 
   const [showNewEventFormModal, setShowNewEventFormModal] = useState(false)
 
-  const { userId } = useAuth();
+  // const { userId } = useAuth();
 
-  const { getEventsByUserId } = useDbApi();
-
-
-
-
-  const [, setOwnEvents] = useState<EventType[]>([]);
-
-  useEffect(() => {
-    console.log("Skickar userId till API:", userId);
-
-    (async () => {
-      try {
-        const response = await getEventsByUserId(userId);
-        console.log(response);
-        setOwnEvents(response)
-      } catch (error) {
-        console.error(error);
-      }
-    })();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  // const { getEventsByUserId } = useDbApi();
 
 
 
@@ -145,7 +125,7 @@ const Home = () => {
                   )
                 ) : (
                   // Nej, visa fallback-text
-                  <p>Inga aktiva evenemang just nu.</p>
+                  <p>Inga pågående evenemang just nu.</p>
                 )
             }
           </div>
@@ -163,7 +143,7 @@ const Home = () => {
 
 
         <div className={`${styles.yourEventsSection}`} ref={myEventsContainer}>
-          <h2 className={`${styles.yourEventsSectionHeading}`}>Dina events</h2>
+          <h2 className={`${styles.yourEventsSectionHeading}`}>Dina event</h2>
 
 
           <p>liggande kort (slmall) med bara titel. <br />också liite lite card-slip motsvarande marginalen</p>
@@ -286,7 +266,7 @@ const Home = () => {
         </div>
 
         <div>
-          <h2>Andra events (ännu mindre kort? sidoscroll)</h2>
+          <h2>Andras event (ännu mindre kort? sidoscroll)</h2>
 
         </div>
 
