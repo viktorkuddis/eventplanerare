@@ -189,48 +189,6 @@ const Home = () => {
           <br />
 
           <Carousel
-            width={myEventsContainerWidth !== undefined && myEventsContainerWidth < 576 ? 5 : 3}
-            aspectRatioH={1}
-            aspectRatioW={1}
-            paddingX={"1rem"}
-            gap={"0.5rem"}
-            firstItemWidth={myEventsContainerWidth !== undefined && myEventsContainerWidth < 576 ? 5 : 3}
-            items={[
-              // första itemet är alltid SKAPAKNAPPEN
-              <button style={{
-                padding: "unset", lineHeight: "1", textAlign: "center", background: "rgba(255, 255, 255, 0.1)", border: "none"
-              }}
-                key="create-button"
-                className="btn-medium btn-outlined-light-static"
-                onClick={() => setShowNewEventFormModal(true)}
-              >
-                <PlusCircle size={18} /> <br /><small>
-                  SKAPA
-                </small>
-              </button>,
-              //Mappar igenom arrayen av events och sprider ut den i den nya listan
-              ...(context?.ownEvents?.map((e, i) => (
-                <EventCard
-                  key={i}
-                  color={e.color}
-                  title={e.title}
-                  start={e.start}
-                  location={e.location}
-                  // description={e.description}
-                  layout="portrait"
-                  size="small" />
-              )) || [])
-            ]} />
-          <br />
-
-          <h2 className={`${styles.yourEventsSectionHeading}`}>Dina event</h2>
-
-          <br />
-
-
-
-
-          <Carousel
             width={myEventsContainerWidth !== undefined && myEventsContainerWidth < 576 ? 7 : 4}
             aspectRatioH={4}
             aspectRatioW={3}
@@ -266,6 +224,51 @@ const Home = () => {
                   size="large" />
               )) || [])
             ]} />
+
+          <br />
+
+          <h2 className={`${styles.yourEventsSectionHeading}`}>Dina event</h2>
+
+          <br />
+
+          <Carousel
+            width={myEventsContainerWidth !== undefined && myEventsContainerWidth < 576 ? 5 : 3}
+            aspectRatioH={1}
+            aspectRatioW={1}
+            paddingX={"1rem"}
+            gap={"0.5rem"}
+            firstItemWidth={myEventsContainerWidth !== undefined && myEventsContainerWidth < 576 ? 5 : 3}
+            items={[
+              // första itemet är alltid SKAPAKNAPPEN
+              <button style={{
+                padding: "unset", lineHeight: "1", textAlign: "center", background: "rgba(255, 255, 255, 0.1)", border: "none"
+              }}
+                key="create-button"
+                className="btn-medium btn-outlined-light-static"
+                onClick={() => setShowNewEventFormModal(true)}
+              >
+                <PlusCircle size={18} /> <br /><small>
+                  SKAPA
+                </small>
+              </button>,
+              //Mappar igenom arrayen av events och sprider ut den i den nya listan
+              ...(context?.ownEvents?.map((e, i) => (
+                <EventCard
+                  key={i}
+                  color={e.color}
+                  title={e.title}
+                  start={e.start}
+                  location={e.location}
+                  // description={e.description}
+                  layout="portrait"
+                  size="small" />
+              )) || [])
+            ]} />
+
+
+
+
+
 
 
 
