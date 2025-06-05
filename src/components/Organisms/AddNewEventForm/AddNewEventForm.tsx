@@ -48,6 +48,7 @@ const AddNewEventForm: React.FC<Props> = ({ onCancel, onEventCreated }) => {
       return;
     } else {
       const newEventData: EventType = {
+        _id: undefined,
         title: title,
         description: description,
         location: location,
