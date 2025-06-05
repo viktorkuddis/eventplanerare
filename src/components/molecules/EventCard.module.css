@@ -6,7 +6,7 @@
 
 
     line-height: 1.2;
-    /* ♥️ DENNA ÄR SJÄLVA KORTET*/
+
 
     .dateStamp {
         flex-shrink: 0;
@@ -96,7 +96,7 @@
     }
 
     .title {
-        font-size: var(--font-size-h4);
+        font-size: var(--font-size-h5);
         /* margin-bottom: 0.25rem; */
 
 

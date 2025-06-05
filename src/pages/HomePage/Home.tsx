@@ -168,6 +168,7 @@ const Home = () => {
               ,
               //Mappar igenom arrayen av events och sprider ut den i den nya listan
               ...(context?.ownEvents?.map((e, i) => (
+
                 <EventCard
                   key={i}
                   color={e.color}
@@ -177,6 +178,7 @@ const Home = () => {
                   // description={e.description}
                   layout="landscape"
                   size="small" />
+
               )) || [])
             ]}
           />
