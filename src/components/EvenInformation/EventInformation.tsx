@@ -43,7 +43,7 @@ const EventInformation = () => {
 
     return (
         <div className={styles.container}>
-            <h1>{context?.currentEventObject?.title}</h1>
+            <h2>{context?.currentEventObject?.title}</h2>
 
 
 
