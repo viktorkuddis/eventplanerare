@@ -1,5 +1,6 @@
 import styles from "./EventLayout.module.css";
 import type { ReactNode } from 'react';
+import { useNavigate } from "react-router-dom";
 
 import { Home, Info, Settings } from "react-feather";
 
@@ -9,6 +10,8 @@ type Props = {
     children?: ReactNode;
 };
 const EventLayout = ({ children }: Props) => {
+
+    const navigate = useNavigate()
     return (
         <>
             <div className={styles.backdrop}>
@@ -20,7 +23,7 @@ const EventLayout = ({ children }: Props) => {
                     <header className={`${styles.headerWrapper}`}>
                         <div className={`${styles.header} content-container-width-wrapper`}>
                             <div className={styles.headerLeft}>
-                                <button className={styles.homeButton}>
+                                <button className={styles.homeButton} onClick={() => navigate("/")}>
                                     <Home size={24} />
                                 </button>
 
