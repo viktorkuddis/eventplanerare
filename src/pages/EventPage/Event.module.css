@@ -1,15 +1,4 @@
-.main {
-    min-height: 100svh;
+.eventInfoSection {
     padding: 1rem;
-
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-
-    background-color: rgba(143, 143, 143, 0.1);
-
-
-    /* för container query */
-    container-type: inline-size;
-
+    background-color: var(--bg-color-elevated);
 }

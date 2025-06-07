@@ -1,0 +1,10 @@
+.timeSection {
+
+    display: flex;
+
+    background-color: rgba(128, 128, 128, 0.1);
+    border-radius: 1rem;
+    gap: 1rem;
+
+    padding: 1rem 2rem;
+}

@@ -6,6 +6,10 @@ import { DotLoader } from "react-spinners";
 
 import { useParams } from "react-router-dom";
 
+import EventInformation from "../../components/EvenInformation/EventInformation";
+
+import style from "./Event.module.css";
+
 
 
 
@@ -63,11 +67,13 @@ const Event = () => {
     return (
       <div>
 
-        hej eventet FINNS
-        {/* <div>{currentEventObject?.title}</div>
+        <hr />
+        <div className={style.eventInfoSection}>
+          <EventInformation />
+        </div>
 
-      <div>{currentEventObject?.description}</div>
-      <div>{currentEventObject?.location}</div> */}
+
+
 
 
       </div>
