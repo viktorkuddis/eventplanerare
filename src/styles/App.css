@@ -1,6 +1,22 @@
 /* size */
 
+/* circle behöver kvadratiskt innehåll för att bli perfekt cirkle. */
 
+.btn-circle {
+    border-radius: 10rem !important;
+}
+
+.btn-circle.btn-small {
+    padding: 0.45rem !important;
+}
+
+.btn-circle.btn-mediuml {
+    padding: 0.75rem !important;
+}
+
+.btn-circle.btn-large {
+    padding: 0.87rem !important;
+}
 
 .btn-small {
     all: unset;

@@ -1,8 +1,7 @@
-import { UserButton } from '@clerk/clerk-react';
 import styles from "./EventLayout.module.css";
 import type { ReactNode } from 'react';
 
-import { Home } from "react-feather";
+import { Home, Info, Settings } from "react-feather";
 
 
 
@@ -12,30 +11,54 @@ type Props = {
 const EventLayout = ({ children }: Props) => {
     return (
         <>
-            <div className={`${styles.pageWrapper}`}>
-
-                <div className={`content-container-width-wrapper`}>
-                    <header className={styles.header}>
-                        <Home />
+            <div className={styles.backdrop}>
 
 
-
-                        <div>{ }</div>
-                        {/* <div> <small><mark>362 notis(er)</mark></small></div> */}
-
-                        {/* <div className={styles.logoContainer}>
-                        <h1>VADSKER?</h1>
-                        <span><small><small>EVENTPLANERARE</small></small></span>
-                    </div> */}
+                <div className={`${styles.pageWrapper}`}>
 
 
-                        < UserButton />
+                    <header className={`${styles.headerWrapper}`}>
+                        <div className={`${styles.header} content-container-width-wrapper`}>
+                            <div className={styles.headerLeft}>
+                                <button className={styles.homeButton}>
+                                    <Home size={24} />
+                                </button>
+
+                            </div>
+                            <div className={styles.headerMiddle}>
+                                <div>Namn på eventet Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio deleniti voluptatem perspiciatis, debitis magnam dolorem ipsum fugit, sunt saepe architecto inventore sint a reprehenderit quibusdam tempore et fugiat ipsam excepturi.</div>
+
+                            </div>
+                            <div className={styles.headerRight}>
+
+                                <button className=" btn-small btn-circle btn-filled-light-static">
+                                    <div style={{ height: "1.25rem", aspectRatio: "1/1" }}>
+                                        <Info size={"1.25rem"} />
+                                    </div>
+                                </button>
+
+                                <button className="btn-small btn-circle btn-filled-light-static">
+                                    <div style={{ height: "1.25rem", aspectRatio: "1/1" }}>
+                                        <Settings size={"1.25rem"} />
+                                    </div>
+
+                                </button>
+
+
+                            </div>
+                        </div>
+
                     </header >
-                </div >
-                <main>
-                    {children}
-                </main>
-            </div>
+                    <main>
+                        {children}
+                        info , inställning Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eius harum, quasi vitae libero recusandae neque aut officiis placeat reiciendis earum deleniti aperiam possimus, autem hic quia, quibusdam odio eveniet saepe? info , inställning Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eius harum, quasi vitae libero recusandae neque aut officiis placeat reiciendis earum deleniti aperiam possimus, autem hic quia, quibusdam odio eveniet saepe? info , inställning Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eius harum, quasi vitae libero recusandae neque aut officiis placeat reiciendis earum deleniti aperiam possimus, autem hic quia, quibusdam odio eveniet saepe? info , inställning Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eius harum, quasi vitae libero recusandae neque aut officiis placeat reiciendis earum deleniti aperiam possimus, autem hic quia, quibusdam odio eveniet saepe? info , inställning Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eius harum, quasi vitae libero recusandae neque aut officiis placeat reiciendis earum deleniti aperiam possimus, autem hic quia, quibusdam odio eveniet saepe? info , inställning Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eius harum, quasi vitae libero recusandae neque aut officiis placeat reiciendis earum deleniti aperiam possimus, autem hic quia, quibusdam odio eveniet saepe? info , inställning Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eius harum, quasi vitae libero recusandae neque aut officiis placeat reiciendis earum deleniti aperiam possimus, autem hic quia, quibusdam odio eveniet saepe? info , inställning Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eius harum, quasi vitae libero recusandae neque aut officiis placeat reiciendis earum deleniti aperiam possimus, autem hic quia, quibusdam odio eveniet saepe? info , inställning Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eius harum, quasi vitae libero recusandae neque aut officiis placeat reiciendis earum deleniti aperiam possimus, autem hic quia, quibusdam odio eveniet saepe? info , inställning Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eius harum, quasi vitae libero recusandae neque aut officiis placeat reiciendis earum deleniti aperiam possimus, autem hic quia, quibusdam odio eveniet saepe? info , inställning Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eius harum, quasi vitae libero recusandae neque aut officiis placeat reiciendis earum deleniti aperiam possimus, autem hic quia, quibusdam odio eveniet saepe? info , inställning Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eius harum, quasi vitae libero recusandae neque aut officiis placeat reiciendis earum deleniti aperiam possimus, autem hic quia, quibusdam odio eveniet saepe? info , inställning Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eius harum, quasi vitae libero recusandae neque aut officiis placeat reiciendis earum deleniti aperiam possimus, autem hic quia, quibusdam odio eveniet saepe? info , inställning Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eius harum, quasi vitae libero recusandae neque aut officiis placeat reiciendis earum deleniti aperiam possimus, autem hic quia, quibusdam odio eveniet saepe? info , inställning Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eius harum, quasi vitae libero recusandae neque aut officiis placeat reiciendis earum deleniti aperiam possimus, autem hic quia, quibusdam odio eveniet saepe? info , inställning Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eius harum, quasi vitae libero recusandae neque aut officiis placeat reiciendis earum deleniti aperiam possimus, autem hic quia,  info , inställning Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eius harum, quasi vitae libero recusandae neque aut officiis placeat reiciendis earum deleniti aperiam possimus, autem hic quia, quibusdam odio eveniet saepe? info , inställning Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eius harum, quasi vitae libero recusandae neque aut officiis placeat reiciendis earum deleniti aperiam possimus, autem hic quia, quibusdam odio eveniet saepe? info , inställning Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eius harum, quasi vitae libero recusandae neque aut officiis placeat reiciendis earum deleniti aperiam possimus, autem hic quia, quibusdam odio eveniet saepe? info , inställning Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eius harum, quasi vitae libero recusandae neque aut officiis placeat reiciendis earum deleniti aperiam possimus, autem hic quia, quibusdam odio eveniet saepe? info , inställning Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eius harum, quasi vitae libero recusandae neque aut officiis placeat reiciendis earum deleniti aperiam possimus, autem hic quia, quibusdam odio eveniet saepe? info , inställning Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eius harum, quasi vitae libero recusandae neque aut officiis placeat reiciendis earum deleniti aperiam possimus, autem hic quia, quibusdam odio eveniet saepe? info , inställning Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eius harum, quasi vitae libero recusandae neque aut officiis placeat reiciendis earum deleniti aperiam possimus, autem hic quia, quibusdam odio eveniet saepe? info , inställning Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eius harum, quasi vitae libero recusandae neque aut officiis placeat reiciendis earum deleniti aperiam possimus, autem hic quia, quibusdam odio eveniet saepe? info , inställning Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eius harum, quasi vitae libero recusandae neque aut officiis placeat reiciendis earum deleniti aperiam possimus, autem hic quia, quibusdam odio eveniet saepe?quibusdam odio eveniet saepe? info , inställning Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eius harum, quasi vitae libero recusandae neque aut officiis placeat reiciendis earum deleniti aperiam possimus, autem hic quia, quibusdam odio eveniet saepe?
+
+
+                    </main>
+                </div ></div>
+
+
+            {/* </div > */}
 
         </>
     );
