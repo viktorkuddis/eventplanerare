@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 // import { useAuth } from "@clerk/clerk-react";
 import styles from "./Home.module.css";
 
-import { PlusCircle, Link as LinkIcon } from "react-feather";
+import { PlusCircle, Link as LinkIcon, } from "react-feather";
 
 import Carousel from "../../components/Organisms/Carousel/Carousel";
 
@@ -118,7 +118,6 @@ const Home = () => {
                     isEventActive(e.start, e.end) && (
 
 
-
                       <EventCard
                         onClick={() => navigate(`/event/${e._id}`)}
                         key={i}
@@ -131,7 +130,6 @@ const Home = () => {
                         size="large"
 
                       />
-
                     )
                   )
                 ) : (
@@ -182,6 +180,9 @@ const Home = () => {
 
 
 
+
+
+
                 <EventCard
                   onClick={() => navigate(`/event/${e._id}`)}
                   key={i}
@@ -193,10 +194,11 @@ const Home = () => {
                   layout="landscape"
                   size="small" />
 
-
               )) || [])
             ]}
           />
+
+
 
 
 

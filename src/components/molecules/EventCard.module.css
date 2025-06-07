@@ -5,7 +5,13 @@
     overflow: hidden;
 
 
+    cursor: pointer;
+
+
+
+
     line-height: 1.2;
+
 
 
     .dateStamp {
