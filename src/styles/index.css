@@ -35,6 +35,22 @@ ul {
   list-style: none;
 }
 
+hr {
+
+
+  all: unset;
+  /* Tar bort alla ärvda och default styles */
+  display: block;
+  /* Behövs om du vill ge den egna dimensioner */
+
+
+
+
+  height: 1px;
+
+  background-color: hsla(0, 0%, 50%, 0.2);
+  width: 100%;
+}
 
 body {
   margin: 0;

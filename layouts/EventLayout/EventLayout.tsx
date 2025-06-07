@@ -1,17 +1,45 @@
+
+
+
 import styles from "./EventLayout.module.css";
-import type { ReactNode } from 'react';
+import { useContext, useEffect, type ReactNode } from 'react';
 import { useNavigate } from "react-router-dom";
 
 import { Home, Info, Settings } from "react-feather";
 
+import { AppContext } from "../../src/context /AppContext";
+import { useParams } from "react-router-dom";
 
+
+// TODO: SE TILL ATT LETA I DATABASEN SÅ ATT USER ID FINNS MED EN PACPISITPANT så att vi har access att hämta allt som detta eventet acdosieras med
 
 type Props = {
     children?: ReactNode;
 };
 const EventLayout = ({ children }: Props) => {
 
+    const { eventId } = useParams();
+    console.log(eventId)
+
+    const context = useContext(AppContext)
+
+    console.log(context?.currentEventObject)
+
     const navigate = useNavigate()
+
+
+
+
+    useEffect(() => {
+
+        if (context?.allEvents) {
+            // Leta efter eventet att sätta som aktuellt eventobjekt. null om inte hittat
+            const eventObject = context.allEvents.find(e => e._id === eventId) ?? null;
+            context.setCurrentEventObject(eventObject)
+        }
+
+
+    }, [context, context?.allEvents, eventId]);
     return (
         <>
             <div className={styles.backdrop}>
@@ -29,7 +57,9 @@ const EventLayout = ({ children }: Props) => {
 
                             </div>
                             <div className={styles.headerMiddle}>
-                                <div>Namn på eventet Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio deleniti voluptatem perspiciatis, debitis magnam dolorem ipsum fugit, sunt saepe architecto inventore sint a reprehenderit quibusdam tempore et fugiat ipsam excepturi.</div>
+
+
+                                <div>{context?.currentEventObject?.title}</div>
 
                             </div>
                             <div className={styles.headerRight}>

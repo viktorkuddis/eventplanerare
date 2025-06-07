@@ -3,8 +3,8 @@ import type { EventType } from '../types';
 
 export type AppContextType = {
     ownEvents: EventType[];
-    currentEventId: string;
-    setCurrentEventId: React.Dispatch<React.SetStateAction<string>>
+    currentEventObject: EventType | null;
+    setCurrentEventObject: React.Dispatch<React.SetStateAction<EventType | null>>
     setOwnEvents: React.Dispatch<React.SetStateAction<EventType[]>>;
     allEvents: EventType[];
     setAllEvents: React.Dispatch<React.SetStateAction<EventType[]>>
