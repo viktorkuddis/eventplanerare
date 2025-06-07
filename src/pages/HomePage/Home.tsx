@@ -1,7 +1,9 @@
+import { useNavigate } from "react-router-dom";
+
 // import { useAuth } from "@clerk/clerk-react";
 import styles from "./Home.module.css";
 
-import { PlusCircle, Link } from "react-feather";
+import { PlusCircle, Link as LinkIcon } from "react-feather";
 
 import Carousel from "../../components/Organisms/Carousel/Carousel";
 
@@ -22,6 +24,9 @@ import { useContext, useEffect, useRef, useState } from "react";
 import { AppContext } from "../../context /AppContext";
 
 const Home = () => {
+
+
+  const navigate = useNavigate();
 
 
   const context = useContext(AppContext)
@@ -111,7 +116,11 @@ const Home = () => {
                   // Ja, rendera kort för alla aktiva event
                   context.ownEvents.map((e, i) =>
                     isEventActive(e.start, e.end) && (
+
+
+
                       <EventCard
+                        onClick={() => navigate(`/event/${e._id}`)}
                         key={i}
                         color={e.color}
                         title={e.title}
@@ -120,7 +129,9 @@ const Home = () => {
                         description={e.description}
                         layout="landscape"
                         size="large"
+
                       />
+
                     )
                   )
                 ) : (
@@ -144,7 +155,7 @@ const Home = () => {
 
         <div className={`${styles.yourEventsSection}`} ref={myEventsContainer}>
           <h2 className={`${styles.yourEventsSectionHeading}`}>Dina event</h2>
-
+          DENNA
           <br />
           <Carousel
             width={myEventsContainerWidth !== undefined && myEventsContainerWidth < 576 ? 10 : 5}
@@ -169,7 +180,10 @@ const Home = () => {
               //Mappar igenom arrayen av events och sprider ut den i den nya listan
               ...(context?.ownEvents?.map((e, i) => (
 
+
+
                 <EventCard
+                  onClick={() => navigate(`/event/${e._id}`)}
                   key={i}
                   color={e.color}
                   title={e.title}
@@ -179,9 +193,14 @@ const Home = () => {
                   layout="landscape"
                   size="small" />
 
+
               )) || [])
             ]}
           />
+
+
+
+
           <br />
 
           <h2 className={`${styles.yourEventsSectionHeading}`}>Dina event</h2>
@@ -206,7 +225,7 @@ const Home = () => {
                 className="btn-medium btn-outlined-light-static"
                 onClick={() => setShowNewEventFormModal(true)}
               >
-                <Link size={18} /> <br /><small>
+                <LinkIcon size={18} /> <br /><small>
                   ANSLUT
                 </small>
               </button>
@@ -214,6 +233,7 @@ const Home = () => {
               //Mappar igenom arrayen av events och sprider ut den i den nya listan
               ...(context?.ownEvents?.map((e, i) => (
                 <EventCard
+                  onClick={() => navigate(`/event/${e._id}`)}
                   key={i}
                   color={e.color}
                   title={e.title}
@@ -254,6 +274,7 @@ const Home = () => {
               //Mappar igenom arrayen av events och sprider ut den i den nya listan
               ...(context?.ownEvents?.map((e, i) => (
                 <EventCard
+                  onClick={() => navigate(`/event/${e._id}`)}
                   key={i}
                   color={e.color}
                   title={e.title}

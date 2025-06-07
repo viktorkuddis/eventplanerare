@@ -65,6 +65,7 @@ const Carousel = ({ items, width, paddingX, gap, firstItemWidth, aspectRatioH, a
                     <div
                         key={i}
                         className={styles.itemContainer}
+                        tabIndex={0}
                         style={{
                             // sätter kortets bredd:
                             // - Vi räknar med den containerns totala bredd inklusive containerns padding,

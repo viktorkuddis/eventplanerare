@@ -11,11 +11,14 @@ type Props = {
     location?: string,
     description?: string,
 
+
     layout: "landscape" | "portrait",
     size: "large" | "small",
 
-}
-const EventCard = ({ color, title, start, location, description, layout, size }: Props) => {
+
+
+} & React.HTMLAttributes<HTMLDivElement>
+const EventCard = ({ color, title, start, location, description, layout, size, ...rest }: Props) => {
 
     if (!color) color = "#80a6b6"
 
@@ -27,6 +30,7 @@ const EventCard = ({ color, title, start, location, description, layout, size }:
 
 
     return (
+
         <div className={`${styles.card} 
         ${layout == "landscape" && styles.cardLandScape} 
         ${layout == "portrait" && styles.cardPortrait}
@@ -34,8 +38,8 @@ const EventCard = ({ color, title, start, location, description, layout, size }:
         ${size == "large" && styles.large}`}
             style={{
                 backgroundColor: color,
-            }}>
-
+            }}
+            {...rest}>
 
 
 
@@ -75,6 +79,8 @@ const EventCard = ({ color, title, start, location, description, layout, size }:
 
 
         </div >
+
+
     )
 }
 
