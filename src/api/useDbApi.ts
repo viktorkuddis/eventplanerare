@@ -18,7 +18,7 @@ export function useDbApi() {
             console.log("token:")
             console.log(token)
 
-            const response = await axios.post(`${apiUrl}/event`, eventData, {
+            const response = await axios.post(`${apiUrl}/events`, eventData, {
                 headers: { Authorization: `Bearer ${token}` }
             });
 
@@ -43,7 +43,7 @@ export function useDbApi() {
             console.log("token:")
             console.log(token)
 
-            const response = await axios.get(`${apiUrl}/user/${userId}/events`, {
+            const response = await axios.get(`${apiUrl}/users/${userId}/events`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
 
