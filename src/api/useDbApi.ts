@@ -40,10 +40,10 @@ export function useDbApi() {
     async function getEventsByUserId(userId: string | null | undefined) {
         try {
             const token = await getToken();
-            // console.log("token:")
-            // console.log(token)
+            console.log("token:")
+            console.log(token)
 
-            const response = await axios.get(`${apiUrl}/event/${userId}`, {
+            const response = await axios.get(`${apiUrl}/user/${userId}/events`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
 
