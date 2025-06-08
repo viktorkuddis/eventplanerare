@@ -1,5 +1,5 @@
 import { useState, type ReactNode } from 'react';
-import type { EventType } from '../types';
+import type { EventType, EventObjectsDetailedType } from '../types';
 import { AppContext, type AppContextType } from './AppContext';
 
 export const AppContextProvider = ({ children }: { children: ReactNode }) => {
@@ -11,9 +11,20 @@ export const AppContextProvider = ({ children }: { children: ReactNode }) => {
 
     const [ownEvents, setOwnEvents] = useState<EventType[]>([]);
 
+    // de event som användaren just ju interagerar med.
+    const [currentEventObjectDetailed, setCurrentEventObjectsDetailed] = useState<EventObjectsDetailedType | null>(null);
+
+    // alltefter att användaren interagerar med event så sätter vi dom här:
+    const [eventObjectsDetailed, setEventObjectsDetailed] = useState<EventObjectsDetailedType[]>([]);
+
+
+
 
     // vid uppdatering sätt alla event här oavsett var dom tars ifrån.
+    // ! här borde alla event som användaren har vara och dom borde komma med en flagga som är ty "is host ? tru eller fals. men de e i framtiden."
     const [allEvents, setAllEvents] = useState<EventType[]>([]);
+
+
 
 
 
@@ -26,8 +37,13 @@ export const AppContextProvider = ({ children }: { children: ReactNode }) => {
         currentEventObject,
         setCurrentEventObject,
         allEvents,
-        setAllEvents
-    };
+        setAllEvents,
+        currentEventObjectDetailed,
+        setCurrentEventObjectsDetailed,
+        eventObjectsDetailed,
+        setEventObjectsDetailed,
+    }
+
 
 
     return <AppContext.Provider value={contextValue}>{children}</AppContext.Provider>;

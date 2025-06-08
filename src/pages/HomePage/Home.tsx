@@ -49,7 +49,7 @@ const Home = () => {
 
     // skapa lyssnare som kör när storleksförändring upptäcks
     const resizeObserver = new ResizeObserver(([entry]) => {// entry är det observerade elementet.
-      console.log("Bredden är nu:", entry.contentRect.width);
+      // console.log("Bredden är nu:", entry.contentRect.width);
       setMyEventsContainer(entry.contentRect.width)
     });
 

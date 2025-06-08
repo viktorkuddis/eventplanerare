@@ -13,29 +13,29 @@ const EventInformation = () => {
     const context = useContext(AppContext);
 
     // Formatera startdatumet
-    const startDate = context?.currentEventObject?.start
-        ? new Date(context.currentEventObject.start).toLocaleDateString("sv-SE", {
+    const startDate = context?.currentEventObjectDetailed?.event.start
+        ? new Date(context?.currentEventObjectDetailed.event.start).toLocaleDateString("sv-SE", {
             day: "numeric",
             month: "short",
         })
         : null;
 
-    const startTime = context?.currentEventObject?.start
-        ? new Date(context.currentEventObject.start).toLocaleTimeString("sv-SE", {
+    const startTime = context?.currentEventObjectDetailed?.event.start
+        ? new Date(context?.currentEventObjectDetailed.event.start).toLocaleTimeString("sv-SE", {
             hour: "2-digit",
             minute: "2-digit",
         })
         : null;
 
-    const endDate = context?.currentEventObject?.end
-        ? new Date(context.currentEventObject.end).toLocaleDateString("sv-SE", {
+    const endDate = context?.currentEventObjectDetailed?.event.end
+        ? new Date(context?.currentEventObjectDetailed.event.end).toLocaleDateString("sv-SE", {
             day: "numeric",
             month: "short",
         })
         : null;
 
-    const endTime = context?.currentEventObject?.end
-        ? new Date(context.currentEventObject.end).toLocaleTimeString("sv-SE", {
+    const endTime = context?.currentEventObjectDetailed?.event.end
+        ? new Date(context?.currentEventObjectDetailed.event.end).toLocaleTimeString("sv-SE", {
             hour: "2-digit",
             minute: "2-digit",
         })
@@ -43,19 +43,19 @@ const EventInformation = () => {
 
     return (
         <div className={styles.container}>
-            <h2>{context?.currentEventObject?.title}</h2>
+            <h2>{context?.currentEventObjectDetailed?.event.title}</h2>
 
 
 
             <p><Clock size={"0.80rem"} /><small> {startDate} kl. {startTime}-{endDate} kl. {endTime}</small></p>
 
-            {context?.currentEventObject?.location && <p><MapPin size={"0.80rem"} /><small> {context?.currentEventObject?.location} </small></p>}
+            {context?.currentEventObjectDetailed?.event.location && <p><MapPin size={"0.80rem"} /><small> {context?.currentEventObjectDetailed?.event.location} </small></p>}
 
-            <p>{context?.currentEventObject?.description}</p>
+            <p>{context?.currentEventObjectDetailed?.event.description}</p>
 
 
             <p>Host:</p>
-            <p>{context?.currentEventObject?.ownerUserAuthId}</p>
+            <p>{context?.currentEventObjectDetailed?.event.ownerUserAuthId}</p>
             {/* här hade varit najs att kunna säga vad användaren heter  */}
 
 

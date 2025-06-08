@@ -46,7 +46,7 @@ const Carousel = ({ items, width, paddingX, gap, firstItemWidth, aspectRatioH, a
     if (firstItemWidth) firstItemWidth = 12 / firstItemWidth;
 
 
-    console.log(items)
+    // console.log(items)
 
     return (
         <div className={styles.carouselContainer}

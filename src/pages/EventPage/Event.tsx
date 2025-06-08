@@ -31,7 +31,7 @@ const Event = () => {
     }, 10000);
 
     // om de e samma i parameter som i statet så betyder de att statet är aktuellt och inte skvalpar med gammal data från tidigare
-    if (context?.currentEventObject?._id == eventId) {
+    if (context?.currentEventObjectDetailed?.event._id == eventId) {
       setTimeIsOut(true)
       setIsLoading(false)
     }
@@ -39,7 +39,7 @@ const Event = () => {
     // cleanup
     return () => clearTimeout(timeout);
 
-  }, [context?.currentEventObject, eventId]);
+  }, [context?.currentEventObjectDetailed?.event._id, eventId]);
 
   if (isLoading == true && timoeIsOut == false) {
     return (

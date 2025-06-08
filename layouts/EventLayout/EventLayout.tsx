@@ -10,8 +10,10 @@ import { Home, Info, Settings } from "react-feather";
 import { AppContext } from "../../src/context /AppContext";
 import { useParams } from "react-router-dom";
 
+import { useDbApi } from "../../src/api/useDbApi";
 
-// TODO: SE TILL ATT LETA I DATABASEN SÅ ATT USER ID FINNS MED EN PACPISITPANT så att vi har access att hämta allt som detta eventet acdosieras med
+
+// TODO: SE TILL ATT LETA I DATABASEN SÅ ATT USER ID FINNS MED EN PACPISITPANT så att vi har access att hämta allt som detta eventet asosieras med. vi kan göra de i rutten där vi ber om hela eventdetails.  just nu gör vi inte detta.
 
 type Props = {
     children?: ReactNode;
@@ -19,6 +21,7 @@ type Props = {
 const EventLayout = ({ children }: Props) => {
 
     const { eventId } = useParams();
+
     console.log(eventId)
 
     const context = useContext(AppContext)
@@ -26,20 +29,30 @@ const EventLayout = ({ children }: Props) => {
     console.log(context?.currentEventObject)
 
     const navigate = useNavigate()
+    const { getEventDetailsById } = useDbApi();
+
+    // kollar om den redan finns i kontexten isåfall kan vi temporärt nu sätta den som aktuellt event tills vi laddat från databasen.
 
 
 
 
     useEffect(() => {
 
-        if (context?.allEvents) {
-            // Leta efter eventet att sätta som aktuellt eventobjekt. null om inte hittat
-            const eventObject = context.allEvents.find(e => e._id === eventId) ?? null;
-            context.setCurrentEventObject(eventObject)
+        const eventFoundInContext = context?.eventObjectsDetailed?.find(e => e.event._id == eventId)
+        if (eventFoundInContext) {
+            context?.setCurrentEventObjectsDetailed(eventFoundInContext)
+            console.log("😎eventet fanns i contexten. sätter tillfälligt till current event tills svar från databasen eventuellt skriver över")
         }
+        // ÅÅ VI HÄMTAR OBJEKTET från databasen :) Vi vill alltid hämta nytt från databasen när denne sidan laddas 
+        if (eventId) {
+            getEventDetailsById(eventId)
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [eventId]);
 
 
-    }, [context, context?.allEvents, eventId]);
+
+
     return (
         <>
             <div className={styles.backdrop}>
