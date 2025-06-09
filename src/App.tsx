@@ -30,6 +30,7 @@ import { useEffect } from "react";
 // import type { EventType } from "./types";
 import { useDbApi } from "./api/useDbApi";
 
+import ScrollToTop from "./utils/ScrollToTop";
 /* 
 LITE CLERKDOKUMENTATION:
 <SignedIn />
@@ -85,7 +86,10 @@ export default function App() {
   }, [userId]);
 
 
-  return (
+  return (<>
+
+    <ScrollToTop />
+    {/* scroll to top är en utils funkltin som lyssnar efter path name och när den ändras skrollar vi till toppen av sidan för att lösa skrollproblem när man byter från en lång till kort sida och att skrollpositionen då ligger kvar. */}
     <BrowserRouter>
       <Routes>
 
@@ -157,6 +161,8 @@ export default function App() {
         <Route path="*" element={<NoPage />} />
 
       </Routes>
-    </BrowserRouter>);
+    </BrowserRouter>
+  </>);
+
 }
 
