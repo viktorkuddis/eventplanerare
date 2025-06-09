@@ -64,8 +64,8 @@ const EventLayout = ({ children }: Props) => {
                     <header className={`${styles.headerWrapper}`}>
                         <div className={`${styles.header} content-container-width-wrapper`}>
                             <div className={styles.headerLeft}>
-                                <button className={styles.homeButton} onClick={() => navigate("/")}>
-                                    <Home size={24} />
+                                <button className={`btn-small btn-circle btn-filled-light-static ${styles.homeButton}`} onClick={() => navigate("/")}>
+                                    <Home size={"1.75rem"} />
                                 </button>
 
                             </div>
@@ -78,13 +78,13 @@ const EventLayout = ({ children }: Props) => {
                             <div className={styles.headerRight}>
 
                                 <button className=" btn-small btn-circle btn-filled-light-static">
-                                    <div style={{ height: "1.25rem", aspectRatio: "1/1" }}>
+                                    <div style={{ height: "1.5rem", aspectRatio: "1/1", display: "grid", placeItems: "center" }}>
                                         <Info size={"1.25rem"} />
                                     </div>
                                 </button>
 
                                 <button className="btn-small btn-circle btn-filled-light-static">
-                                    <div style={{ height: "1.25rem", aspectRatio: "1/1" }}>
+                                    <div style={{ height: "1.5rem", aspectRatio: "1/1", display: "grid", placeItems: "center" }}>
                                         <Settings size={"1.25rem"} />
                                     </div>
 

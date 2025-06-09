@@ -65,10 +65,23 @@ const Event = () => {
 
   if (timoeIsOut == true && isLoading == false) {
     return (
-      <div>
+      <div className={`content-container-width-wrapper ${style.contentContainer}`}>
 
-        <hr />
-        <div className={style.eventInfoSection}>
+        {/* <hr /> */}
+        <div className={`content-container-width-wrapper ${style.eventInfoSection}`}>
+          <EventInformation />
+        </div>
+
+        <div className={`content-container-width-wrapper ${style.eventInfoSection}`}>
+          <EventInformation />
+        </div>
+        <div className={`content-container-width-wrapper ${style.eventInfoSection}`}>
+          <EventInformation />
+        </div>
+        <div className={`content-container-width-wrapper ${style.eventInfoSection}`}>
+          <EventInformation />
+        </div>
+        <div className={`content-container-width-wrapper ${style.eventInfoSection}`}>
           <EventInformation />
         </div>
 
