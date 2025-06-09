@@ -44,6 +44,28 @@ export function useDbApi() {
         }
     }
 
+    // Hämtar ett event via connectionCode
+    async function getEventByConnectionCode(connectionCode: string) {
+        try {
+            const token = await getToken();
+
+            const response = await axios.get(`${apiUrl}/events/bycode/${connectionCode}`, {
+                headers: { Authorization: `Bearer ${token}` }
+            });
+
+            const event: EventType = response.data;
+
+            console.log("Event hämtat via connectionCode:", event);
+
+            return event;
+
+        } catch (error) {
+            console.error("Fel vid hämtning av event via connectionCode:", error);
+            throw error;
+        }
+    }
+
+
     // HÄMTAR ALLA EVENT SOM TILLHÖR EN SPECIFFIK ANVÄNDARE
     async function getEventsByUserId(userId: string | null | undefined) {
         try {
@@ -119,5 +141,5 @@ export function useDbApi() {
 
 
 
-    return { createNewEvent, getEventsByUserId, getEventDetailsById };
+    return { createNewEvent, getEventsByUserId, getEventDetailsById, getEventByConnectionCode };
 }

@@ -135,7 +135,7 @@ label {
 input,
 textarea {
   all: unset;
-  background-color: hsla(0, 0%, 50%, 0.4);
+  background-color: hsla(0, 0%, 50%, 0.2);
 
   padding: 0.65rem 1rem;
   border-radius: 0.5rem;

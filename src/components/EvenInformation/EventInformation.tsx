@@ -48,7 +48,7 @@ const EventInformation = () => {
 
 
                 <small>
-                    <b>Anslutningskod: </b><div className={styles.connectionCodeTag}>ddjhsk</div>
+                    <b>Anslutningskod: </b><div className={styles.connectionCodeTag}>{context?.currentEventObjectDetailed?.event.connectionCode}</div>
                 </small>
 
             </div>

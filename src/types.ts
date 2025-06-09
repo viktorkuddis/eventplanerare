@@ -5,6 +5,7 @@ export type EventType = {
     color: string,
     start: Date
     end: Date,
+    connectionCode: string,
     location: string,
     ownerUserAuthId: string | null | undefined,
 }
@@ -82,4 +83,5 @@ export type EventObjectsDetailedType = {
     eventParticipationsEnriched: (EventParticipationType & { user: SimplifiedUserType; })[];
     eventActivities: EventActivityType[];
     personalActivities: PersonalActivityType[];
+
 };

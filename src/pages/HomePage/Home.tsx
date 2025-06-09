@@ -10,6 +10,8 @@ import Carousel from "../../components/Organisms/Carousel/Carousel";
 import EventCard from "../../components/molecules/EventCard";
 
 import AddNewEventModal from "../../components/Organisms/Modaler med innehåll/AddNewEventModal";
+import ConnectToEventModal from "../../components/Organisms/Modaler med innehåll/ConnectToEventModal/ConnectToEventModal";
+
 
 import { isEventActive } from "../../utils/evenTimeStatusUtil";
 
@@ -34,6 +36,9 @@ const Home = () => {
 
 
   const [showNewEventFormModal, setShowNewEventFormModal] = useState(false)
+
+  const [showConnectToEventModal, setShowConnectToModal] = useState(false)
+
 
   // const { userId } = useAuth();
 
@@ -103,6 +108,9 @@ const Home = () => {
 
       {/* MODAL */}
       <AddNewEventModal isOpen={showNewEventFormModal} onCloseModal={() => setShowNewEventFormModal(false)} />
+      <ConnectToEventModal
+        isOpen={showConnectToEventModal}
+        onCloseModal={() => setShowConnectToModal(false)} />
 
       <main className="content-container-width-wrapper">
 
@@ -225,7 +233,7 @@ const Home = () => {
               }}
                 key="create-button"
                 className="btn-medium btn-outlined-light-static"
-                onClick={() => setShowNewEventFormModal(true)}
+                onClick={() => setShowConnectToModal(true)}
               >
                 <LinkIcon size={18} /> <br /><small>
                   ANSLUT
