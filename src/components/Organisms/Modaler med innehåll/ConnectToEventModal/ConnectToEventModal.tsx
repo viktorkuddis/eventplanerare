@@ -24,21 +24,21 @@ const ConnectToEventModal = ({ isOpen, onCloseModal }: Props) => {
 
     const [view, setView] = useState<"start" | "loading" | "result">("start")
     const [connectionCode, setConnectionCode] = useState<string>("")
-    const [foundEvent, setFoundEvent] = useState<EventType | null>(null);
+    // const [foundEvent, setFoundEvent] = useState<EventType | null>(null);
 
 
-    const { getEventByConnectionCode } = useDbApi()
+    // const { getEventByConnectionCode } = useDbApi()
 
     const handleSarch = async () => {
 
         console.log("sökning klickades")
         setView("loading");
-        setFoundEvent(null);
+        // setFoundEvent(null);
 
 
 
-        const event = await getEventByConnectionCode(connectionCode);
-        setFoundEvent(event);
+        // const event = await getEventByConnectionCode(connectionCode);
+        // setFoundEvent(event);
 
         setView('result');
 
