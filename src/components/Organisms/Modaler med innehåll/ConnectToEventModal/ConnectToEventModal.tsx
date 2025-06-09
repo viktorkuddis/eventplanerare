@@ -7,8 +7,8 @@ import styles from "./ConnectToEventModal.module.css"
 import { Search } from 'react-feather';
 import { DotLoader } from 'react-spinners';
 
-import { useDbApi } from "../../../../api/useDbApi";
-import type { EventType } from '../../../../types';
+// import { useDbApi } from "../../../../api/useDbApi";
+// import type { EventType } from '../../../../types';
 
 type Props = {
     isOpen: boolean;
