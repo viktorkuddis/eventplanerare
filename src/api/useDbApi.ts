@@ -5,7 +5,7 @@ const apiUrl = import.meta.env.VITE_API_URL;
 
 import { AppContext } from "../context /AppContext";
 import { useContext } from "react";
-import type { EventType } from "../types";
+import type { EventParticipationType, EventType } from "../types";
 import type { EventObjectsDetailedType } from "../types";
 
 
@@ -16,18 +16,25 @@ export function useDbApi() {
     async function createNewEvent(eventData: object) {
         try {
             const token = await getToken();
+
             // console.log("token:")
             // console.log(token)
 
+            // ! !! !!! !!! DENNA RUTT SKAPA BÅDE EVENT OCH EN TILLHÖRANDE PARTISIPATION
             const response = await axios.post(`${apiUrl}/events`, eventData, {
                 headers: { Authorization: `Bearer ${token}` }
             });
 
-            // lägger till data till context
-            context?.setOwnEvents((prev) => [...prev, response.data]);
-            context?.setAllEvents((prev) => [...prev, response.data]);
+            // response. data innehåller både event och participation
+            const { event } = response.data as { event: EventType; participation: EventParticipationType };
+            console.log(response.data)
+
+            // Lägg till event i context
+            context?.setOwnEvents((prev) => [...prev, event]);
+            context?.setAllEvents((prev) => [...prev, event]);
 
             console.log("Event tillagd :) ")
+            console.log()
 
             return response.data;
 
@@ -41,8 +48,8 @@ export function useDbApi() {
     async function getEventsByUserId(userId: string | null | undefined) {
         try {
             const token = await getToken();
-            // console.log("token:")
-            // console.log(token)
+            console.log("token:")
+            console.log(token)
 
             const response = await axios.get(`${apiUrl}/users/${userId}/events`, {
                 headers: { Authorization: `Bearer ${token}` }

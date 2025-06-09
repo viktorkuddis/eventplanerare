@@ -2,7 +2,7 @@
 import { useContext } from "react"
 import { AppContext } from "../../context /AppContext"
 
-import { Clock, MapPin } from "react-feather";
+import { Calendar, MapPin } from "react-feather";
 
 import styles from "./EntInformation.module.css"
 
@@ -47,15 +47,18 @@ const EventInformation = () => {
 
 
 
-            <p><Clock size={"0.80rem"} /><small> {startDate} kl. {startTime}-{endDate} kl. {endTime}</small></p>
+            <p><Calendar size={"0.80rem"} /><small> {startDate} kl. {startTime} - {endDate} kl. {endTime}</small></p>
 
             {context?.currentEventObjectDetailed?.event.location && <p><MapPin size={"0.80rem"} /><small> {context?.currentEventObjectDetailed?.event.location} </small></p>}
 
             <p>{context?.currentEventObjectDetailed?.event.description}</p>
 
 
-            <p>Host:</p>
-            <p>{context?.currentEventObjectDetailed?.event.ownerUserAuthId}</p>
+            <p><small>Värd:</small></p> { }
+
+
+
+            <p>{context?.currentEventObjectDetailed?.eventParticipationsEnriched.map(item => item.role == "host" && `${item.user.firstName} ${item.user.lastName}`)}</p>
             {/* här hade varit najs att kunna säga vad användaren heter  */}
 
 

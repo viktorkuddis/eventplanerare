@@ -72,18 +72,7 @@ const Event = () => {
           <EventInformation />
         </div>
 
-        <div className={`content-container-width-wrapper ${style.eventInfoSection}`}>
-          <EventInformation />
-        </div>
-        <div className={`content-container-width-wrapper ${style.eventInfoSection}`}>
-          <EventInformation />
-        </div>
-        <div className={`content-container-width-wrapper ${style.eventInfoSection}`}>
-          <EventInformation />
-        </div>
-        <div className={`content-container-width-wrapper ${style.eventInfoSection}`}>
-          <EventInformation />
-        </div>
+        här finns info :)
 
 
 
