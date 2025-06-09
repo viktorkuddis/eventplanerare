@@ -14,6 +14,8 @@ Här definerar vi grundläggande CORE-style
 html {
   /* ändrar rem: */
   font-size: 15px;
+  background-color: var(--brand-color-strong);
+
 }
 
 :root {
@@ -54,6 +56,7 @@ hr {
 
 body {
   margin: 0;
+  height: fit-content;
   min-height: 100svh;
   background-color: var(--brand-color-strong);
 }

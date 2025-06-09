@@ -46,11 +46,11 @@ const EventInformation = () => {
             <div>
                 <h2>{context?.currentEventObjectDetailed?.event.title}</h2>
 
-                <p>
-                    <small>
-                        <b>Anslutningskod: </b><div className={styles.connectionCodeTag}>ddjhsk</div>
-                    </small>
-                </p>
+
+                <small>
+                    <b>Anslutningskod: </b><div className={styles.connectionCodeTag}>ddjhsk</div>
+                </small>
+
             </div>
 
 
