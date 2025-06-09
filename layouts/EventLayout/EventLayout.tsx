@@ -12,7 +12,7 @@ import { useParams } from "react-router-dom";
 
 import { useDbApi } from "../../src/api/useDbApi";
 
-import { textColorMixDark } from "../../src/utils/colorMix.utils";
+import { textColorMixVibrant, backgroundColorMixLight } from "../../src/utils/colorMix.utils";
 
 
 // TODO: SE TILL ATT LETA I DATABASEN SÅ ATT USER ID FINNS MED EN PACPISITPANT så att vi har access att hämta allt som detta eventet asosieras med. vi kan göra de i rutten där vi ber om hela eventdetails.  just nu gör vi inte detta.
@@ -60,7 +60,13 @@ const EventLayout = ({ children }: Props) => {
 
 
     // skapar textfärg om de finns någon 
-    const textColor = context?.currentEventObjectDetailed?.event.color && textColorMixDark(context?.currentEventObjectDetailed?.event.color)
+    const textColorVibrant = context?.currentEventObjectDetailed?.event.color && textColorMixVibrant(context?.currentEventObjectDetailed?.event.color)
+
+
+
+
+    // skapar bakgrundsfärge om de finns
+    const backgroundColor = context?.currentEventObjectDetailed?.event.color && backgroundColorMixLight(context?.currentEventObjectDetailed?.event.color)
     // let textColor;
 
 
@@ -68,7 +74,9 @@ const EventLayout = ({ children }: Props) => {
 
     return (
         <>
-            <div className={styles.backdrop}>
+            <div className={styles.backdrop} style={{
+                backgroundColor: backgroundColor
+            }}>
 
 
                 <div className={`${styles.pageWrapper}`}>
@@ -83,7 +91,7 @@ const EventLayout = ({ children }: Props) => {
 
                             </div>
                             <div className={styles.headerMiddle} style={{
-                                color: textColor,
+                                color: textColorVibrant,
                             }}>
 
 
