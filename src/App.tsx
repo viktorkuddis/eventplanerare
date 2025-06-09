@@ -88,9 +88,10 @@ export default function App() {
 
   return (<>
 
-    <ScrollToTop />
-    {/* scroll to top är en utils funkltin som lyssnar efter path name och när den ändras skrollar vi till toppen av sidan för att lösa skrollproblem när man byter från en lång till kort sida och att skrollpositionen då ligger kvar. */}
+
     <BrowserRouter>
+      <ScrollToTop />
+      {/* scroll to top är en utils funkltin som lyssnar efter path name och när den ändras skrollar vi till toppen av sidan för att lösa skrollproblem när man byter från en lång till kort sida och att skrollpositionen då ligger kvar. */}
       <Routes>
 
         {/* Root path "/" redirectar beroende på inloggningsstatus */}
