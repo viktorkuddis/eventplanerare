@@ -12,6 +12,8 @@ import { useParams } from "react-router-dom";
 
 import { useDbApi } from "../../src/api/useDbApi";
 
+import { textColorMixDark } from "../../src/utils/colorMix.utils";
+
 
 // TODO: SE TILL ATT LETA I DATABASEN SÅ ATT USER ID FINNS MED EN PACPISITPANT så att vi har access att hämta allt som detta eventet asosieras med. vi kan göra de i rutten där vi ber om hela eventdetails.  just nu gör vi inte detta.
 
@@ -39,16 +41,27 @@ const EventLayout = ({ children }: Props) => {
     useEffect(() => {
 
         const eventFoundInContext = context?.eventObjectsDetailed?.find(e => e.event._id == eventId)
+
         if (eventFoundInContext) {
             context?.setCurrentEventObjectsDetailed(eventFoundInContext)
             console.log("😎eventet fanns i contexten. sätter tillfälligt till current event tills svar från databasen eventuellt skriver över")
+        } else {
+            context?.setCurrentEventObjectsDetailed(null)
         }
+
         // ÅÅ VI HÄMTAR OBJEKTET från databasen :) Vi vill alltid hämta nytt från databasen när denne sidan laddas 
         if (eventId) {
             getEventDetailsById(eventId)
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [eventId]);
+
+
+
+
+    // skapar textfärg om de finns någon 
+    const textColor = context?.currentEventObjectDetailed?.event.color && textColorMixDark(context?.currentEventObjectDetailed?.event.color)
+    // let textColor;
 
 
 
@@ -69,11 +82,12 @@ const EventLayout = ({ children }: Props) => {
                                 </button>
 
                             </div>
-                            <div className={styles.headerMiddle}>
+                            <div className={styles.headerMiddle} style={{
+                                color: textColor,
+                            }}>
 
 
-                                <div>{context?.currentEventObject?.title}</div>
-
+                                <div>{context?.currentEventObjectDetailed?.event.title}</div>
                             </div>
                             <div className={styles.headerRight}>
 
@@ -102,7 +116,7 @@ const EventLayout = ({ children }: Props) => {
 
                     </main>
                 </div >
-            </div>
+            </div >
 
 
             {/* </div > */}
