@@ -47,23 +47,39 @@ const EventInformation = () => {
 
 
 
-            <p><Calendar size={"0.80rem"} /><small> {startDate} kl. {startTime} - {endDate} kl. {endTime}</small></p>
 
-            {context?.currentEventObjectDetailed?.event.location && <p><MapPin size={"0.80rem"} /><small> {context?.currentEventObjectDetailed?.event.location} </small></p>}
+            <small>
+                <p><Calendar size={"0.80rem"} /> {startDate} kl. {startTime} - {endDate} kl. {endTime}</p>
 
+                {context?.currentEventObjectDetailed?.event.location && <p><MapPin size={"0.80rem"} /> {context?.currentEventObjectDetailed?.event.location} </p>}
+
+
+            </small>
+
+            <small>
+                <div>Värd:
+                    {context?.currentEventObjectDetailed?.eventParticipationsEnriched.map((item, i) => item.role == "host"
+                        && <span key={i} > {item.user.firstName} {item.user.lastName}
+
+                            <span className={styles.userNameTag}> @{item.user.username}</span>
+                        </span>)}
+
+
+                </div ></small>
             <p>{context?.currentEventObjectDetailed?.event.description}</p>
 
 
-            <p><small>Värd:</small></p> { }
 
 
 
-            <p>{context?.currentEventObjectDetailed?.eventParticipationsEnriched.map(item => item.role == "host" && `${item.user.firstName} ${item.user.lastName}`)}</p>
+
+
+            <p></p>
             {/* här hade varit najs att kunna säga vad användaren heter  */}
 
 
 
-        </div>
+        </div >
     );
 };
 

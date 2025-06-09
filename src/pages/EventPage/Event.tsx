@@ -72,7 +72,9 @@ const Event = () => {
           <EventInformation />
         </div>
 
-        här finns info :)
+
+
+
 
 
 
