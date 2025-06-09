@@ -58,6 +58,7 @@ const EventInformation = () => {
 
             <small>
                 <div>Värd:
+                    <br />
                     {context?.currentEventObjectDetailed?.eventParticipationsEnriched.map((item, i) => item.role == "host"
                         && <span key={i} > {item.user.firstName} {item.user.lastName}
 
