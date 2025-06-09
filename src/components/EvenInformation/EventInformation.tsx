@@ -43,40 +43,49 @@ const EventInformation = () => {
 
     return (
         <div className={styles.container}>
-            <h2>{context?.currentEventObjectDetailed?.event.title}</h2>
+            <div>
+                <h2>{context?.currentEventObjectDetailed?.event.title}</h2>
 
+                <p>
+                    <small>
+                        <b>Anslutningskod: </b><div className={styles.connectionCodeTag}>ddjhsk</div>
+                    </small>
+                </p>
+            </div>
 
 
 
             <small>
                 <p><Calendar size={"0.80rem"} /> {startDate} kl. {startTime} - {endDate} kl. {endTime}</p>
 
-                {context?.currentEventObjectDetailed?.event.location && <p><MapPin size={"0.80rem"} /> {context?.currentEventObjectDetailed?.event.location} </p>}
+                {context?.currentEventObjectDetailed?.event.location && <p><MapPin size={"0.80rem"} /> {context?.currentEventObjectDetailed?.event.location}</p>}
+
+
+
 
 
             </small>
 
+
             <small>
-                <div><b>Värd:</b>
+                <div>
+                    <p>
+                        <b>Värd:</b>
 
-                    {context?.currentEventObjectDetailed?.eventParticipationsEnriched.map((item, i) => item.role == "host"
-                        && <span key={i} > {item.user.firstName} {item.user.lastName}
+                        {context?.currentEventObjectDetailed?.eventParticipationsEnriched.map((item, i) => item.role == "host"
+                            && <span key={i} > {item.user.firstName} {item.user.lastName}
 
-                            <span className={styles.userNameTag}> @{item.user.username}</span>
-                        </span>)}
+                                <span className={styles.userNameTag}> @{item.user.username}</span>
+                            </span>)}
+                    </p>
 
 
-                </div ></small>
+                </div ></small >
             <p>{context?.currentEventObjectDetailed?.event.description}</p>
 
 
 
 
-
-
-
-            <p></p>
-            {/* här hade varit najs att kunna säga vad användaren heter  */}
 
 
 
