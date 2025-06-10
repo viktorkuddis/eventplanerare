@@ -35,7 +35,7 @@ const HomeLayout = () => {
             if (siteContainerRef.current) {
                 siteContainerRef.current.scrollTo({ top: 0, left: 0, behavior: 'auto' }); // Använd options-objekt för tydlighet
             }
-        }, 1000); // Testa med 0ms, 10ms eller 50ms om det behövs
+        }, 200); // Testa med 0ms, 10ms eller 50ms om det behövs
 
         // Viktigt: Rensa timern när komponenten avmonteras eller beroenden ändras
         return () => clearTimeout(timer);

@@ -15,6 +15,7 @@
     height: 300px;
     overflow: hidden;
     overflow: auto;
+    scroll-behavior: smooth;
 
     .siteMain {}
 }
