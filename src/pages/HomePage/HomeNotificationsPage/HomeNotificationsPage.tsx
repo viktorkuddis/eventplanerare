@@ -1,12 +1,8 @@
 
-import { useEffect } from "react";
 import styles from "./HomeNotificaationPage.module.css"
 
 const HomeNotificationsPage = () => {
-    useEffect(() => {
-        // Scrolla till toppen av hela fönstret
-        window.scrollTo(0, 0);
-    }, []); // Tom array betyder att den körs en gång efter första renderingen
+
 
 
     return (

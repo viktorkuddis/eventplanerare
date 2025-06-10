@@ -1,8 +1,18 @@
+.page {
+    background-color: red;
+    border: 5px solid hotpink;
+    height: 100svh;
+    position: relative;
+    overflow: auto;
+}
+
+
+
 .headerBG {
     background-color: var(--brand-color-strong);
     /* background-color: aqua; */
 
-    position: fixed;
+    position: sticky;
     top: 0;
     width: 100%;
     z-index: 100;
@@ -10,12 +20,7 @@
     background-color: aqua;
 }
 
-.main {
-    /* padiding till headern. Används fixed för att kompensera för webläsares dynamiska ramar. sticky vblir dumt då. */
 
-    /* background-color: blue; */
-
-}
 
 .header {
     color: var(--fg-color-light-static);

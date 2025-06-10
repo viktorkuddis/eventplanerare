@@ -4,8 +4,6 @@
 
     min-height: 100svh;
     color: var(--fg-color-light-static);
-    /* PADDING FÖR HEADER */
-    padding-top: 4.6rem;
 
     main {
         padding: 1rem 0rem;
