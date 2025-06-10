@@ -12,24 +12,77 @@ import type { EventType } from '../../../../types';
 
 import EventCard from '../../../molecules/EventCard';
 
+import type { RequestType } from '../../../../types';
+import { useAuth } from '@clerk/clerk-react';
+
+
+
 type Props = {
     isOpen: boolean;
     onCloseModal: () => void;
 };
 
 
-
-
-
 const ConnectToEventModal = ({ isOpen, onCloseModal }: Props) => {
 
 
-    const [view, setView] = useState<"start" | "loading" | "result">("start")
+    const { userId } = useAuth();
+
+    const [view, setView] = useState<"start" | "loading" | "result" | "confirmation">("start")
     const [connectionCode, setConnectionCode] = useState<string>("")
     const [foundEvent, setFoundEvent] = useState<EventType | null>(null);
 
+    const [confirmationMessage, setConfirmationMessage] = useState("");
 
-    const { getEventByConnectionCode } = useDbApi()
+
+
+    const { getEventByConnectionCode, createNewRequest } = useDbApi()
+
+
+
+    const handleSendRequest = async () => {
+        console.log("vi försöker sända request");
+
+        setView("loading")
+        // Säkra att vi har all data som behövs
+        if (foundEvent) {
+
+            // Skapa dataobjektet för requesten
+            const requestObject: RequestType = {
+                from: {
+                    userAuthId: ""
+                },
+                to: {
+                    type: "event",
+                    id: foundEvent._id
+                },
+                intention: 'joinEvent',
+                relatedId: foundEvent._id,
+                status: "pending"
+            };
+
+            try {
+                // Skicka requesten och logga svaret vid lyckat försök
+                const createdRequest = await createNewRequest(requestObject);
+                console.log("Request skapad:", createdRequest);
+
+                setView("confirmation")
+                setConfirmationMessage("Förfrågan skickad!")
+
+
+            } catch (error) {
+                console.error("Fel vid request:", error);
+
+                setView("confirmation")
+                setConfirmationMessage(`Någont gick fel här. Sorry bro ☹️ `)
+
+            }
+        }
+
+
+
+
+    }
 
     const handleSarch = async () => {
         console.log("connection code att söka efter: ", connectionCode)
@@ -52,6 +105,7 @@ const ConnectToEventModal = ({ isOpen, onCloseModal }: Props) => {
         setView("start");
         setConnectionCode("")
         setFoundEvent(null)
+        setConfirmationMessage("")
 
         onCloseModal();
     };
@@ -122,9 +176,24 @@ const ConnectToEventModal = ({ isOpen, onCloseModal }: Props) => {
 
                         </div>
                         <div style={{ textAlign: "center" }}>
-                            <button className='btn-medium btn-filled-primary'>Skicka förfrågan</button>
 
-                        </div></>
+                            {foundEvent.ownerUserAuthId == userId
+                                ? <>Detta är ditt event!<br />Kan inte skicka förfrågan!</>
+                                : <button onClick={() => handleSendRequest()} className='btn-medium btn-filled-primary'>Skicka förfrågan</button>
+                                // TODO: Skriv något om man redan är medlem i eventet. kräver att vi letar genom alla partisipants.
+                                // TODO: Skriv något om man har en liggande pending förfrågan. kräver att vi letar genom förfrågningar.
+
+                            }
+
+
+                        </div>
+                        {/* 
+                        {userId}
+                        <br />
+                        {foundEvent.ownerUserAuthId} */}
+
+
+                    </>
                     :
                     <div>
                         <br />
@@ -139,6 +208,16 @@ const ConnectToEventModal = ({ isOpen, onCloseModal }: Props) => {
 
 
                     </div>}
+
+
+
+            </div >
+            }
+
+            {view == "confirmation" && <div className={`${styles.container}`}>
+
+
+                <p>{confirmationMessage}</p>
 
 
 

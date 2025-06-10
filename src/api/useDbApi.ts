@@ -44,6 +44,8 @@ export function useDbApi() {
         }
     }
 
+
+
     // Hämtar ett event via connectionCode
     async function getEventByConnectionCode(connectionCode: string) {
         try {
@@ -137,10 +139,32 @@ export function useDbApi() {
             console.error("Fel vid axios.get för event detaljer:", error);
             throw error;
         }
+
+
+
+
+    }
+    async function createNewRequest(requestData: object) {
+        try {
+            console.log("Försöker skicka detta:", requestData);
+
+            const token = await getToken();
+
+            const response = await axios.post(`${apiUrl}/requests`, requestData, {
+                headers: { Authorization: `Bearer ${token}` }
+            });
+
+            console.log("Förfrågan skickad:", response.data);
+
+            return response.data;
+
+        } catch (error) {
+            console.error("Fel vid skickande av förfrågan:", error); // Om något gick fel
+            throw error; // Skicka vidare felet
+        }
     }
 
 
 
-
-    return { createNewEvent, getEventsByUserId, getEventDetailsById, getEventByConnectionCode };
+    return { createNewEvent, getEventsByUserId, getEventDetailsById, getEventByConnectionCode, createNewRequest };
 }

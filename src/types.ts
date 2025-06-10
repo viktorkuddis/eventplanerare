@@ -49,18 +49,19 @@ export type RequestType = {
 
     from: {
         userAuthId: string;
-
-        to: {
-            type: "event" | "user";
-            id: unknown;    // mixad typ - kan vara string, number, objekt etc.
-        };
-
-        intention: "joinEvent" | "inviteToEvent";
-
-        relatedId: unknown;  // mixad typ, beroende på intention
-
-        status?: "pending" | "accepted" | "rejected"; // valfri, default "pending"
+    },
+    to: {
+        type: "event" | "user";
+        id: unknown;    // mixad typ - kan vara string, number, objekt etc.
     };
+
+    intention: "joinEvent" | "inviteToEvent";
+
+    relatedId: unknown;  // mixad typ, beroende på intention
+
+    status: "pending" | "accepted" | "rejected";
+
+
 
     createdAt?: string;
     updatedAt?: string;
