@@ -33,7 +33,7 @@ const HomeLayout = () => {
         // Sätt en liten timeout för att ge renderingen tid
         const timer = setTimeout(() => {
             if (siteContainerRef.current) {
-                siteContainerRef.current.scrollTo({ top: 500, left: 0, behavior: 'auto' }); // Använd options-objekt för tydlighet
+                siteContainerRef.current.scrollTo({ top: 0, left: 0, behavior: 'auto' }); // Använd options-objekt för tydlighet
             }
         }, 1000); // Testa med 0ms, 10ms eller 50ms om det behövs
 
