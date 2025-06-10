@@ -31,7 +31,7 @@ const HomeLayout = () => {
         // Scrolla hela fönstret till toppen
         // Sätt en liten timeout för att ge renderingen tid
         const timer = setTimeout(() => {
-            window.scrollTo(0, 100);
+            window.scrollTo(0, 0);
         }, 1000); // Testa med 0ms, 10ms eller 50ms om det behövs
 
         // Viktigt: Rensa timern när komponenten avmonteras eller beroenden ändras
