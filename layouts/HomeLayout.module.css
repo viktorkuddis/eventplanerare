@@ -2,9 +2,19 @@
     background-color: var(--brand-color-strong);
     /* background-color: aqua; */
 
-    position: sticky;
+    position: fixed;
     top: 0;
+    width: 100%;
     z-index: 100;
+
+    background-color: aqua;
+}
+
+.main {
+    /* padiding till headern. Används fixed för att kompensera för webläsares dynamiska ramar. sticky vblir dumt då. */
+
+    /* background-color: blue; */
+    padding-top: 4.6rem
 }
 
 .header {

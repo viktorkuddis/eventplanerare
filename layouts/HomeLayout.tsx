@@ -82,7 +82,7 @@ const HomeLayout = () => {
 
                 </header >
             </div >
-            <main>
+            <main className={styles.main}>
                 <Outlet />
             </main>
 
