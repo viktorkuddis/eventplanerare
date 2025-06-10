@@ -1,3 +1,4 @@
+import { useSearchParams } from 'react-router-dom';
 
 import styles from './HomeLayout.module.css';
 import { UserButton } from '@clerk/clerk-react';
@@ -5,38 +6,25 @@ import { UserButton } from '@clerk/clerk-react';
 
 import { useNavigate } from "react-router-dom";
 
-
 import HomeNotificationsPage from '../src/pages/HomePage/HomeNotificationsPage/HomeNotificationsPage';
 import Home from '../src/pages/HomePage/Home';
 
 import { Bell } from 'react-feather';
-import { useEffect, useState } from 'react';
-
 
 
 // type Props = {
 //     children?: ReactNode;
 // };
-
-
-
 const HomeLayout = () => {
-    const [view, setView] = useState<"home" | "notifications">("home")
-
-
-    useEffect(() => {
-        window.scrollTo(0, 0);
-    }, [view]);
 
 
     const navigate = useNavigate();
 
-
-    // const [searchParams, setSearchParams] = useSearchParams(); // Hämta och sätt search params
+    const [searchParams, setSearchParams] = useSearchParams(); // Hämta och sätt search params
 
     // Kontrollera om 'view' parametern är satt till 'notifications'
-    // const isNotificationPage = searchParams.get('view') === 'notifications';
-    // console.log(isNotificationPage)
+    const isNotificationPage = searchParams.get('view') === 'notifications';
+    console.log(isNotificationPage)
 
 
 
@@ -52,11 +40,17 @@ const HomeLayout = () => {
                         position: "relative",
                         // backgroundColor: "blue"
                     }}
-                        onClick={() => view == "home" ? setView("notifications") : setView("home")}>
+                        onClick={() => {
+                            if (isNotificationPage) {
+                                setSearchParams({});
+                            } else {
+                                setSearchParams({ view: 'notifications' });
+                            }
+                        }}>
 
                         <button
                             className={`btn-small btn-circle 
-                            ${view == "home" ? "btn-filled-strong" : "btn-filled-primary"} 
+                            ${isNotificationPage ? "btn-filled-primary" : "btn-filled-strong"} 
                             ${styles.bellButton}`}>
 
                             <Bell size={"1.5rem"} />
@@ -93,12 +87,12 @@ const HomeLayout = () => {
             </div >
             <main>
                 {/* Villkorlig rendering baserad på query-parameter */}
-                {view == "home"
-                    ?
+                {isNotificationPage ? (
+                    <HomeNotificationsPage />// Eller din Home-kompone
+                ) : (
+
                     <Home />
-                    :
-                    <HomeNotificationsPage />
-                }
+                )}
                 {/* Outlet behövs inte längre om du renderar Home/Notifications direkt här */}
             </main>
 
