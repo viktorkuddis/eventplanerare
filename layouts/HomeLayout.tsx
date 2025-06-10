@@ -7,12 +7,14 @@ import { useNavigate, Outlet, useLocation } from "react-router-dom";
 
 
 import { Bell } from 'react-feather';
+import { useEffect } from 'react';
 
 
 // type Props = {
 //     children?: ReactNode;
 // };
 const HomeLayout = () => {
+    const { pathname } = useLocation();
 
 
     const navigate = useNavigate();
@@ -23,6 +25,12 @@ const HomeLayout = () => {
     const isNotificationPage = useLocation().pathname
     console.log(isNotificationPage)
 
+
+    // <<-- LÄGG TILL DENNA useEffect HÄR
+    useEffect(() => {
+        // Scrolla hela fönstret till toppen
+        window.scrollTo(0, 0);
+    }, [pathname]); // Tom array betyder att den körs en gång efter första renderingen av HomeLayout
 
 
     return (
