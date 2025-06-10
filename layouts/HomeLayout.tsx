@@ -4,7 +4,7 @@ import styles from './HomeLayout.module.css';
 import { UserButton } from '@clerk/clerk-react';
 // import type { ReactNode } from 'react';
 
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Outlet, useLocation } from "react-router-dom";
 
 import HomeNotificationsPage from '../src/pages/HomePage/HomeNotificationsPage/HomeNotificationsPage';
 import Home from '../src/pages/HomePage/Home';
@@ -20,10 +20,10 @@ const HomeLayout = () => {
 
     const navigate = useNavigate();
 
-    const [searchParams, setSearchParams] = useSearchParams(); // Hämta och sätt search params
+
 
     // Kontrollera om 'view' parametern är satt till 'notifications'
-    const isNotificationPage = searchParams.get('view') === 'notifications';
+    const isNotificationPage = useLocation().pathname
     console.log(isNotificationPage)
 
 
@@ -41,10 +41,10 @@ const HomeLayout = () => {
                         // backgroundColor: "blue"
                     }}
                         onClick={() => {
-                            if (isNotificationPage) {
-                                setSearchParams({});
+                            if (isNotificationPage == "/home") {
+                                navigate(`/home/notifications`)
                             } else {
-                                setSearchParams({ view: 'notifications' });
+                                navigate(`/home`)
                             }
                         }}>
 
@@ -80,20 +80,13 @@ const HomeLayout = () => {
                         <span><small><small>EVENTPLANERARE</small></small></span>
                     </div>
 
-                    < UserButton />
+                    <UserButton />
 
 
                 </header >
             </div >
             <main>
-                {/* Villkorlig rendering baserad på query-parameter */}
-                {isNotificationPage ? (
-                    <HomeNotificationsPage />// Eller din Home-kompone
-                ) : (
-
-                    <Home />
-                )}
-                {/* Outlet behövs inte längre om du renderar Home/Notifications direkt här */}
+                <Outlet />
             </main>
 
 
