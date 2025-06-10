@@ -29,7 +29,13 @@ const HomeLayout = () => {
     // <<-- LÄGG TILL DENNA useEffect HÄR
     useEffect(() => {
         // Scrolla hela fönstret till toppen
-        window.scrollTo(0, 0);
+        // Sätt en liten timeout för att ge renderingen tid
+        const timer = setTimeout(() => {
+            window.scrollTo(0, 100);
+        }, 1000); // Testa med 0ms, 10ms eller 50ms om det behövs
+
+        // Viktigt: Rensa timern när komponenten avmonteras eller beroenden ändras
+        return () => clearTimeout(timer);
     }, [pathname]); // Tom array betyder att den körs en gång efter första renderingen av HomeLayout
 
 
