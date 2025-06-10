@@ -1,4 +1,3 @@
-import { useSearchParams } from 'react-router-dom';
 
 import styles from './HomeLayout.module.css';
 import { UserButton } from '@clerk/clerk-react';
@@ -11,22 +10,30 @@ import HomeNotificationsPage from '../src/pages/HomePage/HomeNotificationsPage/H
 import Home from '../src/pages/HomePage/Home';
 
 import { Bell } from 'react-feather';
+import { useState } from 'react';
 
 
 // type Props = {
 //     children?: ReactNode;
 // };
+
+
+
 const HomeLayout = () => {
+
+
+
+    const [view, setView] = useState<"home" | "notifications">("home")
 
 
     const navigate = useNavigate();
 
 
-    const [searchParams, setSearchParams] = useSearchParams(); // Hämta och sätt search params
+    // const [searchParams, setSearchParams] = useSearchParams(); // Hämta och sätt search params
 
     // Kontrollera om 'view' parametern är satt till 'notifications'
-    const isNotificationPage = searchParams.get('view') === 'notifications';
-    console.log(isNotificationPage)
+    // const isNotificationPage = searchParams.get('view') === 'notifications';
+    // console.log(isNotificationPage)
 
 
 
@@ -42,17 +49,11 @@ const HomeLayout = () => {
                         position: "relative",
                         // backgroundColor: "blue"
                     }}
-                        onClick={() => {
-                            if (isNotificationPage) {
-                                setSearchParams({});
-                            } else {
-                                setSearchParams({ view: 'notifications' });
-                            }
-                        }}>
+                        onClick={() => view == "home" ? setView("notifications") : setView("home")}>
 
                         <button
                             className={`btn-small btn-circle 
-                            ${isNotificationPage ? "btn-filled-primary" : "btn-filled-strong"} 
+                            ${view == "home" ? "btn-filled-strong" : "btn-filled-primary"} 
                             ${styles.bellButton}`}>
 
                             <Bell size={"1.5rem"} />
@@ -89,12 +90,12 @@ const HomeLayout = () => {
             </div >
             <main>
                 {/* Villkorlig rendering baserad på query-parameter */}
-                {isNotificationPage ? (
-                    <HomeNotificationsPage />
-                ) : (
-
+                {view == "home"
+                    ?
                     <Home />
-                )}
+                    :
+                    <HomeNotificationsPage />
+                }
                 {/* Outlet behövs inte längre om du renderar Home/Notifications direkt här */}
             </main>
 
