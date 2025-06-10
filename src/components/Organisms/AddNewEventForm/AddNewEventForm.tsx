@@ -55,7 +55,8 @@ const AddNewEventForm: React.FC<Props> = ({ onCancel, onEventCreated }) => {
         color: color,
         start: combinedStart,
         end: combinedEnd,
-        ownerUserAuthId: userId
+        ownerUserAuthId: userId,
+        connectionCode: ""
       }
       console.log("försökte submitta detta :")
       console.log(newEventData)
