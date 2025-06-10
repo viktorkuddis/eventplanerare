@@ -4,6 +4,11 @@ import styles from './HomeLayout.module.css';
 import { UserButton } from '@clerk/clerk-react';
 // import type { ReactNode } from 'react';
 
+import { useNavigate } from "react-router-dom";
+import { useLocation } from 'react-router-dom';
+
+
+
 import { Bell } from 'react-feather';
 
 
@@ -11,6 +16,16 @@ import { Bell } from 'react-feather';
 //     children?: ReactNode;
 // };
 const HomeLayout = () => {
+
+
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    const isNotificationPage = location.pathname.includes('/home/notifications');
+
+
+
+
     return (
         <>
             <div className={`${styles.headerBG}`}>
@@ -20,8 +35,11 @@ const HomeLayout = () => {
                     <div style={{
                         position: "relative",
                         // backgroundColor: "blue"
-                    }}>
-                        <button className={`btn-small btn-circle btn-filled-strong ${styles.bellButton}`}>
+                    }}
+
+                        onClick={() => navigate(isNotificationPage ? `/home` : `/home/notifications`)}>
+                        <button
+                            className={`btn-small btn-circle ${isNotificationPage ? "btn-filled-primary" : "btn-filled-strong"} ${styles.bellButton}`}>
                             <Bell size={"1.5rem"} />
                         </button>
 
@@ -45,7 +63,8 @@ const HomeLayout = () => {
 
                     </div>
 
-                    <div className={styles.logoContainer}>
+                    <div className={styles.logoContainer}
+                        onClick={() => navigate(`/home`)}>
                         <h1>VADSKER?</h1>
                         <span><small><small>EVENTPLANERARE</small></small></span>
                     </div>
