@@ -28,8 +28,10 @@ const HomeLayout = () => {
 
     return (
         <>
+
             <div className={`${styles.headerBG}`}>
                 <header className={`content-container-width-wrapper ${styles.header}`}>
+
 
 
                     <div style={{
@@ -69,8 +71,9 @@ const HomeLayout = () => {
                         <span><small><small>EVENTPLANERARE</small></small></span>
                     </div>
 
-
                     < UserButton />
+
+
                 </header >
             </div >
             <main>

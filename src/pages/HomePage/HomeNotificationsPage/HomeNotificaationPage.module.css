@@ -1,0 +1,11 @@
+.backdrop {
+
+    background-color: var(--bg-color-base);
+}
+
+.contentContainer {
+
+    padding: 1rem;
+
+    position: relative
+}
