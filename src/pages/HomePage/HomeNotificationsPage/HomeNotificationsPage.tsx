@@ -13,7 +13,7 @@ const HomeNotificationsPage = () => {
 
             <div className={`content-container-width-wrapper ${styles.contentContainer}`}>
 
-                <h2>Notificatios</h2>
+                <h2>Notifications</h2>
 
                 Lorem, ipsum dolor sit amet consectetur adipisicing elit. Qui numquam, pariatur itaque quos corrupti facilis, placeat atque illum vitae provident amet rem inventore voluptates, quam magni velit quibusdam quae quis.
 
