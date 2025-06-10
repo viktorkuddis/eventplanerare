@@ -1,8 +1,7 @@
 .backdrop {
 
     background-color: var(--bg-color-base);
-    /* PADDING FÖR HEADER */
-    min-height: 100svh;
+    height: 100%;
 }
 
 .contentContainer {

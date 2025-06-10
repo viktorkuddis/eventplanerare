@@ -35,7 +35,7 @@ const HomeLayout = () => {
             if (siteContainerRef.current) {
                 siteContainerRef.current.scrollTo({ top: 0, left: 0, behavior: 'auto' }); // Använd options-objekt för tydlighet
             }
-        }, 200); // Testa med 0ms, 10ms eller 50ms om det behövs
+        }, 10); // Testa med 0ms, 10ms eller 50ms om det behövs
 
         // Viktigt: Rensa timern när komponenten avmonteras eller beroenden ändras
         return () => clearTimeout(timer);
@@ -64,7 +64,7 @@ const HomeLayout = () => {
 
                             <button
                                 className={`btn-small btn-circle 
-                            ${isNotificationPage ? "btn-filled-primary" : "btn-filled-strong"} 
+                            ${isNotificationPage == "/home" ? "btn-filled-strong" : "btn-filled-primary"}
                             ${styles.bellButton}`}>
 
                                 <Bell size={"1.5rem"} />
@@ -102,7 +102,7 @@ const HomeLayout = () => {
                 <main className={`${styles.main} ${styles.siteMain}`}>
                     <Outlet />
                 </main>
-            </div>
+            </div >
 
 
 
