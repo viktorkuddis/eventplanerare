@@ -211,6 +211,15 @@ som before pga Mixed mode påverkar annars också texten */
     gap: 1rem;
 }
 
+
+/* FLEX I MAINCONTAINER PÅ SMÅ LANDSKAPSKORT */
+.card.cardLandScape.small {
+    .mainContainer {
+        gap: 0.5rem;
+    }
+}
+
+
 .large {
     .mainContainer {
         gap: 0.5rem;

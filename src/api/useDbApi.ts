@@ -61,7 +61,8 @@ export function useDbApi() {
 
         } catch (error) {
             console.error("Fel vid hämtning av event via connectionCode:", error);
-            throw error;
+            return null
+
         }
     }
 

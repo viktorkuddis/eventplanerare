@@ -7,8 +7,10 @@ import styles from "./ConnectToEventModal.module.css"
 import { Search } from 'react-feather';
 import { DotLoader } from 'react-spinners';
 
-// import { useDbApi } from "../../../../api/useDbApi";
-// import type { EventType } from '../../../../types';
+import { useDbApi } from "../../../../api/useDbApi";
+import type { EventType } from '../../../../types';
+
+import EventCard from '../../../molecules/EventCard';
 
 type Props = {
     isOpen: boolean;
@@ -24,28 +26,33 @@ const ConnectToEventModal = ({ isOpen, onCloseModal }: Props) => {
 
     const [view, setView] = useState<"start" | "loading" | "result">("start")
     const [connectionCode, setConnectionCode] = useState<string>("")
-    // const [foundEvent, setFoundEvent] = useState<EventType | null>(null);
+    const [foundEvent, setFoundEvent] = useState<EventType | null>(null);
 
 
-    // const { getEventByConnectionCode } = useDbApi()
+    const { getEventByConnectionCode } = useDbApi()
 
     const handleSarch = async () => {
+        console.log("connection code att söka efter: ", connectionCode)
 
         console.log("sökning klickades")
         setView("loading");
-        // setFoundEvent(null);
+        setFoundEvent(null);
 
 
 
-        // const event = await getEventByConnectionCode(connectionCode);
-        // setFoundEvent(event);
-
+        const event = await getEventByConnectionCode(connectionCode);
+        setFoundEvent(event);
+        console.log("hittat event: ", event)
         setView('result');
 
     }
 
     const handleClose = () => {
+        // nollställer alla states:
         setView("start");
+        setConnectionCode("")
+        setFoundEvent(null)
+
         onCloseModal();
     };
 
@@ -59,7 +66,7 @@ const ConnectToEventModal = ({ isOpen, onCloseModal }: Props) => {
             title={"Anslut till event"}
             onCloseModal={handleClose}
             type={"standard"}
-            size={'large'}>
+            size={'small'}>
 
 
             {view == "start" && <div className={`${styles.container}`}>
@@ -87,6 +94,53 @@ const ConnectToEventModal = ({ isOpen, onCloseModal }: Props) => {
                             margin: "0 auto",
                         }} />
                 </div>
+
+            </div >
+            }
+
+            {view == "result" && <div className={`${styles.container}`}>
+
+
+                {foundEvent
+                    ?
+
+                    <>
+                        <div style={{
+                            color: "white",
+                            cursor: "default !important",
+                            // Detta inaktiverar alla mus-händelser (som klick) för alla element inuti.
+                            pointerEvents: "none",
+                        }}>
+                            <EventCard color={foundEvent.color}
+                                title={foundEvent.title}
+                                start={foundEvent.start}
+                                layout={'landscape'}
+                                // location={foundEvent.location}
+                                // description={foundEvent.description}
+                                size={'small'}></EventCard>
+
+
+                        </div>
+                        <div style={{ textAlign: "center" }}>
+                            <button className='btn-medium btn-filled-primary'>Skicka förfrågan</button>
+
+                        </div></>
+                    :
+                    <div>
+                        <br />
+                        <p>Gick inte att hitta något event med den aslutningskoden 😅</p>
+                        <br />
+                        <br />
+                        <div style={{ textAlign: "right" }}>
+                            <button onClick={() => (setView("start"))} className='btn-medium btn-filled-primary' style={{ marginRight: "0.5rem" }}>Försök igen</button>
+
+                            <button onClick={() => handleClose()} className='btn-medium btn-outlined-primary'>stäng</button>
+                        </div>
+
+
+                    </div>}
+
+
 
             </div >
             }
