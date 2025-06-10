@@ -10,7 +10,8 @@ import HomeNotificationsPage from '../src/pages/HomePage/HomeNotificationsPage/H
 import Home from '../src/pages/HomePage/Home';
 
 import { Bell } from 'react-feather';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+
 
 
 // type Props = {
@@ -20,10 +21,12 @@ import { useState } from 'react';
 
 
 const HomeLayout = () => {
-
-
-
     const [view, setView] = useState<"home" | "notifications">("home")
+
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [view]);
 
 
     const navigate = useNavigate();
