@@ -1,5 +1,10 @@
 .headerBG {
     background-color: var(--brand-color-strong);
+    /* background-color: aqua; */
+
+    position: sticky;
+    top: 0;
+    z-index: 100;
 }
 
 .header {
@@ -11,6 +16,9 @@
     align-items: center;
 
     padding: 1rem;
+    /* padding-bottom: 0.5rem; */
+
+    /* background-color: antiquewhite; */
 
 }
 
@@ -33,4 +41,21 @@
 
 .header>div:last-child {
     justify-self: end;
+}
+
+.bellButton {
+    color: inherit;
+
+    width: 1.75rem;
+    aspect-ratio: 1/1;
+
+    display: grid;
+    place-items: center;
+    /* background-color: aqua; */
+
+    :hover {
+        cursor: pointer;
+        /* color: var(--brand-color-base); */
+    }
+
 }
