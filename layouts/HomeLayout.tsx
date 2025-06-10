@@ -27,65 +27,67 @@ const HomeLayout = () => {
 
     return (
         <>
-
-            <div className={`${styles.headerBG}`}>
-                <header className={`content-container-width-wrapper ${styles.header}`}>
+            <div className={`${styles.page}`}>
 
 
+                <div className={`${styles.headerBG}`}>
+                    <header className={`content-container-width-wrapper ${styles.header}`}>
 
-                    <div style={{
-                        position: "relative",
-                        // backgroundColor: "blue"
-                    }}
-                        onClick={() => {
-                            if (isNotificationPage == "/home") {
-                                navigate(`/home/notifications`)
-                            } else {
-                                navigate(`/home`)
-                            }
-                        }}>
-
-                        <button
-                            className={`btn-small btn-circle 
-                            ${isNotificationPage ? "btn-filled-primary" : "btn-filled-strong"} 
-                            ${styles.bellButton}`}>
-
-                            <Bell size={"1.5rem"} />
-                        </button>
 
 
                         <div style={{
-                            backgroundColor: "red",
-                            fontSize: "0.75rem",
-                            width: "max-content",
-                            minWidth: "0.75rem",
-                            minHeight: "1rem",
-                            fontWeight: "Bold",
-                            borderRadius: "5rem",
-                            lineHeight: "1",
-                            padding: "0.25rem 0.5rem",
-                            position: "absolute",
-                            top: "5%",
-                            left: "55%"
-                        }}>Jävligt många</div>
+                            position: "relative",
+                            // backgroundColor: "blue"
+                        }}
+                            onClick={() => {
+                                if (isNotificationPage == "/home") {
+                                    navigate(`/home/notifications`)
+                                } else {
+                                    navigate(`/home`)
+                                }
+                            }}>
 
-                    </div>
+                            <button
+                                className={`btn-small btn-circle 
+                            ${isNotificationPage ? "btn-filled-primary" : "btn-filled-strong"} 
+                            ${styles.bellButton}`}>
 
-                    <div className={styles.logoContainer}
-                        onClick={() => navigate(`/home`)}>
-                        <h1>VADSKER?</h1>
-                        <span><small><small>EVENTPLANERARE</small></small></span>
-                    </div>
-
-                    <UserButton />
+                                <Bell size={"1.5rem"} />
+                            </button>
 
 
-                </header >
-            </div >
-            <main className={styles.main}>
-                <Outlet />
-            </main>
+                            <div style={{
+                                backgroundColor: "red",
+                                fontSize: "0.75rem",
+                                width: "max-content",
+                                minWidth: "0.75rem",
+                                minHeight: "1rem",
+                                fontWeight: "Bold",
+                                borderRadius: "5rem",
+                                lineHeight: "1",
+                                padding: "0.25rem 0.5rem",
+                                position: "absolute",
+                                top: "5%",
+                                left: "55%"
+                            }}>Jävligt många</div>
 
+                        </div>
+
+                        <div className={styles.logoContainer}
+                            onClick={() => navigate(`/home`)}>
+                            <h1>VADSKER?</h1>
+                            <span><small><small>EVENTPLANERARE</small></small></span>
+                        </div>
+
+                        <UserButton />
+
+
+                    </header >
+                </div >
+                <main className={styles.main}>
+                    <Outlet />
+                </main>
+            </div>
 
 
         </>

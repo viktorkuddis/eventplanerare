@@ -57,6 +57,7 @@ hr {
 body {
   margin: 0;
   height: fit-content;
+  height: 100svh;
   min-height: 100svh;
   background-color: var(--brand-color-strong);
 }
