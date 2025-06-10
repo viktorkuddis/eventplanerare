@@ -70,7 +70,7 @@ const ConnectToEventModal = ({ isOpen, onCloseModal }: Props) => {
 
 
             {view == "start" && <div className={`${styles.container}`}>
-                <p> Skriv in eventets anslutningskod.</p>
+                <p style={{ textAlign: "center" }}> Skriv in eventets anslutningskod.</p>
 
                 <input type="text" value={connectionCode} onChange={(e) => setConnectionCode(e.target.value.toLocaleLowerCase())} style={{ textTransform: "uppercase", letterSpacing: "0.05em" }} />
 
@@ -128,13 +128,13 @@ const ConnectToEventModal = ({ isOpen, onCloseModal }: Props) => {
                     :
                     <div>
                         <br />
-                        <p>Gick inte att hitta något event med den aslutningskoden 😅</p>
+                        <p style={{ textAlign: "center" }}>Gick inte att hitta något event med den aslutningskoden 😅</p>
                         <br />
                         <br />
                         <div style={{ textAlign: "right" }}>
-                            <button onClick={() => (setView("start"))} className='btn-medium btn-filled-primary' style={{ marginRight: "0.5rem" }}>Försök igen</button>
+                            <button onClick={() => (setView("start"))} className='btn-medium btn-filled-primary' >Försök igen</button>
 
-                            <button onClick={() => handleClose()} className='btn-medium btn-outlined-primary'>stäng</button>
+                            <button onClick={() => handleClose()} style={{ marginLeft: "0.5rem" }} className='btn-medium btn-outlined-primary'>stäng</button>
                         </div>
 
 
