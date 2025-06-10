@@ -1,13 +1,14 @@
-import { Outlet } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 
 import styles from './HomeLayout.module.css';
 import { UserButton } from '@clerk/clerk-react';
 // import type { ReactNode } from 'react';
 
-import { useNavigate, NavLink } from "react-router-dom";
-import { useLocation } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 
+import HomeNotificationsPage from '../src/pages/HomePage/HomeNotificationsPage/HomeNotificationsPage';
+import Home from '../src/pages/HomePage/Home';
 
 import { Bell } from 'react-feather';
 
@@ -19,10 +20,13 @@ const HomeLayout = () => {
 
 
     const navigate = useNavigate();
-    const location = useLocation();
 
-    const isNotificationPage = location.pathname.includes('/home/notifications');
 
+    const [searchParams, setSearchParams] = useSearchParams(); // Hämta och sätt search params
+
+    // Kontrollera om 'view' parametern är satt till 'notifications'
+    const isNotificationPage = searchParams.get('view') === 'notifications';
+    console.log(isNotificationPage)
 
 
 
@@ -37,19 +41,22 @@ const HomeLayout = () => {
                     <div style={{
                         position: "relative",
                         // backgroundColor: "blue"
-                    }}> {/* Ta bort onClick härifrån om NavLink hanterar det */}
-
-                        <NavLink
-                            to={isNotificationPage ? `/home` : `/home/notifications`}
-                            className={({ isActive }) =>
-                                `btn-small btn-circle ${isActive && isNotificationPage ? "btn-filled-primary" : "btn-filled-strong"} ${styles.bellButton}`
+                    }}
+                        onClick={() => {
+                            if (isNotificationPage) {
+                                setSearchParams({});
+                            } else {
+                                setSearchParams({ view: 'notifications' });
                             }
-                        // OBS: isNotificationPage kommer att vara true när vi navigerar TILL notifications,
-                        // men isActive kommer att vara true NÄR vi ÄR PÅ notifications.
-                        // Du kan förenkla className-logiken här.
-                        >
+                        }}>
+
+                        <button
+                            className={`btn-small btn-circle 
+                            ${isNotificationPage ? "btn-filled-primary" : "btn-filled-strong"} 
+                            ${styles.bellButton}`}>
+
                             <Bell size={"1.5rem"} />
-                        </NavLink>
+                        </button>
 
 
                         <div style={{
@@ -81,8 +88,16 @@ const HomeLayout = () => {
                 </header >
             </div >
             <main>
-                <Outlet />
+                {/* Villkorlig rendering baserad på query-parameter */}
+                {isNotificationPage ? (
+                    <HomeNotificationsPage />
+                ) : (
+
+                    <Home />
+                )}
+                {/* Outlet behövs inte längre om du renderar Home/Notifications direkt här */}
             </main>
+
 
 
         </>

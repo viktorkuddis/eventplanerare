@@ -21,8 +21,8 @@ import {
 } from "react-router-dom";
 
 import Login from "./pages/Login/Login";
-import Home from "./pages/HomePage/Home";
-import HomeNotificationsPage from "./pages/HomePage/HomeNotificationsPage/HomeNotificationsPage";
+// import Home from "./pages/HomePage/Home";
+// import HomeNotificationsPage from "./pages/HomePage/HomeNotificationsPage/HomeNotificationsPage";
 import Event from './pages/EventPage/Event'
 import NoPage from "./pages/NoPage";
 import Style from "./pages/style";
@@ -145,16 +145,14 @@ export default function App() {
             <>
               <SignedIn>
                 <HomeLayout />
+                {/* *Vad som sker i homelayout sköts i denna komponent med queryparametrar. inte i router */}
               </SignedIn>
               <SignedOut>
                 <Navigate to="/login" replace />
               </SignedOut>
             </>
           }
-        >
-          <Route index element={<Home />} />
-          <Route path="notifications" element={<HomeNotificationsPage />} />
-        </Route>
+        />
         <Route
           path="/event/:eventId"
           element={<>
