@@ -1,18 +1,26 @@
-.page {
-    background-color: red;
-    border: 5px solid hotpink;
-    height: 100svh;
-    position: relative;
-    overflow: auto;
-}
+.siteContainer {
+    background-color: hotpink;
 
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    padding: 1rem;
+
+    .siteHeader {
+        position: sticky;
+        top: 0px;
+    }
+
+    .siteMain {}
+}
 
 
 .headerBG {
     background-color: var(--brand-color-strong);
     /* background-color: aqua; */
 
-    position: sticky;
+    /* position: sticky; */
     top: 0;
     width: 100%;
     z-index: 100;

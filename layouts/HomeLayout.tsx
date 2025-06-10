@@ -27,10 +27,8 @@ const HomeLayout = () => {
 
     return (
         <>
-            <div className={`${styles.page}`}>
-
-
-                <div className={`${styles.headerBG}`}>
+            <div className={`${styles.siteContainer}`}>
+                <div className={`${styles.headerBG} ${styles.siteHeader}`}>
                     <header className={`content-container-width-wrapper ${styles.header}`}>
 
 
@@ -84,10 +82,13 @@ const HomeLayout = () => {
 
                     </header >
                 </div >
-                <main className={styles.main}>
+                <main className={`${styles.main} ${styles.siteMain}`}>
                     <Outlet />
                 </main>
             </div>
+
+
+
 
 
         </>
