@@ -7,7 +7,7 @@ import { useNavigate, Outlet, useLocation } from "react-router-dom";
 
 
 import { Bell } from 'react-feather';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 
 
 // type Props = {
@@ -25,13 +25,16 @@ const HomeLayout = () => {
     const isNotificationPage = useLocation().pathname
     console.log(isNotificationPage)
 
+    const siteContainerRef = useRef<HTMLDivElement>(null);
 
     // <<-- LÄGG TILL DENNA useEffect HÄR
     useEffect(() => {
         // Scrolla hela fönstret till toppen
         // Sätt en liten timeout för att ge renderingen tid
         const timer = setTimeout(() => {
-            window.scrollTo(0, 0);
+            if (siteContainerRef.current) {
+                siteContainerRef.current.scrollTo({ top: 500, left: 0, behavior: 'auto' }); // Använd options-objekt för tydlighet
+            }
         }, 1000); // Testa med 0ms, 10ms eller 50ms om det behövs
 
         // Viktigt: Rensa timern när komponenten avmonteras eller beroenden ändras
@@ -41,7 +44,7 @@ const HomeLayout = () => {
 
     return (
         <>
-            <div className={`${styles.siteContainer}`}>
+            <div className={`${styles.siteContainer}`} ref={siteContainerRef}>
                 <div className={`${styles.headerBG} ${styles.siteHeader}`}>
                     <header className={`content-container-width-wrapper ${styles.header}`}>
 

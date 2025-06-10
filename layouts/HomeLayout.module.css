@@ -12,6 +12,11 @@
         top: 0px;
     }
 
+
+    height: 300px;
+    overflow: hidden;
+    overflow: auto;
+
     .siteMain {}
 }
 
