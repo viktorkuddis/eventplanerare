@@ -4,7 +4,7 @@ import styles from './HomeLayout.module.css';
 import { UserButton } from '@clerk/clerk-react';
 // import type { ReactNode } from 'react';
 
-import { useNavigate } from "react-router-dom";
+import { useNavigate, NavLink } from "react-router-dom";
 import { useLocation } from 'react-router-dom';
 
 
@@ -37,13 +37,19 @@ const HomeLayout = () => {
                     <div style={{
                         position: "relative",
                         // backgroundColor: "blue"
-                    }}
+                    }}> {/* Ta bort onClick härifrån om NavLink hanterar det */}
 
-                        onClick={() => navigate(isNotificationPage ? `/home` : `/home/notifications`)}>
-                        <button
-                            className={`btn-small btn-circle ${isNotificationPage ? "btn-filled-primary" : "btn-filled-strong"} ${styles.bellButton}`}>
+                        <NavLink
+                            to={isNotificationPage ? `/home` : `/home/notifications`}
+                            className={({ isActive }) =>
+                                `btn-small btn-circle ${isActive && isNotificationPage ? "btn-filled-primary" : "btn-filled-strong"} ${styles.bellButton}`
+                            }
+                        // OBS: isNotificationPage kommer att vara true när vi navigerar TILL notifications,
+                        // men isActive kommer att vara true NÄR vi ÄR PÅ notifications.
+                        // Du kan förenkla className-logiken här.
+                        >
                             <Bell size={"1.5rem"} />
-                        </button>
+                        </NavLink>
 
 
                         <div style={{
@@ -60,8 +66,6 @@ const HomeLayout = () => {
                             top: "5%",
                             left: "55%"
                         }}>Jävligt många</div>
-
-
 
                     </div>
 
