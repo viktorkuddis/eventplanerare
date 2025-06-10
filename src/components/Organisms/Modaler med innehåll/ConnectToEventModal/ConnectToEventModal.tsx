@@ -197,7 +197,7 @@ const ConnectToEventModal = ({ isOpen, onCloseModal }: Props) => {
                     :
                     <div>
                         <br />
-                        <p style={{ textAlign: "center" }}>Gick inte att hitta något event med den aslutningskoden 😅</p>
+                        <p style={{ textAlign: "center" }}>Gick inte att hitta något event med den anslutningskoden 😅</p>
                         <br />
                         <br />
                         <div style={{ textAlign: "right" }}>
