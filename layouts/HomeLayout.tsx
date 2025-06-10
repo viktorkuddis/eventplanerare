@@ -1,4 +1,3 @@
-import { useSearchParams } from 'react-router-dom';
 
 import styles from './HomeLayout.module.css';
 import { UserButton } from '@clerk/clerk-react';
@@ -6,8 +5,6 @@ import { UserButton } from '@clerk/clerk-react';
 
 import { useNavigate, Outlet, useLocation } from "react-router-dom";
 
-import HomeNotificationsPage from '../src/pages/HomePage/HomeNotificationsPage/HomeNotificationsPage';
-import Home from '../src/pages/HomePage/Home';
 
 import { Bell } from 'react-feather';
 
