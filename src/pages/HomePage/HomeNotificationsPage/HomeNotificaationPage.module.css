@@ -11,3 +11,46 @@
 
     position: relative
 }
+
+
+.notificationCardsContainer {
+    /* background-color: aqua; */
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+
+    border-radius: 0.5rem;
+    overflow: hidden;
+
+
+}
+
+.notificationCard {
+    background-color: var(--bg-color-elevated);
+    padding: 1rem;
+
+
+    display: grid;
+    grid-template-columns: 1rem auto;
+}
+
+.markContainer,
+.textContainer {
+    /* border: 1px solid #000; */
+}
+
+.textContainer {
+    line-height: normal;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.mark {
+    width: 0.5rem;
+    height: 0.5rem;
+    background-color: red;
+    border-radius: 3rem;
+
+    margin-top: 0.5rem;
+}

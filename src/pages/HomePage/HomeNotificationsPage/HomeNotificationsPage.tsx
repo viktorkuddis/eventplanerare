@@ -1,90 +1,50 @@
 
 import styles from "./HomeNotificaationPage.module.css"
 
+import { useContext } from "react"
+
+import { AppContext } from "../../../context /AppContext"
+
+import DOMPurify from 'dompurify';
+
+
 const HomeNotificationsPage = () => {
 
-
+    const context = useContext(AppContext)
 
     return (
         <div className={styles.backdrop} >
 
 
 
-
             <div className={`content-container-width-wrapper ${styles.contentContainer}`}>
 
                 <h2>Notifications</h2>
+                <br />
 
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Qui numquam, pariatur itaque quos corrupti facilis, placeat atque illum vitae provident amet rem inventore voluptates, quam magni velit quibusdam quae quis.
+                <div className={styles.notificationCardsContainer} >
 
-                <hr />
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit.placeat atque illum vitae provident amet rem inventore voluptates, quam magni velit quibusdam quae quis.
 
-                <hr />
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit.placeat atque illum vitae provident amet rem inventore voluptates, quam magni velit quibusdam quae quis.
+                    {context?.notificationFeed.map((notification, i) => (
+                        <div className={styles.notificationCard} key={i}>
+                            <div className={styles.markContainer}>
+                                <div className={styles.mark}></div>
+                            </div>
 
-                <hr />
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit.placeat atque illum vitae provident amet rem inventore voluptates, quam magni velit quibusdam quae quis.
+                            <div className={styles.textContainer}>
 
-                <hr />
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit.placeat atque illum vitae provident amet rem inventore voluptates, quam magni velit quibusdam quae quis.
+                                <p dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(notification.textAsHtml) }} />
+                                <small> <p>{new Date(notification.date).toLocaleString('sv-SE', {
+                                    day: 'numeric',
+                                    month: 'short',
+                                    hour: '2-digit',
+                                    minute: '2-digit',
+                                })}</p></small>
+                            </div>
+                        </div>
+                    ))}
+                </div>
 
-                <hr />
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit.placeat atque illum vitae provident amet rem inventore voluptates, quam magni velit quibusdam quae quis.
-
-                <hr />
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit.placeat atque illum vitae provident amet rem inventore voluptates, quam magni velit quibusdam quae quis.
-
-                <hr />
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit.placeat atque illum vitae provident amet rem inventore voluptates, quam magni velit quibusdam quae quis.
-
-                <hr />
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit.placeat atque illum vitae provident amet rem inventore voluptates, quam magni velit quibusdam quae quis.
-
-                <hr />
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit.placeat atque illum vitae provident amet rem inventore voluptates, quam magni velit quibusdam quae quis.
-
-                <hr />
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit.placeat atque illum vitae provident amet rem inventore voluptates, quam magni velit quibusdam quae quis.
-
-                <hr />
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit.placeat atque illum vitae provident amet rem inventore voluptates, quam magni velit quibusdam quae quis.
-
-                <hr />
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit.placeat atque illum vitae provident amet rem inventore voluptates, quam magni velit quibusdam quae quis.
-
-                <hr />
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit.placeat atque illum vitae provident amet rem inventore voluptates, quam magni velit quibusdam quae quis.
-
-                <hr />
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit.placeat atque illum vitae provident amet rem inventore voluptates, quam magni velit quibusdam quae quis.
-
-                <hr />
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit.placeat atque illum vitae provident amet rem inventore voluptates, quam magni velit quibusdam quae quis.
-
-                <hr />
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit.placeat atque illum vitae provident amet rem inventore voluptates, quam magni velit quibusdam quae quis.
-
-                <hr />
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit.placeat atque illum vitae provident amet rem inventore voluptates, quam magni velit quibusdam quae quis.
-
-                <hr />
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit.placeat atque illum vitae provident amet rem inventore voluptates, quam magni velit quibusdam quae quis.
-
-                <hr />
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit.placeat atque illum vitae provident amet rem inventore voluptates, quam magni velit quibusdam quae quis.
-
-                <hr />
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit.placeat atque illum vitae provident amet rem inventore voluptates, quam magni velit quibusdam quae quis.
-
-                <hr />
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit.placeat atque illum vitae provident amet rem inventore voluptates, quam magni velit quibusdam quae quis.
-
-                <hr />
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit.placeat atque illum vitae provident amet rem inventore voluptates, quam magni velit quibusdam quae quis.
-
-                <hr />
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit.
 
 
 
