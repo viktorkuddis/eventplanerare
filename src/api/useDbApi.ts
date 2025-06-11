@@ -5,7 +5,7 @@ const apiUrl = import.meta.env.VITE_API_URL;
 
 import { AppContext } from "../context /AppContext";
 import { useContext } from "react";
-import type { EventParticipationType, EventType } from "../types";
+import type { EventParticipationType, EventType, NotificationItemType } from "../types";
 import type { EventObjectsDetailedType } from "../types";
 
 
@@ -73,8 +73,8 @@ export function useDbApi() {
     async function getEventsByUserId(userId: string | null | undefined) {
         try {
             const token = await getToken();
-            console.log("token:")
-            console.log(token)
+            // console.log("token:")
+            // console.log(token)
 
             const response = await axios.get(`${apiUrl}/users/${userId}/events`, {
                 headers: { Authorization: `Bearer ${token}` }
@@ -165,6 +165,37 @@ export function useDbApi() {
     }
 
 
+    // hämta notifications baserat på användarens id:
+    async function getNotificationFeedByUserId(userId: string | null | undefined) {
+        try {
 
-    return { createNewEvent, getEventsByUserId, getEventDetailsById, getEventByConnectionCode, createNewRequest };
+            // console.log("🔔börjar hämta notifications.")
+
+            const token = await getToken();
+            // console.log("token:")
+            // console.log(token)
+
+            const response = await axios.get(`${apiUrl}/users/${userId}/notifications`, {
+                headers: { Authorization: `Bearer ${token}` }
+            });
+
+            const notificationItems: NotificationItemType[] = response.data
+
+            // console.log("🔔notificationssvar: ", response.data)
+
+            context?.setNotificationFeed(response.data)
+            console.log("🔔notiser sattes")
+
+
+            return notificationItems;
+        } catch (error) {
+
+            console.error("🔔Fel hämtning av notifications:", error);
+            throw error;
+        }
+
+
+    }
+
+    return { createNewEvent, getEventsByUserId, getEventDetailsById, getEventByConnectionCode, createNewRequest, getNotificationFeedByUserId };
 }

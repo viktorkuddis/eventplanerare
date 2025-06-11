@@ -86,3 +86,11 @@ export type EventObjectsDetailedType = {
     personalActivities: PersonalActivityType[];
 
 };
+
+
+export type NotificationItemType = {
+    _id?: string;
+    textAsHtml: string;
+    date: Date;
+    url: string;
+};

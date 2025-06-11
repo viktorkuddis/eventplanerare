@@ -1,5 +1,5 @@
 import { useState, type ReactNode } from 'react';
-import type { EventType, EventObjectsDetailedType } from '../types';
+import type { EventType, EventObjectsDetailedType, NotificationItemType } from '../types';
 import { AppContext, type AppContextType } from './AppContext';
 
 export const AppContextProvider = ({ children }: { children: ReactNode }) => {
@@ -8,7 +8,6 @@ export const AppContextProvider = ({ children }: { children: ReactNode }) => {
     // de event som användaren just ju interagerar med.
     const [currentEventObject, setCurrentEventObject] = useState<EventType | null>(null);
 
-
     const [ownEvents, setOwnEvents] = useState<EventType[]>([]);
 
     // de event som användaren just ju interagerar med.
@@ -16,6 +15,8 @@ export const AppContextProvider = ({ children }: { children: ReactNode }) => {
 
     // alltefter att användaren interagerar med event så sätter vi dom här:
     const [eventObjectsDetailed, setEventObjectsDetailed] = useState<EventObjectsDetailedType[]>([]);
+
+    const [notificationFeed, setNotificationFeed] = useState<NotificationItemType[]>([])
 
 
 
@@ -42,6 +43,8 @@ export const AppContextProvider = ({ children }: { children: ReactNode }) => {
         setCurrentEventObjectsDetailed,
         eventObjectsDetailed,
         setEventObjectsDetailed,
+        notificationFeed,
+        setNotificationFeed
     }
 
 

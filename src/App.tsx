@@ -60,6 +60,7 @@ export default function App() {
 
 
   const { userId } = useAuth();
+  const { getNotificationFeedByUserId } = useDbApi()
 
   const { getEventsByUserId } = useDbApi();
 
@@ -81,7 +82,36 @@ export default function App() {
           console.error(error);
         }
       })();
+
+      // Hämta notifikationer direkt initialt
+      (async () => {
+        try {
+          await getNotificationFeedByUserId(userId);
+        } catch (error) {
+          console.error(error);
+        }
+      })();
+
+      // startar polling för notifikatione
+      const pollNotifications = setInterval(() => {
+
+        (async () => {
+          try {
+            await getNotificationFeedByUserId(userId);
+
+          } catch (error) {
+            console.error(error);
+          }
+        })();
+      }, 15000);
+
+      // cleanup:
+      return () => clearInterval(pollNotifications);
+
     }
+
+
+
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userId]);

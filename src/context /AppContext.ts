@@ -1,5 +1,5 @@
 import { createContext } from 'react';
-import type { EventType, EventObjectsDetailedType } from '../types';
+import type { EventType, NotificationItemType, EventObjectsDetailedType } from '../types';
 
 
 export type AppContextType = {
@@ -17,6 +17,9 @@ export type AppContextType = {
 
     allEvents: EventType[];
     setAllEvents: React.Dispatch<React.SetStateAction<EventType[]>>
+
+    notificationFeed: NotificationItemType[];
+    setNotificationFeed: React.Dispatch<React.SetStateAction<NotificationItemType[]>>;
 };
 
 
