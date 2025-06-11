@@ -40,9 +40,6 @@ const Home = () => {
   const [showConnectToEventModal, setShowConnectToModal] = useState(false)
 
 
-  // const { userId } = useAuth();
-
-  // const { getEventsByUserId } = useDbApi();
 
 
 
@@ -67,18 +64,9 @@ const Home = () => {
 
 
 
-  // async function testfunction() {
-  //   console.log("testfunktoin klickad")
-  //   try {
-  //     const response = await getEventsByUserId(userId);
-  //     console.log(response);
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // }
+
 
   return (<>
-    {/* <button onClick={testfunction}> KLICKA PÅ TESTKNAPPEN</button> */}
 
     <div className={styles.backdrop}>
 

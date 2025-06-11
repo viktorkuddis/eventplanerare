@@ -11,6 +11,8 @@ import "./styles/Variables.css";
 import HomeLayout from "../layouts/HomeLayout"
 import EventLayout from "../layouts/EventLayout/EventLayout"
 
+import usePageVisible from "../hooks/usePageVisible"
+
 
 import {
   Route,
@@ -60,10 +62,11 @@ export default function App() {
 
 
   const { userId } = useAuth();
-  const { getNotificationFeedByUserId } = useDbApi()
+  const { getNotificationFeedByUserId, getEventsByUserId } = useDbApi();
 
-  const { getEventsByUserId } = useDbApi();
 
+  // state som berättar om kage är visible så man kan pausa pollingen 
+  const isPageVisible = usePageVisible();
 
 
 
@@ -72,7 +75,7 @@ export default function App() {
 
     // hämtar bara om det finns en användare. annars crashar hämtningen ju :) 
     if (userId) {
-      console.log("Skickar userId till API:", userId);
+
 
       (async () => {
         try {
@@ -92,21 +95,28 @@ export default function App() {
         }
       })();
 
-      // startar polling för notifikatione
-      const pollNotifications = setInterval(() => {
 
-        (async () => {
-          try {
-            await getNotificationFeedByUserId(userId);
+      let pollNotifications: string | number | NodeJS.Timeout | undefined;
 
-          } catch (error) {
-            console.error(error);
-          }
-        })();
-      }, 15000);
+      if (isPageVisible) {
+        console.log(`▶️ Polling startades kl ${new Date().toLocaleTimeString()}`);
 
-      // cleanup:
-      return () => clearInterval(pollNotifications);
+        // Starta polling bara om sidan är synlig
+        pollNotifications = setInterval(() => {
+          (async () => {
+            try {
+              await getNotificationFeedByUserId(userId);
+            } catch (error) {
+              console.error(error);
+            }
+          })();
+        }, 15000);
+      }
+
+      return () => {
+        clearInterval(pollNotifications);
+        console.log(`⏸️ Polling Stoppades kl ${new Date().toLocaleTimeString()}`);
+      }
 
     }
 
@@ -114,7 +124,7 @@ export default function App() {
 
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [userId]);
+  }, [userId, isPageVisible]);
 
 
   return (<>

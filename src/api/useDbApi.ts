@@ -87,6 +87,9 @@ export function useDbApi() {
                 const eventsToAdd = response.data.filter((newEvent: EventType) =>
                     !existingEvents.some(existingEvent => existingEvent._id === newEvent._id)
                 );
+
+                console.log("🗓️events sattessattes")
+
                 return [...existingEvents, ...eventsToAdd];
             });
 
