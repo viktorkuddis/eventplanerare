@@ -1,12 +1,12 @@
 import { useContext, useEffect, useState } from "react";
-import { AppContext } from "../../context /AppContext";
+import { AppContext } from "../../context/AppContext";
 
 
 import { DotLoader } from "react-spinners";
 
 import { useParams } from "react-router-dom";
 
-import EventInformation from "../../components/EvenInformation/EventInformation";
+import EventInformation from "../../components/molecules/EvenInformation/EventInformation";
 
 import style from "./Event.module.css";
 

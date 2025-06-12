@@ -70,20 +70,3 @@
 .header>div:last-child {
     justify-self: end;
 }
-
-.bellButton {
-    color: inherit;
-
-    width: 1.75rem;
-    aspect-ratio: 1/1;
-
-    display: grid;
-    place-items: center;
-    /* background-color: aqua; */
-
-    :hover {
-        cursor: pointer;
-        /* color: var(--brand-color-base); */
-    }
-
-}

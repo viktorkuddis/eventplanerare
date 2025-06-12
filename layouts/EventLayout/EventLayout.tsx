@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 import { Home, Info, Settings } from "react-feather";
 
-import { AppContext } from "../../src/context /AppContext";
+import { AppContext } from "../../src/context/AppContext";
 import { useParams } from "react-router-dom";
 
 import { useDbApi } from "../../src/api/useDbApi";

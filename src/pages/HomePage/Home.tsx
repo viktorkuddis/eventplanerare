@@ -23,7 +23,7 @@ import { useContext, useEffect, useRef, useState } from "react";
 // import type { EventType } from "../../types";
 
 
-import { AppContext } from "../../context /AppContext";
+import { AppContext } from "../../context/AppContext";
 
 const Home = () => {
 

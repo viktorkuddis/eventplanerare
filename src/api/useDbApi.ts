@@ -3,7 +3,7 @@ import { useAuth } from "@clerk/clerk-react";
 
 const apiUrl = import.meta.env.VITE_API_URL;
 
-import { AppContext } from "../context /AppContext";
+import { AppContext } from "../context/AppContext";
 import { useContext } from "react";
 import type { EventParticipationType, EventType, NotificationItemType } from "../types";
 import type { EventObjectsDetailedType } from "../types";
