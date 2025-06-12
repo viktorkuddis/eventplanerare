@@ -50,7 +50,6 @@ const HomeNotificationsPage = () => {
 
 
 
-
     // // Spara senaste öppnade notifikationslistan (datum som sträng)
     // setAppSettingsToLocalStorage(userId, 'lastNotificationListOpened', new Date().toISOString())
 
@@ -64,6 +63,7 @@ const HomeNotificationsPage = () => {
 
     const context = useContext(AppContext)
 
+
     return (
         <div className={styles.backdrop} >
 
@@ -73,15 +73,12 @@ const HomeNotificationsPage = () => {
 
                 <h2>Notifications</h2>
                 <br />
-
-                {<p style={{ textAlign: "center" }}>
+                {showFirstTimeMessage && <p style={{ textAlign: "center" }}>
                     <strong>👋</strong>{' '}
                     <strong style={{ opacity: 0.7 }}>Välkommen till Notiscenter!</strong>
                     <br />
                     <span style={{ opacity: 0.7 }}>Här dyker dina notiser upp!</span>
                 </p>}
-
-
 
                 <br />
 
@@ -98,9 +95,12 @@ const HomeNotificationsPage = () => {
 
 
                                 <div className={styles.markContainer}>
-                                    {new Date(lastOpened) < new Date(notification.date) || showFirstTimeMessage && <div className={styles.mark}>
-
-                                    </div>}
+                                    {showFirstTimeMessage
+                                        ? <div className={styles.mark}></div>
+                                        : new Date(lastOpened) < new Date(notification.date)
+                                            ?
+                                            <div className={styles.mark}></div>
+                                            : <div></div>}
                                 </div>
 
                                 <div className={styles.textContainer}>
