@@ -30,16 +30,16 @@ const BellButton = () => {
     let showNotificationIndicator;
     if (lastOpendDate && context?.notificationFeed[0]?.date) {
         const lastDate = new Date(lastOpendDate);
-        console.log("panelen var senast öppen", lastDate)
+        // console.log("panelen var senast öppen", lastDate)
 
         const newestNotificationDate = new Date(context.notificationFeed[0].date);
-        console.log("senaste notifikationen:", newestNotificationDate)
+        // console.log("senaste notifikationen:", newestNotificationDate)
 
         // sätt true om man ligger efter med att titta på notifikationerna
         showNotificationIndicator = lastDate < newestNotificationDate ? true : false
     }
 
-    console.log("showNotificationIndicator", showNotificationIndicator)
+    // console.log("showNotificationIndicator", showNotificationIndicator)
 
     const navigate = useNavigate();
 
