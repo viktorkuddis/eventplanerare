@@ -16,6 +16,11 @@ import { useParams } from "react-router-dom";
 import { AppContext } from "../../../context/AppContext";
 // import { useUser } from '@clerk/clerk-react'; // Importera useUser
 
+import { useNavigate } from "react-router-dom";
+
+import { X } from "react-feather";
+
+import styles from "./RequestDetails.module.css"
 
 
 
@@ -38,7 +43,9 @@ const RequestDetails = () => {
     const contex = useContext(AppContext)
 
 
-    const { getRequest, getUsersByIdList } = useDbApi();
+    const navigate = useNavigate()
+
+    const { getRequest, getUsersByIdList, updateRequestStatus } = useDbApi();
 
 
     useEffect(() => {
@@ -58,13 +65,14 @@ const RequestDetails = () => {
                     console.log("intentionen är att joina event :) ")
                     const event = (contex?.allEvents.find((e) => (e._id == request.to.id)))
 
-                    // sätter states:
-                    setRequestObject(request)
-                    setActualEvent(event)
-                    // den returnerar enlista men här blir det ju bara 1 :) 
-                    setFromUser(foundUser[0])
-                    setIsLoading(false)
-
+                    if (event && foundUser.length > 0) {
+                        // sätter states:
+                        setRequestObject(request)
+                        setActualEvent(event)
+                        // den returnerar enlista men här blir det ju bara 1 :) 
+                        setFromUser(foundUser[0])
+                        setIsLoading(false)
+                    }
                 }
 
 
@@ -77,19 +85,47 @@ const RequestDetails = () => {
 
 
 
+    async function handleOnDeclineEventRequest() {
+        try {
+            const updated = await updateRequestStatus(requestObjekt?._id as string, "rejected");
+            console.log("Uppdaterad request:", updated);
+            setRequestObject(updated)
+        } catch (err) {
+            console.error("Kunde inte uppdatera:", err);
+        }
+
+        console.log("Nekar")
+
+    }
+    async function handleOnAcceptEventRequest() {
+        try {
+            const updated = await updateRequestStatus(requestObjekt?._id as string, "accepted");
+            console.log("Uppdaterad request:", updated);
+            setRequestObject(updated)
+        } catch (err) {
+            console.error("Kunde inte uppdatera:", err);
+        }
+
+        console.log("Accepterar")
+
+
+    }
 
 
     return (
-        <>
-            {isLoading
-                ?
-                "laddar"
-                :
-                <>
-                    {requestObjekt?.intention == "joinEvent" &&
-                        <div>
+        <div className={styles.backdrop}>
+            <div className={` content-container-width-wrapper ${styles.contentContainer}`}>
 
-                            <p><strong>@{fromUser?.username}</strong> vill ansluta till ditt event<strong>@{actualEvent?.title}</strong> </p>
+                <> <div className={`${styles.card}`}>
+                    <div className={`${styles.crossButton}`}
+                        onClick={() => navigate("/home/notifications")}>
+                        <X size={"1.5rem"} />
+                    </div>
+                    {isLoading ? "laddar" :
+
+                        requestObjekt?.intention == "joinEvent" &&
+                        <>
+                            <p><strong>@{fromUser?.username}</strong> vill ansluta till ditt event <strong>@{actualEvent?.title}</strong> </p>
                             <small>
                                 <p>{new Date(requestObjekt.createdAt as string).toLocaleString('sv-SE', {
                                     day: 'numeric',
@@ -97,12 +133,33 @@ const RequestDetails = () => {
                                     hour: '2-digit',
                                     minute: '2-digit',
                                 })}</p></small>
-                        </div>
-                    }
-                </>
-            }
-        </>
 
+
+                            {requestObjekt.status == "pending"
+                                ? <div className={`${styles.buttonGroup}`}>
+                                    <button
+                                        onClick={() => handleOnDeclineEventRequest()}
+                                        className="btn-medium btn-outlined-primary">Neka</button>
+                                    <button
+                                        onClick={() => handleOnAcceptEventRequest()}
+                                        className="btn-medium btn-filled-primary">Acceptera</button>
+                                </div>
+                                : requestObjekt.status == "accepted"
+                                    ? <div className={`${styles.buttonGroup}`}>Förfrågan accepterad</div>
+                                    : <div className={`${styles.buttonGroup}`}>Förfrågan Nekad</div>}
+
+                        </>
+
+                    }
+
+
+
+                </div>
+                </>
+
+
+            </div>
+        </div >
 
 
     )

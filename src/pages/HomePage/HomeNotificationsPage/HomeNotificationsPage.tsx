@@ -77,13 +77,16 @@ const HomeNotificationsPage = () => {
                 <h2>Notifications</h2>
                 <br />
                 {showFirstTimeMessage && <p style={{ textAlign: "center" }}>
+
                     <strong>👋</strong>{' '}
                     <strong style={{ opacity: 0.7 }}>Välkommen till Notiscenter!</strong>
                     <br />
                     <span style={{ opacity: 0.7 }}>Här dyker dina notiser upp!</span>
+                    <br />
+                    <br />
                 </p>}
 
-                <br />
+
 
                 <div className={styles.notificationCardsContainer} >
 
@@ -100,10 +103,10 @@ const HomeNotificationsPage = () => {
                                 <div className={styles.markContainer}>
                                     {showFirstTimeMessage
                                         ? <div className={styles.mark}></div>
-                                        : new Date(lastOpened) < new Date(notification.date)
+                                        : new Date(lastOpened) > new Date(notification.date)
                                             ?
-                                            <div className={styles.mark}></div>
-                                            : <div></div>}
+                                            <div></div>
+                                            : <div className={styles.mark}></div>}
                                 </div>
 
                                 <div className={styles.textContainer}>
@@ -116,7 +119,6 @@ const HomeNotificationsPage = () => {
                                         minute: '2-digit',
                                     })}</p></small>
 
-                                    länk: {notification.url}
                                 </div>
                             </div>)
                     }

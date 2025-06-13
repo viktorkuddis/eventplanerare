@@ -243,6 +243,24 @@ export function useDbApi() {
     }
 
 
+    async function updateRequestStatus(requestId: string, status: string) {
+        try {
+            const token = await getToken();
+
+            const response = await axios.patch(`${apiUrl}/requests/${requestId}`,
+                { status }, // skickar bara status
+                {
+                    headers: { Authorization: `Bearer ${token}` }
+                }
+            );
+
+            console.log("Request uppdaterad:", response.data);
+            return response.data;
+        } catch (error) {
+            console.error("Fel vid uppdatering av request:", error);
+            throw error;
+        }
+    }
 
 
 
@@ -254,6 +272,7 @@ export function useDbApi() {
         createNewRequest,
         getNotificationFeedByUserId,
         getRequest,
-        getUsersByIdList
+        getUsersByIdList,
+        updateRequestStatus
     };
 }

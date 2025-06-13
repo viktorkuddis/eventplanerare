@@ -1,0 +1,46 @@
+.backdrop {
+    background-color: var(--bg-color-base);
+    height: 100%;
+
+
+}
+
+.contentContainer {
+    padding: 2rem 1rem;
+
+}
+
+.card {
+    background-color: var(--bg-color-elevated);
+    padding: 0rem 2rem 2rem 2rem;
+    border-radius: 0.5rem;
+
+
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    /* background-color: antiquewhite; */
+}
+
+.buttonGroup {
+    /* background-color: aliceblue; */
+    display: flex;
+    gap: 1rem;
+    justify-content: end;
+}
+
+
+.crossButton {
+    display: inline-block;
+    margin-left: auto;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    display: grid;
+    cursor: pointer;
+
+    &:hover {
+        background-color: hsla(0, 0%, 50%, 0.10);
+    }
+
+    transform: translate(1rem, 0.75rem);
+}
