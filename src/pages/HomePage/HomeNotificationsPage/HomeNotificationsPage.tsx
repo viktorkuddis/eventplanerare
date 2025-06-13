@@ -52,7 +52,6 @@ const HomeNotificationsPage = () => {
 
 
 
-
     // // Spara senaste öppnade notifikationslistan (datum som sträng)
     // setAppSettingsToLocalStorage(userId, 'lastNotificationListOpened', new Date().toISOString())
 
@@ -65,6 +64,9 @@ const HomeNotificationsPage = () => {
 
 
     const context = useContext(AppContext)
+
+    console.log(context?.notificationFeed)
+
 
 
     return (
@@ -119,7 +121,15 @@ const HomeNotificationsPage = () => {
                                         minute: '2-digit',
                                     })}</p></small>
 
+
+
+
+
                                 </div>
+
+
+
+
                             </div>)
                     }
                     )}
