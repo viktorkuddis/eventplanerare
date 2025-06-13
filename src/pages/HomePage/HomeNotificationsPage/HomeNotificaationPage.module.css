@@ -32,6 +32,8 @@
 
     display: grid;
     grid-template-columns: 1rem auto;
+
+    cursor: pointer;
 }
 
 .markContainer,

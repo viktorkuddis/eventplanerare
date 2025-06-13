@@ -11,6 +11,8 @@ import "./styles/Variables.css";
 import HomeLayout from "../layouts/HomeLayout"
 import EventLayout from "../layouts/EventLayout/EventLayout"
 
+import RequestDetails from "./pages/HomePage/RequestDetailsPage/RequestDetails";
+
 import usePageVisible from "../hooks/usePageVisible"
 
 
@@ -164,21 +166,7 @@ export default function App() {
           }
         />
 
-        {/* Home-sidan (bara synlig för SignedIn) */}
-        {/* <Route
-          path="/home"
-          element={<>
-            <SignedIn>
-              <HomeLayout>
-                <Home />
-              </HomeLayout>
-            </SignedIn>
-            <SignedOut>
-              <Navigate to="/login" replace />
-            </SignedOut>
-          </>
-          }
-        /> */}
+
         <Route
           path="/home"
           element={
@@ -193,8 +181,15 @@ export default function App() {
           }
         >
           <Route index element={<Home />} />
-          <Route path="notifications" element={<HomeNotificationsPage />} />
+          <Route path="notifications" >
+            <Route index element={<HomeNotificationsPage />} >
+            </Route>
+            <Route path="request/:requestId" element={<RequestDetails />} >
+            </Route>
+          </Route>
         </Route>
+
+
         <Route
           path="/event/:eventId"
           element={<>

@@ -7,6 +7,8 @@ import { useContext, useEffect, useState } from "react"
 
 import { AppContext } from "../../../context/AppContext"
 
+import { useNavigate } from "react-router-dom";
+
 import { getAppSettingsFromLocalStorage, setAppSettingsToLocalStorage } from "../../../utils/localStorageUtils";
 
 import DOMPurify from 'dompurify';
@@ -17,6 +19,7 @@ import { useAuth } from "@clerk/clerk-react";
 const HomeNotificationsPage = () => {
 
 
+    const navigate = useNavigate()
     const { userId } = useAuth()
 
 
@@ -91,7 +94,7 @@ const HomeNotificationsPage = () => {
 
 
                         return (
-                            <div className={styles.notificationCard} key={i}>
+                            <div className={styles.notificationCard} key={i} onClick={() => navigate(notification.url)}>
 
 
                                 <div className={styles.markContainer}>
@@ -112,6 +115,8 @@ const HomeNotificationsPage = () => {
                                         hour: '2-digit',
                                         minute: '2-digit',
                                     })}</p></small>
+
+                                    länk: {notification.url}
                                 </div>
                             </div>)
                     }

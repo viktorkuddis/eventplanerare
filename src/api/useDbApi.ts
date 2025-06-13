@@ -5,7 +5,7 @@ const apiUrl = import.meta.env.VITE_API_URL;
 
 import { AppContext } from "../context/AppContext";
 import { useContext } from "react";
-import type { EventParticipationType, EventType, NotificationItemType } from "../types";
+import type { EventParticipationType, EventType, NotificationItemType, SimplifiedUserType } from "../types";
 import type { EventObjectsDetailedType } from "../types";
 
 
@@ -167,6 +167,23 @@ export function useDbApi() {
         }
     }
 
+    async function getRequest(requestId: string) {
+        try {
+            console.log("försöker hitta denna request:", requestId);
+            const token = await getToken();
+
+            const response = await axios.get(`${apiUrl}/requests/${requestId}`, {
+                headers: { Authorization: `Bearer ${token}` }
+            });
+            console.log("fick detta:", response.data);
+
+            return response.data;
+
+        } catch (error) {
+            console.error("Fel vid försök att hämta en förfrågan", error);
+            throw error;
+        }
+    }
 
     // hämta notifications baserat på användarens id:
     async function getNotificationFeedByUserId(userId: string | null | undefined) {
@@ -200,5 +217,43 @@ export function useDbApi() {
 
     }
 
-    return { createNewEvent, getEventsByUserId, getEventDetailsById, getEventByConnectionCode, createNewRequest, getNotificationFeedByUserId };
+
+    // hämta notifications baserat på användarens id:
+    async function getUsersByIdList(usersList: string[]) {
+        try {
+
+            const token = await getToken();
+            // console.log("token:")
+            // console.log(token)
+
+            const response = await axios.get(`${apiUrl}/users/list?userIds=${usersList}`, {
+                headers: { Authorization: `Bearer ${token}` }
+            });
+
+            const usersItems: SimplifiedUserType[] = response.data
+
+            return usersItems;
+        } catch (error) {
+
+            console.error("🔔Fel hämtning simplifies användarobjekt från clerk via api:", error);
+            throw error;
+        }
+
+
+    }
+
+
+
+
+
+    return {
+        createNewEvent,
+        getEventsByUserId,
+        getEventDetailsById,
+        getEventByConnectionCode,
+        createNewRequest,
+        getNotificationFeedByUserId,
+        getRequest,
+        getUsersByIdList
+    };
 }
