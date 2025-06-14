@@ -136,23 +136,47 @@
     /* hindra radbrytning i knappen */
     text-align: center;
     overflow: hidden;
-    text-overflow: ellipsis;
-    /* valfritt: trimma lång text med "..." */
+
+
+    border: 1px solid color-mix(in srgb, var(--brand-color-base) 20%, transparent 80%);
+
+
+    padding-left: 1rem;
+    padding-right: 1rem;
 
     display: flex;
     justify-content: center;
     align-items: center;
-
-    gap: 0.5rem;
 
     >* {
         overflow: hidden;
         text-overflow: ellipsis;
     }
 
-    border: 1px solid color-mix(in srgb, var(--brand-color-base) 20%, transparent 80%);
+    p {
+        padding-left: 0.5rem;
+    }
+
 
 }
+
+/* detta är ett litet försök att göra texten i knapparna synlig för väven minsta skärmstorlek :) */
+@media (max-width: 355px) {
+    .buttonGroup {
+        font-size: 85%;
+
+        button {
+            padding-left: 0.5rem;
+            padding-right: 0.5rem;
+
+            p {
+                padding-left: 0.25rem;
+            }
+        }
+    }
+}
+
+
 
 
 /* Denna backdrop läggs längst bak i dokumentet för att uundvika att användaren skrollar bram bodyn som är av annan färg på mobila enheter */

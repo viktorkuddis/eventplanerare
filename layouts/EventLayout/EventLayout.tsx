@@ -5,7 +5,7 @@ import styles from "./EventLayout.module.css";
 import { useContext, useEffect, type ReactNode } from 'react';
 import { useNavigate } from "react-router-dom";
 
-import { Home, Info, Settings, User, Users } from "react-feather";
+import { Home, Info, Settings, User, Users, Plus } from "react-feather";
 
 import { AppContext } from "../../src/context/AppContext";
 import { useParams } from "react-router-dom";
@@ -137,10 +137,10 @@ const EventLayout = ({ children }: Props) => {
 
 
                         <button className="btn-medium btn-filled-light-static">
-                            <Users size={"1rem"} /> <span>Gruppaktivitet</span>
+                            <Plus size={"1rem"} /><Users size={"1rem"} /> <p>Gruppaktivitet</p>
                         </button>
                         <button className="btn-medium btn-filled-primary">
-                            <User size={"1rem"} /> <span>Egen aktivitet</span>
+                            <Plus size={"1rem"} /><User size={"1rem"} /><p>Egen aktivitet</p>
                         </button>
 
 
