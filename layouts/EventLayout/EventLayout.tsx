@@ -5,7 +5,7 @@ import styles from "./EventLayout.module.css";
 import { useContext, useEffect, type ReactNode } from 'react';
 import { useNavigate } from "react-router-dom";
 
-import { Home, Info, Settings } from "react-feather";
+import { Home, Info, Settings, User, Users } from "react-feather";
 
 import { AppContext } from "../../src/context/AppContext";
 import { useParams } from "react-router-dom";
@@ -59,13 +59,13 @@ const EventLayout = ({ children }: Props) => {
 
 
     // skapar textfärg om de finns någon 
-    const textColorVibrant = context?.currentEventObjectDetailed?.event.color && textColorMixVibrant(context?.currentEventObjectDetailed?.event.color)
+    const textColorVibrant = context?.currentEventObjectDetailed?.event.color ? textColorMixVibrant(context?.currentEventObjectDetailed?.event.color) : "black"
 
 
 
 
     // skapar bakgrundsfärge om de finns
-    const backgroundColor = context?.currentEventObjectDetailed?.event.color && backgroundColorMixLight(context?.currentEventObjectDetailed?.event.color)
+    const backgroundColor = context?.currentEventObjectDetailed?.event.color ? backgroundColorMixLight(context?.currentEventObjectDetailed?.event.color) : "white"
     // let textColor;
 
 
@@ -79,7 +79,6 @@ const EventLayout = ({ children }: Props) => {
             <div className={styles.backdrop} style={{
                 backgroundColor: backgroundColor
             }}>
-
 
                 <div className={`${styles.pageWrapper}`}>
 
@@ -123,6 +122,25 @@ const EventLayout = ({ children }: Props) => {
                         {children}
 
 
+                        <div className={styles.buttonGroup}
+
+                            style={{
+                                background: `linear-gradient(to top, ${backgroundColor} 50%, transparent 100%)`,
+
+                                width: "100%"
+                            }}
+
+                        >
+
+
+                            <button className="btn-medium btn-filled-light-static">
+                                <Users size={"1rem"} /> <span>Gruppaktivitet</span>
+                            </button>
+                            <button className="btn-medium btn-filled-primary">
+                                <User size={"1rem"} /> <span>Egen aktivitet</span>
+                            </button>
+
+                        </div>
 
                     </main>
                 </div >

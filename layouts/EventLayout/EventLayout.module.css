@@ -116,3 +116,41 @@
 .header>div:last-child {
     justify-self: end;
 }
+
+
+.buttonGroup {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    /* exakt två kolumner */
+    gap: 0.5rem;
+    padding: 1rem;
+    /* padding-bottom: 2rem; */
+    /* background-color: aquamarine; */
+
+
+    position: fixed;
+    bottom: 0
+}
+
+.buttonGroup button {
+    white-space: nowrap;
+    /* hindra radbrytning i knappen */
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /* valfritt: trimma lång text med "..." */
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    gap: 0.5rem;
+
+    >* {
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    border: 1px solid color-mix(in srgb, var(--brand-color-base) 20%, transparent 80%);
+
+}

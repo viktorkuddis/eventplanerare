@@ -8,7 +8,7 @@ import { useParams } from "react-router-dom";
 
 import EventInformation from "../../components/molecules/EvenInformation/EventInformation";
 
-import style from "./Event.module.css";
+import styles from "./Event.module.css";
 
 
 
@@ -65,10 +65,10 @@ const Event = () => {
 
   if (timoeIsOut == true && isLoading == false) {
     return (
-      <div className={`content-container-width-wrapper ${style.contentContainer}`}>
+      <div className={`content-container-width-wrapper ${styles.contentContainer}`}>
 
         {/* <hr /> */}
-        <div className={`content-container-width-wrapper ${style.eventInfoSection}`}>
+        <div className={`content-container-width-wrapper ${styles.eventInfoSection}`}>
           <EventInformation />
         </div>
 
@@ -91,11 +91,25 @@ const Event = () => {
 
 
 
+        {/* <div className={styles.buttonGroup}
+
+          style={{
+            background: "linear-gradient(to top,  50%, transparent 100%)"
+          }}
+
+        >
+          <button className="btn-medium btn-filled-light-static">
+            <Users size={"1rem"} /> <span>Gruppaktivitet</span>
+          </button>
+          <button className="btn-medium btn-filled-primary">
+            <User size={"1rem"} /> <span>Egen aktivitet</span>
+          </button>
+
+        </div> */}
 
 
 
-
-      </div>
+      </div >
 
     )
   }
