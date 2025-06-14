@@ -119,10 +119,10 @@ const Home = () => {
           <div className={styles.cardsContainer}>
             {
               // Finns det minst ett aktivt event?
-              context?.ownEvents?.some(e => isEventActive(e.start, e.end))
+              context?.allEvents?.some(e => isEventActive(e.start, e.end))
                 ? (
                   // Ja, rendera kort för alla aktiva event
-                  context.ownEvents.map((e, i) =>
+                  context.allEvents.map((e, i) =>
                     isEventActive(e.start, e.end) && (
 
 
