@@ -198,7 +198,7 @@ const Home = () => {
         </div> */}
 
         <div className={`${styles.othersEventsSection}`}>
-          <h2 className={`${styles.sectionHeading}`}>Andras Event</h2>
+          <h2 className={`${styles.sectionHeading}`}>Andras event</h2>
 
 
 
