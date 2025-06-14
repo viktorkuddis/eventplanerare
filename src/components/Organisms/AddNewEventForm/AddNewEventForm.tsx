@@ -214,10 +214,11 @@ const AddNewEventForm: React.FC<Props> = ({ onCancel, onEventCreated }) => {
         </div>
       </div>
 
-      <div>
-        <button type="submit">Skapa</button>
-        <button type="button" onClick={handleCancel}>Avbryt</button>
-        {/* <button type="button" onClick={clearForm}>rens</button> */}
+      <div className={styles.buttonGroup}>
+        <button type="button" className="btn-medium btn-outlined-primary" onClick={handleCancel}>Avbryt</button>
+        <button type="submit" className="btn-medium btn-filled-primary">Skapa</button>
+
+
 
       </div>
     </form>

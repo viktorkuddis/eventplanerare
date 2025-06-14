@@ -49,6 +49,14 @@
 }
 
 
+.buttonGroup {
+    padding: 1rem;
+    /* background-color: antiquewhite; */
+    display: flex;
+    gap: 1rem;
+    justify-content: right;
+}
+
 @container (min-width:375px) {
     .colorPickerGrid {
         grid-template-columns: 1fr 1fr 1fr;
