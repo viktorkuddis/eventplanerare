@@ -140,7 +140,6 @@ export function useDbApi() {
             return eventDetail;
         } catch (error) {
             console.error("Fel vid axios.get för event detaljer:", error);
-            throw error;
         }
 
 
