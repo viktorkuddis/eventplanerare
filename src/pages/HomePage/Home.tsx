@@ -24,9 +24,11 @@ import { useContext, useEffect, useRef, useState } from "react";
 
 
 import { AppContext } from "../../context/AppContext";
+import { useAuth } from "@clerk/clerk-react";
 
 const Home = () => {
 
+  const { userId } = useAuth();
 
   const navigate = useNavigate();
 
@@ -212,7 +214,6 @@ const Home = () => {
             items={[
               // första itemet är alltid SKAPAKNAPPEN
 
-
               <button style={{
                 padding: "unset", lineHeight: "1", textAlign: "center", background: "rgba(255, 255, 255, 0.1)", border: "none"
               }}
@@ -225,19 +226,23 @@ const Home = () => {
                 </small>
               </button>
               ,
-              //Mappar igenom arrayen av events och sprider ut den i den nya listan
-              ...(context?.ownEvents?.map((e, i) => (
-                <EventCard
-                  onClick={() => navigate(`/event/${e._id}`)}
-                  key={i}
-                  color={e.color}
-                  title={e.title}
-                  start={e.start}
-                  location={e.location}
-                  description={e.description}
-                  layout="portrait"
-                  size="large" />
-              )) || [])
+              //Mappar igenom arrayen av events, 
+              // först: tar bara dom som användaren inte är host till .filter
+              // sen: och sprider ut den i den nya listan .map
+              ...(context?.allEvents?.filter(e => e.ownerUserAuthId !== userId)
+                .map((e, i) => (
+                  <EventCard
+                    key={i}
+                    onClick={() => navigate(`/event/${e._id}`)}
+                    color={e.color}
+                    title={e.title}
+                    start={e.start}
+                    location={e.location}
+                    description={e.description}
+                    layout="portrait"
+                    size="large"
+                  />
+                )) || [])
             ]} />
         </div>
 
