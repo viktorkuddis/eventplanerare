@@ -14,7 +14,8 @@ import { useDbApi } from "../../../api/useDbApi";
 import type { EventType, RequestType, SimplifiedUserType } from "../../../types";
 import { useParams } from "react-router-dom";
 import { AppContext } from "../../../context/AppContext";
-// import { useUser } from '@clerk/clerk-react'; // Importera useUser
+
+
 
 import { useNavigate } from "react-router-dom";
 
@@ -45,7 +46,7 @@ const RequestDetails = () => {
 
     const navigate = useNavigate()
 
-    const { getRequest, getUsersByIdList, updateRequestStatus } = useDbApi();
+    const { getRequest, getUsersByIdList, updateRequestStatus, acceptJoinnEventRequestAndCreateParticipation } = useDbApi();
 
 
     useEffect(() => {
@@ -86,6 +87,7 @@ const RequestDetails = () => {
 
 
     async function handleOnDeclineEventRequest() {
+        console.log("försöker neka....")
         try {
             const updated = await updateRequestStatus(requestObjekt?._id as string, "rejected");
             console.log("Uppdaterad request:", updated);
@@ -94,21 +96,19 @@ const RequestDetails = () => {
             console.error("Kunde inte uppdatera:", err);
         }
 
-        console.log("Nekar")
 
     }
     async function handleOnAcceptEventRequest() {
+        console.log("försöker acceptera.....")
         try {
-            const updated = await updateRequestStatus(requestObjekt?._id as string, "accepted");
+            const updated = await acceptJoinnEventRequestAndCreateParticipation(requestObjekt?._id as string);
             console.log("Uppdaterad request:", updated);
-            setRequestObject(updated)
+            setRequestObject(updated.updatedRequest)
+
+
         } catch (err) {
             console.error("Kunde inte uppdatera:", err);
         }
-
-        console.log("Accepterar")
-
-
     }
 
 
@@ -133,6 +133,9 @@ const RequestDetails = () => {
                                     hour: '2-digit',
                                     minute: '2-digit',
                                 })}</p></small>
+
+
+
 
 
                             {requestObjekt.status == "pending"

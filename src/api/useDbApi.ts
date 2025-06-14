@@ -5,7 +5,7 @@ const apiUrl = import.meta.env.VITE_API_URL;
 
 import { AppContext } from "../context/AppContext";
 import { useContext } from "react";
-import type { EventParticipationType, EventType, NotificationItemType, SimplifiedUserType } from "../types";
+import type { EventParticipationType, EventType, NotificationItemType, RequestType, SimplifiedUserType } from "../types";
 import type { EventObjectsDetailedType } from "../types";
 
 
@@ -73,8 +73,8 @@ export function useDbApi() {
     async function getEventsByUserId(userId: string | null | undefined) {
         try {
             const token = await getToken();
-            // console.log("token:")
-            // console.log(token)
+            console.log("token:")
+            console.log(token)
 
             const response = await axios.get(`${apiUrl}/users/${userId}/events`, {
                 headers: { Authorization: `Bearer ${token}` }
@@ -263,6 +263,53 @@ export function useDbApi() {
     }
 
 
+    async function createEventParticipation(participationData: EventParticipationType) {
+        try {
+            const token = await getToken();
+
+
+            console.log("🙃")
+            const response = await axios.post(`${apiUrl}/eventParticipations`, participationData, {
+                headers: { Authorization: `Bearer ${token}` }
+            });
+
+            console.log(response)
+
+            console.log("EventParticipation skapad:", response.data);
+
+            return response.data;
+        } catch (error) {
+            console.error("Fel vid skapande av EventParticipation:", error);
+            throw error;
+        }
+    }
+
+
+    async function acceptJoinnEventRequestAndCreateParticipation(requestId: string) {
+        try {
+            const token = await getToken();
+
+            const response = await axios.patch(`${apiUrl}/requests/accept/${requestId}`,
+                {}, //tom body
+                {
+                    headers: { Authorization: `Bearer ${token}` }
+                }
+            );
+
+            const data: {
+                message: string;
+                updatedRequest: RequestType;
+                createdEventParticipation: EventParticipationType;
+            } = response.data;
+
+            console.log("Request uppdaterad och patisipationskapad:", data);
+            return data;
+
+        } catch (error) {
+            console.error("Fel när vi försökte acceptera förfrågan :", error);
+            throw error;
+        }
+    }
 
     return {
         createNewEvent,
@@ -273,6 +320,8 @@ export function useDbApi() {
         getNotificationFeedByUserId,
         getRequest,
         getUsersByIdList,
-        updateRequestStatus
+        updateRequestStatus,
+        createEventParticipation,
+        acceptJoinnEventRequestAndCreateParticipation
     };
 }
