@@ -69,6 +69,41 @@ export function useDbApi() {
     }
 
 
+
+    // HÄMTAR ALLA EVENT SOM EN VISS PERSON DALTAR I dvs både som gäst och host 
+    async function getAllParticipatingEventsByUserId(userId: string | null | undefined) {
+        try {
+            const token = await getToken();
+            console.log("token:")
+            console.log(token)
+
+            const response = await axios.get(`${apiUrl}/events/${userId}/all-participating-events`, {
+                headers: { Authorization: `Bearer ${token}` }
+            });
+
+            const allEvents: EventType[] = response.data;
+
+
+            // context?.setOwnEvents(allEvents.filter(e => e.ownerUserAuthId === userId))
+            // console.log("🗓️satte egna event i kontext")
+
+
+            // // Uppdatera alla events i context
+            // context?.setAllEvents(response.data)
+            // console.log("🗓️satte alla events i context")
+
+
+            return allEvents;
+
+        } catch (error) {
+            console.error("Fel vid axios.post:", error);
+            throw error;
+        }
+
+
+    }
+
+
     // HÄMTAR ALLA EVENT SOM TILLHÖR EN SPECIFFIK ANVÄNDARE
     async function getEventsByUserId(userId: string | null | undefined) {
         try {
@@ -92,9 +127,6 @@ export function useDbApi() {
 
                 return [...existingEvents, ...eventsToAdd];
             });
-
-
-
 
 
             // console.log("context ocnEvents Uppdaterad", response.data)
@@ -321,6 +353,7 @@ export function useDbApi() {
         getUsersByIdList,
         updateRequestStatus,
         createEventParticipation,
-        acceptJoinnEventRequestAndCreateParticipation
+        acceptJoinnEventRequestAndCreateParticipation,
+        getAllParticipatingEventsByUserId
     };
 }

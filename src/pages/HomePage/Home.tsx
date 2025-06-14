@@ -43,20 +43,20 @@ const Home = () => {
 
 
 
-  const myEventsContainer = useRef(null);
-  const [myEventsContainerWidth, setMyEventsContainer] = useState<number>()
+  const refContainer = useRef(null);
+  const [refContainerWidth, setrefContainer] = useState<number>()
 
   useEffect(() => {
-    if (!myEventsContainer.current) return;
+    if (!refContainer.current) return;
 
     // skapa lyssnare som kör när storleksförändring upptäcks
     const resizeObserver = new ResizeObserver(([entry]) => {// entry är det observerade elementet.
       // console.log("Bredden är nu:", entry.contentRect.width);
-      setMyEventsContainer(entry.contentRect.width)
+      setrefContainer(entry.contentRect.width)
     });
 
     // pekar på element att börja hala lyssnaren på
-    resizeObserver.observe(myEventsContainer.current);
+    resizeObserver.observe(refContainer.current);
 
     // cleanup:
     return () => resizeObserver.disconnect();
@@ -100,10 +100,20 @@ const Home = () => {
         isOpen={showConnectToEventModal}
         onCloseModal={() => setShowConnectToModal(false)} />
 
-      <main className="content-container-width-wrapper">
+      <main className="content-container-width-wrapper" ref={refContainer}>
+
+
+
+
+
+
 
         <div className={`${styles.rightNowSection}`}>
-          <h2>Pågår just nu</h2>
+
+
+
+
+          <h2 className={`${styles.sectionHeading}`}>Pågår just nu</h2>
           <div className={styles.cardsContainer}>
             {
               // Finns det minst ett aktivt event?
@@ -134,25 +144,17 @@ const Home = () => {
                 )
             }
           </div>
+
+
+
+
         </div>
 
-
-
-
-        <div>
-          <h2>Nästa event</h2>
-        </div>
-
-
-
-
-
-        <div className={`${styles.yourEventsSection}`} ref={myEventsContainer}>
-          <h2 className={`${styles.yourEventsSectionHeading}`}>Dina event</h2>
-          DENNA
-          <br />
+        {/* todo: NEXT EVENT ÄR MENINGEN BARA SKA VISA NÄSTA EVENT AV ALLA EVENT SOM FINNS: */}
+        {/* <div className={`${styles.nextEventsSection}`}>
+          <h2 className={`${styles.sectionHeading}`}>Nästa event</h2>
           <Carousel
-            width={myEventsContainerWidth !== undefined && myEventsContainerWidth < 576 ? 10 : 5}
+            width={refContainerWidth !== undefined && refContainerWidth < 576 ? 10 : 5}
             aspectRatioH={1}
             aspectRatioW={5}
             paddingX={"1rem"}
@@ -193,25 +195,20 @@ const Home = () => {
               )) || [])
             ]}
           />
+        </div> */}
+
+        <div className={`${styles.othersEventsSection}`}>
+          <h2 className={`${styles.sectionHeading}`}>Andras Event</h2>
 
 
-
-
-
-
-          <br />
-
-          <h2 className={`${styles.yourEventsSectionHeading}`}>Dina event</h2>
-
-          <br />
 
           <Carousel
-            width={myEventsContainerWidth !== undefined && myEventsContainerWidth < 576 ? 7 : 4}
+            width={refContainerWidth !== undefined && refContainerWidth < 576 ? 7 : 4}
             aspectRatioH={4}
             aspectRatioW={3}
             paddingX={"1rem"}
             gap={"0.5rem"}
-            firstItemWidth={myEventsContainerWidth !== undefined && myEventsContainerWidth < 576 ? 4 : 2}
+            firstItemWidth={refContainerWidth !== undefined && refContainerWidth < 576 ? 4 : 2}
             items={[
               // första itemet är alltid SKAPAKNAPPEN
 
@@ -242,20 +239,19 @@ const Home = () => {
                   size="large" />
               )) || [])
             ]} />
+        </div>
 
-          <br />
+        <div className={`${styles.yourEventsSection}`}>
+          <h2 className={`${styles.sectionHeading}`}>Dina event</h2>
 
-          <h2 className={`${styles.yourEventsSectionHeading}`}>Dina event</h2>
-
-          <br />
 
           <Carousel
-            width={myEventsContainerWidth !== undefined && myEventsContainerWidth < 576 ? 5 : 3}
+            width={refContainerWidth !== undefined && refContainerWidth < 576 ? 5 : 3}
             aspectRatioH={1}
             aspectRatioW={1}
             paddingX={"1rem"}
             gap={"0.5rem"}
-            firstItemWidth={myEventsContainerWidth !== undefined && myEventsContainerWidth < 576 ? 5 : 3}
+            firstItemWidth={refContainerWidth !== undefined && refContainerWidth < 576 ? 5 : 3}
             items={[
               // första itemet är alltid SKAPAKNAPPEN
               <button style={{
@@ -283,37 +279,7 @@ const Home = () => {
                   size="small" />
               )) || [])
             ]} />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-          <div className={styles.cardsContainer}>
-
-
-
-
-
-          </div>
-        </div >
-
-        <div>
-          <h2>Andras event (ännu mindre kort? sidoscroll)</h2>
-
         </div>
-
-
-
-
 
 
 

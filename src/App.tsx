@@ -31,10 +31,11 @@ import Event from './pages/EventPage/Event'
 import NoPage from "./pages/NoPage";
 import Style from "./pages/style";
 import { SignedIn, SignedOut, useAuth } from "@clerk/clerk-react";
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 // import type { EventType } from "./types";
 import { useDbApi } from "./api/useDbApi";
 
+import { AppContext } from "./context/AppContext";
 import ScrollToTop from "./utils/ScrollToTop";
 /* 
 LITE CLERKDOKUMENTATION:
@@ -62,9 +63,10 @@ LITE CLERKDOKUMENTATION:
 
 export default function App() {
 
+  const context = useContext(AppContext)
 
   const { userId } = useAuth();
-  const { getNotificationFeedByUserId, getEventsByUserId } = useDbApi();
+  const { getNotificationFeedByUserId, getAllParticipatingEventsByUserId } = useDbApi();
 
 
   // state som berättar om kage är visible så man kan pausa pollingen 
@@ -81,7 +83,12 @@ export default function App() {
 
       (async () => {
         try {
-          await getEventsByUserId(userId);
+          const allEvents = await getAllParticipatingEventsByUserId(userId);
+          context?.setOwnEvents(allEvents.filter(e => e.ownerUserAuthId === userId))
+          console.log("🗓️satte egna event i kontext")
+          // Uppdatera alla events i context
+          context?.setAllEvents(allEvents)
+          console.log("🗓️satte alla events i context")
 
         } catch (error) {
           console.error(error);
