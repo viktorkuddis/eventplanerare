@@ -150,8 +150,8 @@ const EventLayout = ({ children }: Props) => {
 
                         style={{
                             background: backgroundColor,
-                            border: "1px solid green",
-                        }}>hej</div>
+
+                        }}></div>
                 </div >
             </div >
 
