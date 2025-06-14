@@ -15,7 +15,7 @@ import { useDbApi } from "../../src/api/useDbApi";
 import { textColorMixVibrant, backgroundColorMixLight } from "../../src/utils/colorMix.utils";
 
 
-// TODO: SE TILL ATT LETA I DATABASEN SÅ ATT USER ID FINNS MED EN PACPISITPANT så att vi har access att hämta allt som detta eventet asosieras med. vi kan göra de i rutten där vi ber om hela eventdetails.  just nu gör vi inte detta.
+
 
 type Props = {
     children?: ReactNode;
@@ -24,11 +24,10 @@ const EventLayout = ({ children }: Props) => {
 
     const { eventId } = useParams();
 
-    console.log(eventId)
+    console.log("eventid:", eventId)
 
     const context = useContext(AppContext)
 
-    console.log(context?.currentEventObject)
 
     const navigate = useNavigate()
     const { getEventDetailsById } = useDbApi();
@@ -74,6 +73,9 @@ const EventLayout = ({ children }: Props) => {
 
     return (
         <>
+
+
+
             <div className={styles.backdrop} style={{
                 backgroundColor: backgroundColor
             }}>

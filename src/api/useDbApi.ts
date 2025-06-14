@@ -157,6 +157,7 @@ export function useDbApi() {
             context?.setCurrentEventObjectsDetailed(eventDetail);
             console.log("satt currentEventObjectsDetailed till:", eventDetail)
 
+            // sparar detaljerade eventobjekt så de snabbarde går att visa nå :) 
             context?.setEventObjectsDetailed(prev => {
                 const exists = prev?.some(e => e.event._id === eventDetail.event._id);
                 if (exists) {

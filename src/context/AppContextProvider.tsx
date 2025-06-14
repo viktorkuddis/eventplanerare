@@ -6,7 +6,6 @@ export const AppContextProvider = ({ children }: { children: ReactNode }) => {
 
 
     // de event som användaren just ju interagerar med.
-    const [currentEventObject, setCurrentEventObject] = useState<EventType | null>(null);
 
     const [ownEvents, setOwnEvents] = useState<EventType[]>([]);
 
@@ -35,8 +34,6 @@ export const AppContextProvider = ({ children }: { children: ReactNode }) => {
     const contextValue: AppContextType = {
         ownEvents,
         setOwnEvents,
-        currentEventObject,
-        setCurrentEventObject,
         allEvents,
         setAllEvents,
         currentEventObjectDetailed,

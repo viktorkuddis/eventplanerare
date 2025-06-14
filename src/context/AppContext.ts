@@ -12,8 +12,6 @@ export type AppContextType = {
     eventObjectsDetailed: EventObjectsDetailedType[];
     setEventObjectsDetailed: React.Dispatch<React.SetStateAction<EventObjectsDetailedType[]>>;
 
-    currentEventObject: EventType | null;
-    setCurrentEventObject: React.Dispatch<React.SetStateAction<EventType | null>>
 
     allEvents: EventType[];
     setAllEvents: React.Dispatch<React.SetStateAction<EventType[]>>

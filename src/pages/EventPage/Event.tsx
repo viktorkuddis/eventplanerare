@@ -72,7 +72,22 @@ const Event = () => {
           <EventInformation />
         </div>
 
+        <div>
+          {context?.currentEventObjectDetailed?.eventActivities.map((item) => <>
+            <div style={{
+              backgroundColor: context?.currentEventObjectDetailed?.event.color,
+              color: "white",
+              borderRadius: "0.25rem",
+              padding: "0.5rem",
+              margin: "1rem",
+              border: "1px, solid white"
+            }}>
+              <small>{item.startTime.toString()} - {item.endTime?.toString()}</small>
+              <h3>{item.title}</h3>
+              <p>{item.description}</p></div>
+          </>)}
 
+        </div>
 
 
 
