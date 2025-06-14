@@ -122,27 +122,36 @@ const EventLayout = ({ children }: Props) => {
                         {children}
 
 
-                        <div className={styles.buttonGroup}
 
-                            style={{
-                                background: `linear-gradient(to top, ${backgroundColor} 50%, transparent 100%)`,
-
-                                width: "100%"
-                            }}
-
-                        >
-
-
-                            <button className="btn-medium btn-filled-light-static">
-                                <Users size={"1rem"} /> <span>Gruppaktivitet</span>
-                            </button>
-                            <button className="btn-medium btn-filled-primary">
-                                <User size={"1rem"} /> <span>Egen aktivitet</span>
-                            </button>
-
-                        </div>
 
                     </main>
+                    <div className={styles.buttonGroup}
+
+                        style={{
+                            background: `linear-gradient(to top, ${backgroundColor} 50%, transparent 100%)`,
+
+                            width: "100%"
+                        }}
+
+                    >
+
+
+                        <button className="btn-medium btn-filled-light-static">
+                            <Users size={"1rem"} /> <span>Gruppaktivitet</span>
+                        </button>
+                        <button className="btn-medium btn-filled-primary">
+                            <User size={"1rem"} /> <span>Egen aktivitet</span>
+                        </button>
+
+
+                    </div>
+                    {/* Denna backdrop läggs längst bak i dokumentet för att uundvika att användaren skrollar bram bodyn som är av annan färg på mobila enheter */}
+                    <div className={styles.buttonGroupBackDrop}
+
+                        style={{
+                            background: backgroundColor,
+                            border: "1px solid green",
+                        }}>hej</div>
                 </div >
             </div >
 

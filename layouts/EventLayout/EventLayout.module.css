@@ -127,7 +127,6 @@
     padding-bottom: 2rem;
     /* background-color: aquamarine; */
 
-
     position: fixed;
     bottom: 0
 }
@@ -152,5 +151,17 @@
     }
 
     border: 1px solid color-mix(in srgb, var(--brand-color-base) 20%, transparent 80%);
+
+}
+
+
+/* Denna backdrop läggs längst bak i dokumentet för att uundvika att användaren skrollar bram bodyn som är av annan färg på mobila enheter */
+
+.buttonGroupBackDrop {
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    height: 25svh;
+    z-index: -999;
 
 }
