@@ -2,7 +2,7 @@
 
 
 import styles from "./EventLayout.module.css"
-import { useContext, useEffect, type ReactNode } from 'react';
+import { useContext, useEffect, useState, type ReactNode } from 'react';
 import { useNavigate } from "react-router-dom";
 
 import { Home, Info, Settings, User, Users, Plus } from "react-feather";
@@ -14,7 +14,7 @@ import { useDbApi } from "../../src/api/useDbApi";
 
 import { textColorMixVibrant, backgroundColorMixLight } from "../../src/utils/colorMix.utils";
 
-
+import AddNewPersonalActivityModal from "../../src/components/Organisms/AddNewPersonalActivityForm/AddNewPersonalActivityModal";
 
 
 type Props = {
@@ -70,9 +70,19 @@ const EventLayout = ({ children }: Props) => {
 
 
 
+    const [createPersonalActivityModalIsOpen, setCreatePersonalActivityModalIsOpen] = useState(false)
+
+
+
 
     return (
         <>
+
+            <AddNewPersonalActivityModal
+                isOpen={createPersonalActivityModalIsOpen}
+                onClose={() => setCreatePersonalActivityModalIsOpen(false)} />
+
+
 
 
 
@@ -143,7 +153,7 @@ const EventLayout = ({ children }: Props) => {
                                 <button className="btn-medium btn-filled-light-static">
                                     <Plus size={"1rem"} /><Users size={"1rem"} /> <p>Gruppaktivitet</p>
                                 </button>
-                                <button className="btn-medium btn-filled-primary">
+                                <button className="btn-medium btn-filled-primary" onClick={() => setCreatePersonalActivityModalIsOpen(true)}>
                                     <Plus size={"1rem"} /><User size={"1rem"} /><p>Egen aktivitet</p>
                                 </button>
 

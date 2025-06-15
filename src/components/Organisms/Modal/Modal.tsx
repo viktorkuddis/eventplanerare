@@ -17,7 +17,7 @@ interface ModalProps {
 
 // ***** INSTRUKTIONER *****
 // *** - Man hanterar denna modalen utifrån med ett state *isOpen* (bolean)
-// *** - onCloseModal är funktonen som bör sätta statet till False (och eventuellt annat som ska ske vid stängning).
+// *** - onCloseModal är funktonen som bör sätta statet till False (och eventuellt annat som ska ske utifrån vid stängning).
 // ***
 // ***  [Info:]
 // ***   Drawer är bara drawer i mobil-breakpoint.

@@ -1,0 +1,36 @@
+.contentContainer {
+    padding-bottom: 1rem;
+}
+
+
+.inputGroup {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.whenSection {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+    align-items: center;
+    padding-bottom: 0.5rem;
+
+    button {
+        padding: 0.25rem 0.5rem;
+    }
+}
+
+.timeSection {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem
+}
+
+.footer {
+
+    display: flex;
+    gap: 0.5rem;
+    justify-content: flex-end;
+    width: 100%;
+}
