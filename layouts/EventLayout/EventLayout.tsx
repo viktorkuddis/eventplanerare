@@ -126,35 +126,39 @@ const EventLayout = ({ children }: Props) => {
 
                     </main>
 
-
-                    <div className={`${styles.buttonGroup} content-container-width-wrapper`}
-
-
-                        style={{
-                            background: `linear-gradient(to top, ${backgroundColor} 50%, transparent 100%)`,
-
-                            width: "100%"
-                        }}
-
-                    >
+                    {context?.currentEventObjectDetailed &&
+                        <>
+                            <div className={`${styles.buttonGroup} content-container-width-wrapper`}
 
 
-                        <button className="btn-medium btn-filled-light-static">
-                            <Plus size={"1rem"} /><Users size={"1rem"} /> <p>Gruppaktivitet</p>
-                        </button>
-                        <button className="btn-medium btn-filled-primary">
-                            <Plus size={"1rem"} /><User size={"1rem"} /><p>Egen aktivitet</p>
-                        </button>
+                                style={{
+                                    background: `linear-gradient(to top, ${backgroundColor} 50%, transparent 100%)`,
+
+                                    width: "100%"
+                                }}
+
+                            >
 
 
-                    </div>
-                    {/* Denna backdrop läggs längst bak i dokumentet för att uundvika att användaren skrollar bram bodyn som är av annan färg på mobila enheter */}
-                    <div className={styles.buttonGroupBackDrop}
+                                <button className="btn-medium btn-filled-light-static">
+                                    <Plus size={"1rem"} /><Users size={"1rem"} /> <p>Gruppaktivitet</p>
+                                </button>
+                                <button className="btn-medium btn-filled-primary">
+                                    <Plus size={"1rem"} /><User size={"1rem"} /><p>Egen aktivitet</p>
+                                </button>
 
-                        style={{
-                            background: backgroundColor,
 
-                        }}></div>
+                            </div>
+                            {/* Denna backdrop läggs längst bak i dokumentet för att uundvika att användaren skrollar bram bodyn som är av annan färg på mobila enheter */}
+                            <div className={styles.buttonGroupBackDrop}
+
+                                style={{
+                                    background: backgroundColor,
+
+                                }}></div></>
+
+                    }
+
 
                 </div>
             </div >
