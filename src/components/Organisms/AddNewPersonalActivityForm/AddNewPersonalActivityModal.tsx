@@ -105,6 +105,14 @@ const AddNewPersonalActivityModal = ({ isOpen, onClose, mode, existingActivity }
             alert(" Nu gick det fel. det behövs minst titel och start för att kunna skapa den här aktiviteten")
             return;
         }
+
+        // Om endDate eller endTime är ifyllda men inte båda:
+        if ((endDate && !endTime) || (!endDate && endTime)) {
+            alert(`👀 KOLLA SLUTTIDEN ! 
+Om du vill sätta en sluttid måste både datum och tid fyllas i.`);
+            return;
+        }
+
         const newActivity: PersonalActivityType = {
             ownerUserAuthId: userId as string,
             eventId: context?.currentEventObjectDetailed?.event._id as string,                 // eller något som passar din logik

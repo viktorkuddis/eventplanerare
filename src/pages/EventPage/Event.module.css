@@ -58,3 +58,25 @@
     border: 1px solid color-mix(in srgb, var(--brand-color-base) 20%, transparent 80%);
 
 }
+
+.personalActivityRow {
+    /* background-color: rgba(0, 255, 255, 0.13); */
+    line-height: normal;
+    padding: 0.5rem 2rem;
+    /* margin: 0.5rem; */
+
+
+
+    .dateSpan {
+        display: inline-block;
+        /* background-color: antiquewhite; */
+        min-width: 2.5rem;
+        margin-right: 0.25rem
+    }
+
+
+
+
+
+
+}

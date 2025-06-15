@@ -52,6 +52,13 @@ const Event = () => {
     )
   }
 
+  function getUserNameFromUserID(userId: string) {
+    const participantion = context?.currentEventObjectDetailed?.eventParticipationsEnriched.find(
+      (partisipation) => partisipation?.userId === userId
+    );
+
+    return participantion?.user.username;
+  }
 
   if (timoeIsOut == true && isLoading == true) {
     return (
@@ -73,6 +80,39 @@ const Event = () => {
         </div>
 
         <div>
+          {context?.currentEventObjectDetailed?.personalActivities.map((item) => <>
+            <div className={`content-container-width-wrapper ${styles.personalActivityRow}`}>
+              <small >
+                <span className={`${styles.dateSpan}`}>
+                  {new Date(item.startTime).toTimeString().slice(0, 5)}
+                  {item.endTime && (
+                    <>
+                      {" - "}
+                      {/* om annan dag: */}
+                      {new Date(item.startTime).toDateString() !== new Date(item.endTime).toDateString() &&
+                        new Date(item.endTime).toLocaleDateString("sv-SE", {
+                          day: "2-digit",
+                          month: "short",
+                        }) + " "}
+                      {/* tiden */}
+                      {new Date(item.endTime).toTimeString().slice(0, 5)}
+                    </>
+                  )}
+                </span>
+                <br />
+                <span >
+                  <strong>@{getUserNameFromUserID(item.ownerUserAuthId)}</strong> ska <i>{item.title}</i>
+                </span>
+              </small>
+            </div>
+
+
+
+
+
+          </>)}
+
+
           {context?.currentEventObjectDetailed?.eventActivities.map((item) => <>
             <div style={{
               backgroundColor: context?.currentEventObjectDetailed?.event.color,
