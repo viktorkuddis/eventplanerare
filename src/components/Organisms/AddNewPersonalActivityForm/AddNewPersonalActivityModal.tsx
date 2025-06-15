@@ -264,13 +264,13 @@ Om du vill sätta en sluttid måste både datum och tid fyllas i.`);
                         </div>
 
                     </div>
-                    <div className={`${styles.inputGroup}`}>
+                    {/* <div className={`${styles.inputGroup}`}>
                         <label>extra info</label>
                         <textarea
                             value={extraInfo}
                             onChange={(e) => setExtraInfo(e.target.value)}
                         ></textarea>
-                    </div>
+                    </div> */}
 
 
 
