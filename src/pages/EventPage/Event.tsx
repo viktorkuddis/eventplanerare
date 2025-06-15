@@ -101,7 +101,7 @@ const Event = () => {
                       </>
                     )}
                   </span></small>
-                <br />
+
                 <span >
                   <strong>@{getUserNameFromUserID(item.ownerUserAuthId)}</strong> ska <i>{item.title}</i>
                 </span>
