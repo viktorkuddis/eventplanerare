@@ -1,7 +1,7 @@
 
 
 
-import styles from "./EventLayout.module.css";
+import styles from "./EventLayout.module.css"
 import { useContext, useEffect, type ReactNode } from 'react';
 import { useNavigate } from "react-router-dom";
 
@@ -125,7 +125,10 @@ const EventLayout = ({ children }: Props) => {
 
 
                     </main>
-                    <div className={styles.buttonGroup}
+
+
+                    <div className={`${styles.buttonGroup} content-container-width-wrapper`}
+
 
                         style={{
                             background: `linear-gradient(to top, ${backgroundColor} 50%, transparent 100%)`,
@@ -152,7 +155,8 @@ const EventLayout = ({ children }: Props) => {
                             background: backgroundColor,
 
                         }}></div>
-                </div >
+
+                </div>
             </div >
 
 

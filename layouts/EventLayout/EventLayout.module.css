@@ -119,6 +119,9 @@
 
 
 .buttonGroup {
+
+
+
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     /* exakt två kolumner */
@@ -128,7 +131,9 @@
     /* background-color: aquamarine; */
 
     position: fixed;
-    bottom: 0
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .buttonGroup button {
@@ -136,7 +141,6 @@
     /* hindra radbrytning i knappen */
     text-align: center;
     overflow: hidden;
-
 
     border: 1px solid color-mix(in srgb, var(--brand-color-base) 20%, transparent 80%);
 
