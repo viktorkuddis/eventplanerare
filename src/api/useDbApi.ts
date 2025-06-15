@@ -343,6 +343,29 @@ export function useDbApi() {
         }
     }
 
+
+
+
+    async function createNewPersonalActivity(requestData: object) {
+        try {
+            console.log("Försöker skicka detta:", requestData);
+
+            const token = await getToken();
+
+            const response = await axios.post(`${apiUrl}/personalactivity/create`, requestData, {
+                headers: { Authorization: `Bearer ${token}` }
+            });
+
+            console.log("Förfrågan skickad:", response.data);
+
+            return response.data;
+
+        } catch (error) {
+            console.error("Fel vid skickande av förfrågan:", error); // Om något gick fel
+            throw error; // Skicka vidare felet
+        }
+    }
+
     return {
         createNewEvent,
         getEventsByUserId,
@@ -355,6 +378,7 @@ export function useDbApi() {
         updateRequestStatus,
         createEventParticipation,
         acceptJoinnEventRequestAndCreateParticipation,
-        getAllParticipatingEventsByUserId
+        getAllParticipatingEventsByUserId,
+        createNewPersonalActivity
     };
 }

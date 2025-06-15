@@ -80,7 +80,9 @@ const EventLayout = ({ children }: Props) => {
 
             <AddNewPersonalActivityModal
                 isOpen={createPersonalActivityModalIsOpen}
-                onClose={() => setCreatePersonalActivityModalIsOpen(false)} />
+                onClose={() => setCreatePersonalActivityModalIsOpen(false)}
+                mode={"create"}
+                existingActivity={null} />
 
 
 

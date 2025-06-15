@@ -1,10 +1,13 @@
 
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Modal from "../Modal/Modal"
 
 import styles from "./AddNewPersonalActivityModal.module.css"
 
-
+import { useDbApi } from "../../../api/useDbApi";
+import type { PersonalActivityType } from "../../../types";
+import { useAuth } from "@clerk/clerk-react";
+import { AppContext } from "../../../context/AppContext";
 
 const getTodayDate = () => {
     const today = new Date();
@@ -19,10 +22,55 @@ const getTomorrowDate = () => {
 
 
 
+type Props = {
+    isOpen: boolean;
+    onClose: () => void;
+    mode: "edit" | "create";
+    existingActivity: PersonalActivityType | null;
+};
 
-const AddNewPersonalActivityModal = ({ isOpen, onClose }: { isOpen: boolean, onClose: () => void }) => {
+
+const AddNewPersonalActivityModal = ({ isOpen, onClose, mode, existingActivity }: Props) => {
 
 
+    const { userId } = useAuth();
+
+    const { createNewPersonalActivity } = useDbApi()
+
+    const context = useContext(AppContext)
+
+
+
+    useEffect(() => {
+
+        // sätter states beroende på om vi är i create eller edit mode:
+        // om edit:
+        if (mode === "edit" && existingActivity && isOpen) {
+            setTitle(existingActivity.title);
+            setExtraInfo(existingActivity.description || "");
+            setStartDate(existingActivity.startTime.toISOString().split("T")[0]);
+            setStartTime(existingActivity.startTime.toISOString().split("T")[1].slice(0, 5));
+
+            if (existingActivity.endTime) {
+                setEndDate(existingActivity.endTime.toISOString().split("T")[0]);
+                setEndTime(existingActivity.endTime.toISOString().split("T")[1].slice(0, 5));
+            } else {
+                setEndDate("");
+                setEndTime("");
+            }
+        }
+
+        // om skapa
+        if (mode === "create" && isOpen) {
+            // Nollställ fälten när man öppnar för nytt
+            setTitle("");
+            setExtraInfo("");
+            setStartDate("");
+            setStartTime("");
+            setEndDate("");
+            setEndTime("");
+        }
+    }, [mode, existingActivity, isOpen]);
 
 
 
@@ -33,6 +81,9 @@ const AddNewPersonalActivityModal = ({ isOpen, onClose }: { isOpen: boolean, onC
     const [endTime, setEndTime] = useState("");
     const [extraInfo, setExtraInfo] = useState("");
 
+
+    const eventStartDate = context?.currentEventObjectDetailed?.event.start && new Date(context?.currentEventObjectDetailed?.event.start);
+    const eventEndDate = context?.currentEventObjectDetailed?.event.end && new Date(context?.currentEventObjectDetailed?.event.end);
 
 
     const handleCancel = () => {
@@ -46,16 +97,56 @@ const AddNewPersonalActivityModal = ({ isOpen, onClose }: { isOpen: boolean, onC
         onClose();
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
 
         e.preventDefault()
 
-        setTitle("");
-        setStartDate("");
-        setStartTime("");
-        setEndDate("");
-        setEndTime("");
-        setExtraInfo("");
+        if (!title || !startDate || !startTime) {
+            alert(" Nu gick det fel. det behövs minst titel och start för att kunna skapa den här aktiviteten")
+            return;
+        }
+        const newActivity: PersonalActivityType = {
+            ownerUserAuthId: userId as string,
+            eventId: context?.currentEventObjectDetailed?.event._id as string,                 // eller något som passar din logik
+            title: title,
+            description: extraInfo,
+            startTime: new Date(`${startDate}T${startTime}`),
+            endTime: endDate && endTime ? new Date(`${endDate}T${endTime}`) : undefined,
+        };
+
+        if (newActivity.endTime && newActivity.endTime < newActivity.startTime) {
+            alert("Sluttiden kan inte vara före starttiden 🙃");
+            return;
+        }
+
+        // Kontrollera att aktiviteten startar och slutar inom evenemangets tidsram
+        if (
+            (eventStartDate && newActivity.startTime < eventStartDate) ||
+            (eventEndDate && newActivity.endTime && newActivity.endTime > eventEndDate)
+        ) {
+            alert("oops. är du säker på att din aktivitet håller sig inom evenemangets tidsram?");
+            return;
+        }
+
+
+
+
+        try {
+            // databasanrop beroende på mode:
+            if (mode == "edit") {
+                // const successData = await updatePersonalActivity(newActivity);
+                // console.log("skapade", successData)
+            } else if (mode == "create") {
+                const successData = await createNewPersonalActivity(newActivity);
+                console.log("ändrade till detta:", successData)
+            }
+
+            handleCancel();
+
+        } catch (error) {
+            console.error("Fel :", error);
+            alert("Något gick fel. försök igen 🤔");
+        }
 
 
         onClose();
@@ -66,20 +157,19 @@ const AddNewPersonalActivityModal = ({ isOpen, onClose }: { isOpen: boolean, onC
 
 
         <Modal isOpen={isOpen}
-
+            title={mode == "create" ? "Lägg till egen aktivitet" : "Ändra egen aktivitet"}
+            onCloseModal={onClose}
+            type={"drawer"}
+            size={"small"}
             footerContent={<div className={`${styles.footer}`}>
                 <button type="button" className="btn-medium btn-outlined-primary" onClick={handleCancel}
                 >
                     Avbryt
                 </button>
                 <button type="submit" form="add-activity-form" className="btn-medium btn-filled-primary">
-                    Skapa
+                    {mode == "create" ? "Skapa" : "Ändra"}
                 </button>
-            </div>}
-            title={"Lägg till egen aktivitet"}
-            onCloseModal={onClose}
-            type={"drawer"}
-            size={"small"}>
+            </div>}>
 
             <div className={`${styles.contentContainer}`}>
                 <form id="add-activity-form" onSubmit={handleSubmit}
@@ -119,6 +209,8 @@ const AddNewPersonalActivityModal = ({ isOpen, onClose }: { isOpen: boolean, onC
                                 type="date"
                                 required
                                 value={startDate}
+                                min={eventStartDate?.toISOString().split("T")[0]}
+                                max={eventEndDate?.toISOString().split("T")[0]}
                                 onChange={(e) => setStartDate(e.target.value)}
                             />
                             <input
@@ -152,6 +244,8 @@ const AddNewPersonalActivityModal = ({ isOpen, onClose }: { isOpen: boolean, onC
                             <input
                                 type="date"
                                 value={endDate}
+                                min={eventStartDate?.toISOString().split("T")[0]}
+                                max={eventEndDate?.toISOString().split("T")[0]}
                                 onChange={(e) => setEndDate(e.target.value)}
                             />
                             <input
