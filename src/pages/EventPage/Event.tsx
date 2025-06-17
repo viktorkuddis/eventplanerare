@@ -11,10 +11,16 @@ import EventInformation from "../../components/molecules/EvenInformation/EventIn
 
 import styles from "./Event.module.css";
 
+import AddNewPersonalActivityModal from "../../components/Organisms/AddNewPersonalActivityForm/AddNewPersonalActivityModal";
+import type { PersonalActivityType } from "../../types";
+import { useAuth } from "@clerk/clerk-react";
+
 
 
 
 const Event = () => {
+
+  const { userId } = useAuth();
 
   const { eventId } = useParams();
 
@@ -23,6 +29,10 @@ const Event = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   const [timoeIsOut, setTimeIsOut] = useState(false);
+
+
+  const [showEditPersonalActivityModal, setshowEditPersonalActivityModal] = useState(false)
+  const [personalActivityToEdit, setPersonalActivityToEdit] = useState<PersonalActivityType | null>(null)
 
   useEffect(() => {
 
@@ -75,6 +85,13 @@ const Event = () => {
     return (
       <div className={`content-container-width-wrapper ${styles.contentContainer}`}>
 
+        <AddNewPersonalActivityModal
+          isOpen={showEditPersonalActivityModal}
+          onClose={() => setshowEditPersonalActivityModal(false)}
+          mode={"edit"}
+          existingActivity={personalActivityToEdit} />
+
+
         {/* <hr /> */}
         <div className={`content-container-width-wrapper ${styles.eventInfoSection}`}>
           <EventInformation />
@@ -109,9 +126,14 @@ const Event = () => {
                   <strong>@{getUserNameFromUserID(item.ownerUserAuthId)}</strong> ska <i>{item.title}</i>
                 </span>
               </small>
-              <button className={`${styles.personalActivityEditButton}`}>
+              {userId == item.ownerUserAuthId && <button className={`${styles.personalActivityEditButton}`}
+                onClick={() => {
+                  setPersonalActivityToEdit(item)
+                  setshowEditPersonalActivityModal(true)
+                }}>
                 <Edit3 size={"1rem"} />
-              </button>
+              </button>}
+
 
             </div>
 

@@ -48,12 +48,12 @@ const AddNewPersonalActivityModal = ({ isOpen, onClose, mode, existingActivity }
         if (mode === "edit" && existingActivity && isOpen) {
             setTitle(existingActivity.title);
             setExtraInfo(existingActivity.description || "");
-            setStartDate(existingActivity.startTime.toISOString().split("T")[0]);
-            setStartTime(existingActivity.startTime.toISOString().split("T")[1].slice(0, 5));
+            setStartDate(new Date(existingActivity.startTime).toISOString().split("T")[0]);
+            setStartTime(new Date(existingActivity.startTime).toISOString().split("T")[1].slice(0, 5));
 
             if (existingActivity.endTime) {
-                setEndDate(existingActivity.endTime.toISOString().split("T")[0]);
-                setEndTime(existingActivity.endTime.toISOString().split("T")[1].slice(0, 5));
+                setEndDate(new Date(existingActivity.endTime).toISOString().split("T")[0]);
+                setEndTime(new Date(existingActivity.endTime).toISOString().split("T")[1].slice(0, 5));
             } else {
                 setEndDate("");
                 setEndTime("");
