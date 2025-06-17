@@ -366,6 +366,27 @@ export function useDbApi() {
         }
     }
 
+    async function updatePersonalActivity(id: string, updateData: object) {
+        try {
+            console.log("Försöker uppdatera personal activity med data:", updateData);
+
+            const token = await getToken();
+
+            const response = await axios.put(`${apiUrl}/personalactivity/${id}`, updateData, {
+                headers: { Authorization: `Bearer ${token}` }
+            });
+
+            console.log("Uppdatering skickad:", response.data);
+
+            return response.data;
+
+        } catch (error) {
+            console.error("Fel vid uppdatering av personal activity:", error);
+            throw error;
+        }
+    }
+
+
     return {
         createNewEvent,
         getEventsByUserId,
@@ -379,6 +400,7 @@ export function useDbApi() {
         createEventParticipation,
         acceptJoinnEventRequestAndCreateParticipation,
         getAllParticipatingEventsByUserId,
-        createNewPersonalActivity
+        createNewPersonalActivity,
+        updatePersonalActivity
     };
 }

@@ -100,8 +100,8 @@ const Event = () => {
 
         {/* detta är personal aktivitet rad. */}
         <div>
-          {context?.currentEventObjectDetailed?.personalActivities.map((item) => <>
-            <div className={`content-container-width-wrapper ${styles.personalActivityRow}`}>
+          {context?.currentEventObjectDetailed?.personalActivities.map((item, i) =>
+            <div key={i} className={`content-container-width-wrapper ${styles.personalActivityRow}`}>
               <small >
                 <small>
                   <span className={`${styles.dateSpan}`}>
@@ -141,11 +141,11 @@ const Event = () => {
 
 
 
-          </>)}
+          )}
 
 
-          {context?.currentEventObjectDetailed?.eventActivities.map((item) => <>
-            <div style={{
+          {context?.currentEventObjectDetailed?.eventActivities.map((item, i) =>
+            <div key={i} style={{
               backgroundColor: context?.currentEventObjectDetailed?.event.color,
               color: "white",
               borderRadius: "0.25rem",
@@ -156,7 +156,7 @@ const Event = () => {
               <small>{item.startTime.toString()} - {item.endTime?.toString()}</small>
               <h3>{item.title}</h3>
               <p>{item.description}</p></div>
-          </>)}
+          )}
 
         </div>
 
