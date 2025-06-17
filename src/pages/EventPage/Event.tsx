@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../../context/AppContext";
 
+import { Edit2, Edit3 } from "react-feather";
 
 import { DotLoader } from "react-spinners";
 
@@ -79,12 +80,13 @@ const Event = () => {
           <EventInformation />
         </div>
 
+
+        {/* detta är personal aktivitet rad. */}
         <div>
           {context?.currentEventObjectDetailed?.personalActivities.map((item) => <>
             <div className={`content-container-width-wrapper ${styles.personalActivityRow}`}>
               <small >
                 <small>
-
                   <span className={`${styles.dateSpan}`}>
                     {new Date(item.startTime).toTimeString().slice(0, 5)}
                     {item.endTime && (
@@ -100,12 +102,17 @@ const Event = () => {
                         {new Date(item.endTime).toTimeString().slice(0, 5)}
                       </>
                     )}
-                  </span></small>
+                  </span>
+                </small>
 
                 <span >
                   <strong>@{getUserNameFromUserID(item.ownerUserAuthId)}</strong> ska <i>{item.title}</i>
                 </span>
               </small>
+              <button className={`${styles.personalActivityEditButton}`}>
+                <Edit3 size={"1rem"} />
+              </button>
+
             </div>
 
 

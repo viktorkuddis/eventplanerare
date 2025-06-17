@@ -65,6 +65,11 @@
     padding: 0.5rem 2rem;
     /* margin: 0.5rem; */
 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+
 
 
     .dateSpan {
@@ -75,8 +80,19 @@
     }
 
 
+    .personalActivityEditButton {
 
+        min-height: 24px;
+        aspect-ratio: 1/1;
+        display: grid;
+        place-items: center;
+        transform: translate(1rem);
+        cursor: pointer;
+        border-radius: 0.25rem;
 
-
+        &:hover {
+            background-color: rgba(128, 128, 128, 0.1);
+        }
+    }
 
 }
