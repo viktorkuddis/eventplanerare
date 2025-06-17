@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../../context/AppContext";
 
-import { Edit2, Edit3 } from "react-feather";
+import { Edit3 } from "react-feather";
 
 import { DotLoader } from "react-spinners";
 
