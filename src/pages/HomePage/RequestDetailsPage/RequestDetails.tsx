@@ -125,7 +125,7 @@ const RequestDetails = () => {
 
                         requestObjekt?.intention == "joinEvent" &&
                         <>
-                            <p><strong>@{fromUser?.username}</strong> vill ansluta till ditt event <strong>@{actualEvent?.title}</strong> </p>
+                            <p><strong>@{fromUser?.username}</strong> vill ansluta till ditt event <strong>{actualEvent?.title}</strong> </p>
                             <small>
                                 <p>{new Date(requestObjekt.createdAt as string).toLocaleString('sv-SE', {
                                     day: 'numeric',
