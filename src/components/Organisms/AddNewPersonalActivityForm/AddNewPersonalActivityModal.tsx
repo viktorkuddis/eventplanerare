@@ -1,5 +1,5 @@
 
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import Modal from "../Modal/Modal"
 
 import styles from "./AddNewPersonalActivityModal.module.css"
@@ -25,12 +25,10 @@ const getTomorrowDate = () => {
 type Props = {
     isOpen: boolean;
     onClose: () => void;
-    mode: "edit" | "create";
-    existingActivity: PersonalActivityType | null;
 };
 
 
-const AddNewPersonalActivityModal = ({ isOpen, onClose, mode, existingActivity }: Props) => {
+const AddNewPersonalActivityModal = ({ isOpen, onClose, }: Props) => {
 
 
     const { userId } = useAuth();
@@ -41,37 +39,11 @@ const AddNewPersonalActivityModal = ({ isOpen, onClose, mode, existingActivity }
 
 
 
-    useEffect(() => {
 
-        // sätter states beroende på om vi är i create eller edit mode:
-        // om edit:
-        if (mode === "edit" && existingActivity && isOpen) {
-            setTitle(existingActivity.title);
-            setExtraInfo(existingActivity.description || "");
-            setStartDate(new Date(existingActivity.startTime).toISOString().split("T")[0]);
-            setStartTime(new Date(existingActivity.startTime).toISOString().split("T")[1].slice(0, 5));
 
-            if (existingActivity.endTime) {
-                setEndDate(new Date(existingActivity.endTime).toISOString().split("T")[0]);
-                setEndTime(new Date(existingActivity.endTime).toISOString().split("T")[1].slice(0, 5));
-            } else {
-                setEndDate("");
-                setEndTime("");
-            }
-        }
 
-        // om skapa
-        if (mode === "create" && isOpen) {
-            // Nollställ fälten när man öppnar för nytt
-            setTitle("");
-            setExtraInfo("");
-            setStartDate("");
-            setStartTime("");
-            setEndDate("");
-            setEndTime("");
-        }
-    }, [mode, existingActivity, isOpen]);
-
+    const eventStartDate = context?.currentEventObjectDetailed?.event.start && new Date(context?.currentEventObjectDetailed?.event.start);
+    const eventEndDate = context?.currentEventObjectDetailed?.event.end && new Date(context?.currentEventObjectDetailed?.event.end);
 
 
     const [title, setTitle] = useState("");
@@ -80,11 +52,6 @@ const AddNewPersonalActivityModal = ({ isOpen, onClose, mode, existingActivity }
     const [endDate, setEndDate] = useState("");
     const [endTime, setEndTime] = useState("");
     const [extraInfo, setExtraInfo] = useState("");
-
-
-    const eventStartDate = context?.currentEventObjectDetailed?.event.start && new Date(context?.currentEventObjectDetailed?.event.start);
-    const eventEndDate = context?.currentEventObjectDetailed?.event.end && new Date(context?.currentEventObjectDetailed?.event.end);
-
 
     const handleCancel = () => {
         setTitle("");
@@ -136,20 +103,12 @@ Om du vill sätta en sluttid måste både datum och tid fyllas i.`);
             return;
         }
 
-
-
-
         try {
-            // databasanrop beroende på mode:
-            if (mode == "edit") {
-                // const successData = await updatePersonalActivity(newActivity);
-                // console.log("skapade", successData)
-            } else if (mode == "create") {
+
+            {
                 const successData = await createNewPersonalActivity(newActivity);
                 console.log("ändrade till detta:", successData)
             }
-
-            handleCancel();
 
         } catch (error) {
             console.error("Fel :", error);
@@ -165,7 +124,7 @@ Om du vill sätta en sluttid måste både datum och tid fyllas i.`);
 
 
         <Modal isOpen={isOpen}
-            title={mode == "create" ? "Lägg till egen aktivitet" : "Ändra egen aktivitet"}
+            title={"Lägg till egen aktivitet"}
             onCloseModal={onClose}
             type={"drawer"}
             size={"small"}
@@ -175,7 +134,7 @@ Om du vill sätta en sluttid måste både datum och tid fyllas i.`);
                     Avbryt
                 </button>
                 <button type="submit" form="add-activity-form" className="btn-medium btn-filled-primary">
-                    {mode == "create" ? "Skapa" : "Ändra"}
+                    Skapa
                 </button>
             </div>}>
 
