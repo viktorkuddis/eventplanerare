@@ -14,11 +14,15 @@ import styles from "./Event.module.css";
 // import type { PersonalActivityType } from "../../types";
 import { useAuth } from "@clerk/clerk-react";
 
+import { useDbApi } from "../../api/useDbApi";
+
 import EditPersonalActivityFormModal from "../../components/Organisms/EditPersonalActivityForm/EditPersonalActivityFormModal";
 import type { PersonalActivityType } from "../../types";
 
 
 const Event = () => {
+
+  const { getEventDetailsById } = useDbApi()
 
   const { userId } = useAuth();
 
@@ -39,6 +43,7 @@ const Event = () => {
     setPersonalActivityToEdit(personalActivity)
     setshowEditPersonalActivityModal(true)
   }
+
 
 
   useEffect(() => {
@@ -96,7 +101,11 @@ const Event = () => {
 
         <EditPersonalActivityFormModal
           isOpen={showEditPersonalActivityModal}
-          onClose={() => setshowEditPersonalActivityModal(false)}
+          onClose={async () => {
+            setshowEditPersonalActivityModal(false)
+            const newEventDetails = await getEventDetailsById(context?.currentEventObjectDetailed?.event._id as string)
+            if (newEventDetails) context?.setCurrentEventObjectsDetailed(newEventDetails)
+          }}
           oldPersonalActivity={personalActivityToEdit!} />
 
 
@@ -137,6 +146,7 @@ const Event = () => {
               {userId == item.ownerUserAuthId && <button className={`${styles.personalActivityEditButton}`}
                 onClick={() => {
                   openEditPersonalActvityModal(item)
+
                 }}>
                 <Edit3 size={"1rem"} />
               </button>}

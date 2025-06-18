@@ -2,11 +2,10 @@
 import { useContext, useState } from "react";
 import Modal from "../Modal/Modal"
 
-import styles from "./AddNewPersonalActivityModal.module.css"
+import styles from "./AddNewEventActivityFormModal.module.css"
 
 import { useDbApi } from "../../../api/useDbApi";
-import type { PersonalActivityType } from "../../../types";
-import { useAuth } from "@clerk/clerk-react";
+import type { EventActivityType } from "../../../types";
 import { AppContext } from "../../../context/AppContext";
 
 const getTodayDate = () => {
@@ -28,12 +27,11 @@ type Props = {
 };
 
 
-const AddNewPersonalActivityModal = ({ isOpen, onClose, }: Props) => {
+const AddNewEventActivityFormModal = ({ isOpen, onClose, }: Props) => {
 
 
-    const { userId } = useAuth();
 
-    const { createNewPersonalActivity } = useDbApi()
+    const { createNewEventActivity } = useDbApi()
 
     const context = useContext(AppContext)
 
@@ -80,9 +78,8 @@ Om du vill sätta en sluttid måste både datum och tid fyllas i.`);
             return;
         }
 
-        const newActivity: PersonalActivityType = {
-            ownerUserAuthId: userId as string,
-            eventId: context?.currentEventObjectDetailed?.event._id as string,                 // eller något som passar din logik
+        const newActivity: EventActivityType = {
+            eventId: context?.currentEventObjectDetailed?.event._id as string,
             title: title,
             description: extraInfo,
             startTime: new Date(`${startDate}T${startTime}`),
@@ -106,8 +103,8 @@ Om du vill sätta en sluttid måste både datum och tid fyllas i.`);
         try {
 
             {
-                const successData = await createNewPersonalActivity(newActivity);
-                console.log("ändrade till detta:", successData)
+                const successData = await createNewEventActivity(newActivity);
+                console.log("skapade detta:", successData)
             }
 
         } catch (error) {
@@ -115,8 +112,8 @@ Om du vill sätta en sluttid måste både datum och tid fyllas i.`);
             alert("Något gick fel. försök igen 🤔");
         }
 
-        handleCancel()
 
+        handleCancel()
     };
 
     return (
@@ -124,7 +121,7 @@ Om du vill sätta en sluttid måste både datum och tid fyllas i.`);
 
 
         <Modal isOpen={isOpen}
-            title={"Lägg till egen aktivitet"}
+            title={"Lägg till gruppaktivitet"}
             onCloseModal={onClose}
             type={"drawer"}
             size={"small"}
@@ -133,13 +130,13 @@ Om du vill sätta en sluttid måste både datum och tid fyllas i.`);
                 >
                     Avbryt
                 </button>
-                <button type="submit" form="add-activity-form" className="btn-medium btn-filled-primary">
+                <button type="submit" form="add-group-activity-form" className="btn-medium btn-filled-primary">
                     Skapa
                 </button>
             </div>}>
 
             <div className={`${styles.contentContainer}`}>
-                <form id="add-activity-form" onSubmit={handleSubmit}
+                <form id="add-group-activity-form" onSubmit={handleSubmit}
                     style={{
                         display: "flex",
                         flexDirection: "column",
@@ -147,7 +144,7 @@ Om du vill sätta en sluttid måste både datum och tid fyllas i.`);
                     }}>
 
                     <div className={`${styles.inputGroup}`}>
-                        <label>Vad tänker du göra? *</label>
+                        <label>Titel: *</label>
                         <input
                             type="text"
                             required
@@ -158,7 +155,7 @@ Om du vill sätta en sluttid måste både datum och tid fyllas i.`);
 
 
                     <div className={`${styles.inputGroup}`}>
-                        <label>När? *</label>
+                        <label>Start: *</label>
                         <div className={`${styles.whenSection}`}>
 
                             <button type="button" className={`btn-small btn-outlined-primary`}
@@ -191,7 +188,7 @@ Om du vill sätta en sluttid måste både datum och tid fyllas i.`);
                     </div>
 
                     <div className={`${styles.inputGroup}`}>
-                        <label>Vet du en sluttid?</label>
+                        <label>Slut:</label>
                         <div className={`${styles.whenSection}`}>
                             <button type="button" className={`btn-small btn-outlined-primary`}
                                 onClick={() => {
@@ -223,13 +220,13 @@ Om du vill sätta en sluttid måste både datum och tid fyllas i.`);
                         </div>
 
                     </div>
-                    {/* <div className={`${styles.inputGroup}`}>
-                        <label>extra info</label>
+                    <div className={`${styles.inputGroup}`}>
+                        <label>Extra info:</label>
                         <textarea
                             value={extraInfo}
                             onChange={(e) => setExtraInfo(e.target.value)}
                         ></textarea>
-                    </div> */}
+                    </div>
 
 
 
@@ -244,4 +241,4 @@ Om du vill sätta en sluttid måste både datum och tid fyllas i.`);
     )
 }
 
-export default AddNewPersonalActivityModal
+export default AddNewEventActivityFormModal

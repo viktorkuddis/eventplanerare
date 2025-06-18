@@ -4,6 +4,7 @@ import Modal from "../Modal/Modal"
 
 import styles from "./EditPersonalActivityForm.module.css"
 
+
 import { useDbApi } from "../../../api/useDbApi";
 import type { PersonalActivityType } from "../../../types";
 import { useAuth } from "@clerk/clerk-react";
@@ -35,7 +36,7 @@ const EditPersonalActivityFormModal = ({ isOpen, onClose, oldPersonalActivity }:
 
     const { userId } = useAuth();
 
-    const { updatePersonalActivity } = useDbApi()
+    const { updatePersonalActivity, deletePersonalActivity } = useDbApi()
 
     const context = useContext(AppContext)
 
@@ -79,6 +80,22 @@ const EditPersonalActivityFormModal = ({ isOpen, onClose, oldPersonalActivity }:
 
         onClose();
     };
+
+    const hadleDelete = async () => {
+
+        const isConfirmed = confirm("Vill du verkligen ta bort denna aktiviteten ?")
+        if (isConfirmed) {
+            const deleteSuccess = await deletePersonalActivity(oldPersonalActivity._id as string)
+            if (deleteSuccess) {
+                onClose()
+            }
+
+        }
+
+
+
+
+    }
 
     const handleSubmit = async (e: React.FormEvent) => {
 
@@ -237,6 +254,26 @@ Om du vill sätta en sluttid måste både datum och tid fyllas i.`);
                                 onChange={(e) => setEndTime(e.target.value)}
                             />
                         </div>
+
+
+
+                    </div>
+
+                    <div className={`${styles.inputGroup} ${styles.dangerSection}`}>
+                        <br />
+                        <hr />
+                        <label>Ta bort</label>
+                        <p>Vill du ta bort denna aktiviteten?</p>
+
+                        <div>
+                            <button type="button" className="btn-small btn-outlined-light-static" onClick={hadleDelete}
+                            >
+                                Ta Bort
+                            </button>
+                        </div>
+
+
+
 
                     </div>
                     {/* <div className={`${styles.inputGroup}`}>

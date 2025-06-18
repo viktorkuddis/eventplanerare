@@ -158,13 +158,19 @@ export function useDbApi() {
             console.log("satt currentEventObjectsDetailed till:", eventDetail)
 
             // sparar detaljerade eventobjekt så de snabbarde går att visa nå :) 
+
             context?.setEventObjectsDetailed(prev => {
-                const exists = prev?.some(e => e.event._id === eventDetail.event._id);
+                if (!prev) return [eventDetail];  // om prev är undefined eller tom
+
+                const exists = prev.some(e => e.event._id === eventDetail.event._id);
+
                 if (exists) {
-                    console.log("Event finns redan i contexten eventObjectsDetailed[] så uppdatering skedde inte:", eventDetail.event._id);
-                    return prev;
+                    // Ersätt det objekt som har samma id
+                    return prev.map(e =>
+                        e.event._id === eventDetail.event._id ? eventDetail : e
+                    );
                 } else {
-                    console.log("Eventet har inte besökts ännu denna sessionen så contexten eventObjectsDetailed[] uppdaterades med denne.", eventDetail.event._id);
+                    // Lägg till nytt objekt om det inte finns
                     return [...prev, eventDetail];
                 }
             });
@@ -386,6 +392,86 @@ export function useDbApi() {
         }
     }
 
+    async function deletePersonalActivity(id: string) {
+        try {
+            console.log("Försöker ta bort personal activity med id:", id);
+
+            const token = await getToken();
+
+            const response = await axios.delete(`${apiUrl}/personalactivity/${id}`, {
+                headers: { Authorization: `Bearer ${token}` }
+            });
+
+            console.log("Borttagning lyckades:", response.data);
+
+            return response.data;
+
+        } catch (error) {
+            console.error("Fel vid borttagning av personal activity:", error);
+            throw error;
+        }
+    }
+
+
+    async function createNewEventActivity(requestData: object) {
+        try {
+            console.log("Försöker skicka detta (event activity):", requestData);
+
+            const token = await getToken();
+
+            const response = await axios.post(`${apiUrl}/eventactivity/create`, requestData, {
+                headers: { Authorization: `Bearer ${token}` }
+            });
+
+            console.log("Förfrågan skickad (event activity):", response.data);
+
+            return response.data;
+
+        } catch (error) {
+            console.error("Fel vid skickande av event activity:", error);
+            throw error;
+        }
+    }
+
+    async function updateEventActivity(id: string, updateData: object) {
+        try {
+            console.log("Försöker uppdatera event activity med data:", updateData);
+
+            const token = await getToken();
+
+            const response = await axios.put(`${apiUrl}/eventactivity/${id}`, updateData, {
+                headers: { Authorization: `Bearer ${token}` }
+            });
+
+            console.log("Uppdatering skickad (event activity):", response.data);
+
+            return response.data;
+
+        } catch (error) {
+            console.error("Fel vid uppdatering av event activity:", error);
+            throw error;
+        }
+    }
+
+    async function deleteEventActivity(id: string) {
+        try {
+            console.log("Försöker ta bort event activity med id:", id);
+
+            const token = await getToken();
+
+            const response = await axios.delete(`${apiUrl}/eventactivity/${id}`, {
+                headers: { Authorization: `Bearer ${token}` }
+            });
+
+            console.log("Borttagning lyckades (event activity):", response.data);
+
+            return response.data;
+
+        } catch (error) {
+            console.error("Fel vid borttagning av event activity:", error);
+            throw error;
+        }
+    }
 
     return {
         createNewEvent,
@@ -401,6 +487,10 @@ export function useDbApi() {
         acceptJoinnEventRequestAndCreateParticipation,
         getAllParticipatingEventsByUserId,
         createNewPersonalActivity,
-        updatePersonalActivity
+        updatePersonalActivity,
+        deletePersonalActivity,
+        createNewEventActivity,
+        updateEventActivity,
+        deleteEventActivity
     };
 }

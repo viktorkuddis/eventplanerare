@@ -15,6 +15,7 @@ import { useDbApi } from "../../src/api/useDbApi";
 import { textColorMixVibrant, backgroundColorMixLight } from "../../src/utils/colorMix.utils";
 
 import AddNewPersonalActivityModal from "../../src/components/Organisms/AddNewPersonalActivityForm/AddNewPersonalActivityModal";
+import AddNewEventActivityFormModal from "../../src/components/Organisms/AddEventActivityForm/AddNewEventActivityFormModal";
 
 
 type Props = {
@@ -71,6 +72,7 @@ const EventLayout = ({ children }: Props) => {
 
 
     const [createPersonalActivityModalIsOpen, setCreatePersonalActivityModalIsOpen] = useState(false)
+    const [addNewEventActivityFormModalIsOpen, setAddNewEventActivityFormIsOpen] = useState(false)
 
 
 
@@ -80,9 +82,21 @@ const EventLayout = ({ children }: Props) => {
 
             <AddNewPersonalActivityModal
                 isOpen={createPersonalActivityModalIsOpen}
-                onClose={() => setCreatePersonalActivityModalIsOpen(false)}
-                mode={"create"}
-                existingActivity={null} />
+                onClose={async () => {
+                    setCreatePersonalActivityModalIsOpen(false)
+                    const newEventDetails = await getEventDetailsById(context?.currentEventObjectDetailed?.event._id as string)
+                    if (newEventDetails) context?.setCurrentEventObjectsDetailed(newEventDetails)
+                }}
+            />
+            <AddNewEventActivityFormModal
+                isOpen={addNewEventActivityFormModalIsOpen}
+                onClose={
+                    async () => {
+                        setAddNewEventActivityFormIsOpen(false)
+                        const newEventDetails = await getEventDetailsById(context?.currentEventObjectDetailed?.event._id as string)
+                        if (newEventDetails) context?.setCurrentEventObjectsDetailed(newEventDetails)
+                    }
+                } />
 
 
 
@@ -152,7 +166,7 @@ const EventLayout = ({ children }: Props) => {
                             >
 
 
-                                <button className="btn-medium btn-filled-light-static">
+                                <button className="btn-medium btn-filled-light-static" onClick={() => setAddNewEventActivityFormIsOpen(true)}>
                                     <Plus size={"1rem"} /><Users size={"1rem"} /> <p>Gruppaktivitet</p>
                                 </button>
                                 <button className="btn-medium btn-filled-primary" onClick={() => setCreatePersonalActivityModalIsOpen(true)}>
