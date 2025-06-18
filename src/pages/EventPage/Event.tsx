@@ -14,7 +14,8 @@ import styles from "./Event.module.css";
 // import type { PersonalActivityType } from "../../types";
 import { useAuth } from "@clerk/clerk-react";
 
-
+import EditPersonalActivityFormModal from "../../components/Organisms/EditPersonalActivityForm/EditPersonalActivityFormModal";
+import type { PersonalActivityType } from "../../types";
 
 
 const Event = () => {
@@ -30,8 +31,15 @@ const Event = () => {
   const [timoeIsOut, setTimeIsOut] = useState(false);
 
 
-  // const [showEditPersonalActivityModal, setshowEditPersonalActivityModal] = useState(false)
-  // const [personalActivityToEdit, setPersonalActivityToEdit] = useState<PersonalActivityType | null>(null)
+  const [showEditPersonalActivityModal, setshowEditPersonalActivityModal] = useState(false)
+  const [personalActivityToEdit, setPersonalActivityToEdit] = useState<PersonalActivityType | null>(null)
+
+  const openEditPersonalActvityModal = (personalActivity: PersonalActivityType) => {
+    console.log("modal ska Öppnas")
+    setPersonalActivityToEdit(personalActivity)
+    setshowEditPersonalActivityModal(true)
+  }
+
 
   useEffect(() => {
 
@@ -86,6 +94,11 @@ const Event = () => {
 
 
 
+        <EditPersonalActivityFormModal
+          isOpen={showEditPersonalActivityModal}
+          onClose={() => setshowEditPersonalActivityModal(false)}
+          oldPersonalActivity={personalActivityToEdit!} />
+
 
         {/* <hr /> */}
         <div className={`content-container-width-wrapper ${styles.eventInfoSection}`}>
@@ -123,8 +136,7 @@ const Event = () => {
               </small>
               {userId == item.ownerUserAuthId && <button className={`${styles.personalActivityEditButton}`}
                 onClick={() => {
-                  // setPersonalActivityToEdit(item)
-                  // setshowEditPersonalActivityModal(true)
+                  openEditPersonalActvityModal(item)
                 }}>
                 <Edit3 size={"1rem"} />
               </button>}
