@@ -4,6 +4,7 @@ import { useAuth } from "@clerk/clerk-react";
 const apiUrl = import.meta.env.VITE_API_URL;
 
 import { AppContext } from "../context/AppContext";
+import { NotificationContext } from "../context/NotificationContext";
 import { useContext } from "react";
 import type { EventParticipationType, EventType, NotificationItemType, RequestType, SimplifiedUserType } from "../types";
 import type { EventObjectsDetailedType } from "../types";
@@ -11,7 +12,10 @@ import type { EventObjectsDetailedType } from "../types";
 
 export function useDbApi() {
     const { getToken } = useAuth();
-    const context = useContext(AppContext)
+    const appContext = useContext(AppContext)
+    const notificationContext = useContext(NotificationContext)
+
+
 
     async function createNewEvent(eventData: object) {
         try {
@@ -30,8 +34,8 @@ export function useDbApi() {
             console.log(response.data)
 
             // Lägg till event i context
-            context?.setOwnEvents((prev) => [...prev, event]);
-            context?.setAllEvents((prev) => [...prev, event]);
+            appContext?.setOwnEvents((prev) => [...prev, event]);
+            appContext?.setAllEvents((prev) => [...prev, event]);
 
             console.log("Event tillagd :) ")
             console.log()
@@ -115,10 +119,10 @@ export function useDbApi() {
                 headers: { Authorization: `Bearer ${token}` }
             });
 
-            context?.setOwnEvents(response.data)
+            appContext?.setOwnEvents(response.data)
 
             // Uppdatera alla events i context
-            context?.setAllEvents((existingEvents) => {
+            appContext?.setAllEvents((existingEvents) => {
                 const eventsToAdd = response.data.filter((newEvent: EventType) =>
                     !existingEvents.some(existingEvent => existingEvent._id === newEvent._id)
                 );
@@ -154,12 +158,12 @@ export function useDbApi() {
 
             const eventDetail: EventObjectsDetailedType = response.data;
 
-            context?.setCurrentEventObjectsDetailed(eventDetail);
+            appContext?.setCurrentEventObjectsDetailed(eventDetail);
             console.log("satt currentEventObjectsDetailed till:", eventDetail)
 
             // sparar detaljerade eventobjekt så de snabbarde går att visa nå :) 
 
-            context?.setEventObjectsDetailed(prev => {
+            appContext?.setEventObjectsDetailed(prev => {
                 if (!prev) return [eventDetail];  // om prev är undefined eller tom
 
                 const exists = prev.some(e => e.event._id === eventDetail.event._id);
@@ -241,7 +245,7 @@ export function useDbApi() {
 
             // console.log("🔔notificationssvar: ", response.data)
 
-            context?.setNotificationFeed(response.data)
+            notificationContext?.setNotificationFeed(response.data)
             console.log("🔔notiser sattes")
 
 

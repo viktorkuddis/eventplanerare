@@ -5,7 +5,8 @@ import styles from "./HomeNotificaationPage.module.css"
 
 import { useContext, useEffect, useState } from "react"
 
-import { AppContext } from "../../../context/AppContext"
+// import { AppContext } from "../../../context/AppContext"
+import { NotificationContext } from "../../../context/NotificationContext";
 
 import { useNavigate } from "react-router-dom";
 
@@ -63,9 +64,11 @@ const HomeNotificationsPage = () => {
 
 
 
-    const context = useContext(AppContext)
+    // const context = useContext(AppContext)
+    const notificationContext = useContext(NotificationContext)
 
-    console.log(context?.notificationFeed)
+
+    console.log(notificationContext?.notificationFeed)
 
 
 
@@ -93,7 +96,7 @@ const HomeNotificationsPage = () => {
                 <div className={styles.notificationCardsContainer} >
 
 
-                    {context?.notificationFeed.map((notification, i) => {
+                    {notificationContext?.notificationFeed.map((notification, i) => {
 
 
 

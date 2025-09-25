@@ -16,6 +16,7 @@ if (!PUBLISHABLE_KEY) {
 
 // CONTEXT
 import { AppContextProvider } from "./context/AppContextProvider.tsx";
+import { NotificationContextProvider } from "./context/NotificationContextProvider.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
@@ -25,8 +26,10 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
       afterSignOutUrl="/"
     >
       <AppContextProvider >
-        <App />
+        <NotificationContextProvider>
+          <App />
+        </NotificationContextProvider>
       </AppContextProvider>
     </ClerkProvider>
-  </React.StrictMode>
+  </React.StrictMode >
 );

@@ -1,7 +1,7 @@
 import { useLocation, useNavigate } from "react-router-dom"
 import { Bell } from 'react-feather';
 import { useContext } from "react";
-import { AppContext } from "../../../context/AppContext";
+import { NotificationContext } from "../../../context/NotificationContext";
 
 import styles from "./BellButton.module.css"
 
@@ -19,7 +19,8 @@ import { useAuth } from "@clerk/clerk-react";
 
 
 const BellButton = () => {
-    const context = useContext(AppContext)
+    const notificationContext = useContext(NotificationContext)
+
     const { userId } = useAuth();
 
     // hämtar när man senast öppnade
@@ -28,11 +29,11 @@ const BellButton = () => {
         lastOpendDate = getAppSettingsFromLocalStorage(userId, "lastNotificationListOpened")
     }
     let showNotificationIndicator;
-    if (lastOpendDate && context?.notificationFeed[0]?.date) {
+    if (lastOpendDate && notificationContext?.notificationFeed[0]?.date) {
         const lastDate = new Date(lastOpendDate);
         // console.log("panelen var senast öppen", lastDate)
 
-        const newestNotificationDate = new Date(context.notificationFeed[0].date);
+        const newestNotificationDate = new Date(notificationContext.notificationFeed[0].date);
         // console.log("senaste notifikationen:", newestNotificationDate)
 
         // sätt true om man ligger efter med att titta på notifikationerna
