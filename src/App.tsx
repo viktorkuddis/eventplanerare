@@ -13,7 +13,6 @@ import EventLayout from "../layouts/EventLayout/EventLayout"
 
 import RequestDetails from "./pages/HomePage/RequestDetailsPage/RequestDetails";
 
-import usePageVisible from "../hooks/usePageVisible"
 
 
 import {
@@ -69,8 +68,7 @@ export default function App() {
   const { getNotificationFeedByUserId, getAllParticipatingEventsByUserId } = useDbApi();
 
 
-  // state som berättar om kage är visible så man kan pausa pollingen 
-  const isPageVisible = usePageVisible();
+
 
 
 
@@ -105,27 +103,27 @@ export default function App() {
       })();
 
 
-      let pollNotifications: string | number | NodeJS.Timeout | undefined;
+      // let pollNotifications: string | number | NodeJS.Timeout | undefined;
 
-      if (isPageVisible) {
-        console.log(`▶️ Polling startades kl ${new Date().toLocaleTimeString()}`);
+      // if (isPageVisible) {
+      //   console.log(`▶️ Polling startades kl ${new Date().toLocaleTimeString()}`);
 
-        // Starta polling bara om sidan är synlig
-        pollNotifications = setInterval(() => {
-          (async () => {
-            try {
-              await getNotificationFeedByUserId(userId);
-            } catch (error) {
-              console.error(error);
-            }
-          })();
-        }, 15000);
-      }
+      //   // Starta polling bara om sidan är synlig
+      //   pollNotifications = setInterval(() => {
+      //     (async () => {
+      //       try {
+      //         await getNotificationFeedByUserId(userId);
+      //       } catch (error) {
+      //         console.error(error);
+      //       }
+      //     })();
+      //   }, 15000);
+      // }
 
-      return () => {
-        clearInterval(pollNotifications);
-        console.log(`⏸️ Polling Stoppades kl ${new Date().toLocaleTimeString()}`);
-      }
+      // return () => {
+      //   clearInterval(pollNotifications);
+      //   console.log(`⏸️ Polling Stoppades kl ${new Date().toLocaleTimeString()}`);
+      // }
 
     }
 
@@ -133,7 +131,7 @@ export default function App() {
 
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [userId, isPageVisible]);
+  }, [userId]);
 
 
   return (<>

@@ -11,47 +11,28 @@ import { useEffect, useRef, } from 'react';
 
 import BellButton from '../src/components/molecules/BellButton/BellButton';
 
+import usePollNotifications from "../hooks/usePollNotifications";
 
-
-// type Props = {
-//     children?: ReactNode;
-// };
 const HomeLayout = () => {
     const { pathname } = useLocation();
 
-
-
-
-
-
+    usePollNotifications()
 
 
     const siteContainerRef = useRef<HTMLDivElement>(null);
-
-
 
     useEffect(() => {
         // Scrolla hela fönstret till toppen
         // Sätt en liten timeout för att ge renderingen tid
         const timer = setTimeout(() => {
             if (siteContainerRef.current) {
-                siteContainerRef.current.scrollTo({ top: 0, left: 0, behavior: 'auto' }); // Använd options-objekt för tydlighet
+                siteContainerRef.current.scrollTo({ top: 0, left: 0, behavior: 'auto' });
             }
-        }, 10); // Testa med 0ms, 10ms eller 50ms om det behövs
+        }, 10);
 
-
-
-
-
-
-        // cleanup
         return () => clearTimeout(timer);
 
-    }, [pathname]); // Tom array betyder att den körs en gång efter första renderingen av HomeLayout
-
-
-
-
+    }, [pathname]);
 
 
 
