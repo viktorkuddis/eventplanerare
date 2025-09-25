@@ -147,7 +147,7 @@ Om du vill sätta en sluttid måste både datum och tid fyllas i.`);
                     }}>
 
                     <div className={`${styles.inputGroup}`}>
-                        <label>Vad tänker du göra? *</label>
+                        <label>Vad tänker du göra? </label>
                         <input
                             type="text"
                             required
@@ -158,7 +158,7 @@ Om du vill sätta en sluttid måste både datum och tid fyllas i.`);
 
 
                     <div className={`${styles.inputGroup}`}>
-                        <label>När? *</label>
+                        <label>När? </label>
                         <div className={`${styles.whenSection}`}>
 
                             <button type="button" className={`btn-small btn-outlined-primary`}
@@ -191,7 +191,7 @@ Om du vill sätta en sluttid måste både datum och tid fyllas i.`);
                     </div>
 
                     <div className={`${styles.inputGroup}`}>
-                        <label>Vet du en sluttid?</label>
+                        <label>Vet du en sluttid? (frivilligt)</label>
                         <div className={`${styles.whenSection}`}>
                             <button type="button" className={`btn-small btn-outlined-primary`}
                                 onClick={() => {

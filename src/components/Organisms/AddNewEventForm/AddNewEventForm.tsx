@@ -99,7 +99,7 @@ const AddNewEventForm: React.FC<Props> = ({ onCancel, onEventCreated }) => {
 
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
-      <label htmlFor="title">Eventets Namn: * </label>
+      <label htmlFor="title">Eventets Namn: </label>
       <input
         type="text"
         id="title"
@@ -110,7 +110,7 @@ const AddNewEventForm: React.FC<Props> = ({ onCancel, onEventCreated }) => {
         required
       />
       <div className={styles.timeSection}>
-        <label>Startar: * </label>
+        <label>Startar: </label>
         <div className={styles.timeSectionInputGroup}>
           <input
             type="date"
@@ -138,7 +138,7 @@ const AddNewEventForm: React.FC<Props> = ({ onCancel, onEventCreated }) => {
             {/* <button className="btn-small btn-filled-strong">X</button> */}
           </div>
         </div>
-        <label>Slutar: *</label>
+        <label>Slutar:</label>
         <div className={styles.timeSectionInputGroup}>
           <input
             type="date"
@@ -167,14 +167,14 @@ const AddNewEventForm: React.FC<Props> = ({ onCancel, onEventCreated }) => {
           </div>
         </div>
       </div>
-      <label htmlFor="description">Beskrivning: </label>
+      <label htmlFor="description">Beskrivning (frivilligt): </label>
       <textarea
         id="description"
         name="description"
         value={description}
         onChange={(e) => setDescription(e.target.value)}
       />
-      <label htmlFor="location">Plats: </label>
+      <label htmlFor="location">Plats (frivilligt): </label>
       <input
         type="text"
         id="location"
@@ -184,7 +184,7 @@ const AddNewEventForm: React.FC<Props> = ({ onCancel, onEventCreated }) => {
 
       />
 
-
+      <label>Färg (frivilligt): </label>
       <div className={styles.colorPickerSectionWrapper}>
         <div className={styles.colorPickerGrid}>
           {colors.map((c, index) => {

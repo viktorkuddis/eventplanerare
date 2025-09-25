@@ -12,6 +12,8 @@ import { useParams } from "react-router-dom";
 
 import { useDbApi } from "../../src/api/useDbApi";
 
+import { useAuth } from "@clerk/clerk-react";
+
 import { textColorMixVibrant, backgroundColorMixLight } from "../../src/utils/colorMix.utils";
 
 import AddNewPersonalActivityModal from "../../src/components/Organisms/AddNewPersonalActivityForm/AddNewPersonalActivityModal";
@@ -24,6 +26,8 @@ type Props = {
 const EventLayout = ({ children }: Props) => {
 
     const { eventId } = useParams();
+
+    const { userId } = useAuth()
 
     console.log("eventid:", eventId)
 
@@ -156,23 +160,27 @@ const EventLayout = ({ children }: Props) => {
                         <>
                             <div className={`${styles.buttonGroup} content-container-width-wrapper`}
 
-
                                 style={{
                                     background: `linear-gradient(to top, ${backgroundColor} 50%, transparent 100%)`,
-
                                     width: "100%"
                                 }}
 
                             >
 
+                                {/* om användaren är registrerad som värd i evenemanget får den knapp för gruppaktivitet. */}
+                                {userId == context?.currentEventObjectDetailed.eventParticipationsEnriched.find((p) => p.role == "host")?.userId
+                                    ?
 
-                                <button className="btn-medium btn-filled-light-static" onClick={() => setAddNewEventActivityFormIsOpen(true)}>
-                                    <Plus size={"1rem"} /><Users size={"1rem"} /> <p>Gruppaktivitet</p>
-                                </button>
+                                    <button className="btn-medium btn-filled-light-static" onClick={() => setAddNewEventActivityFormIsOpen(true)}>
+                                        <Plus size={"1rem"} /><Users size={"1rem"} /> <p>Gruppaktivitet</p>
+                                    </button>
+
+                                    :
+                                    false}
+
                                 <button className="btn-medium btn-filled-primary" onClick={() => setCreatePersonalActivityModalIsOpen(true)}>
                                     <Plus size={"1rem"} /><User size={"1rem"} /><p>Egen aktivitet</p>
                                 </button>
-
 
                             </div>
                             {/* Denna backdrop läggs längst bak i dokumentet för att uundvika att användaren skrollar bram bodyn som är av annan färg på mobila enheter */}
@@ -184,6 +192,8 @@ const EventLayout = ({ children }: Props) => {
                                 }}></div></>
 
                     }
+
+
 
 
                 </div>

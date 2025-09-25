@@ -159,9 +159,14 @@ export function useDbApi() {
             const eventDetail: EventObjectsDetailedType = response.data;
 
             appContext?.setCurrentEventObjectsDetailed(eventDetail);
-            console.log("satt currentEventObjectsDetailed till:", eventDetail)
 
-            // sparar detaljerade eventobjekt så de snabbarde går att visa nå :) 
+
+
+            console.group("sattcurrentEventObjectsDetailed till:")
+            console.info(eventDetail)
+            console.groupEnd()
+
+            // sparar detaljerade eventobjekt i array så de snabbarde går att visa om de redan hämtats en gån :) 
 
             appContext?.setEventObjectsDetailed(prev => {
                 if (!prev) return [eventDetail];  // om prev är undefined eller tom
@@ -179,14 +184,14 @@ export function useDbApi() {
                 }
             });
 
-            console.log("Event detaljer hämtade", eventDetail);
+            console.group("lista med hittils hämtade eventobjekt setEventObjectsDetailed(ej aktuellt inkluderat):")
+            console.log(appContext?.eventObjectsDetailed);
+            console.groupEnd()
+
             return eventDetail;
         } catch (error) {
             console.error("Fel vid axios.get för event detaljer:", error);
         }
-
-
-
 
     }
     async function createNewRequest(requestData: object) {

@@ -144,7 +144,7 @@ Om du vill sätta en sluttid måste både datum och tid fyllas i.`);
                     }}>
 
                     <div className={`${styles.inputGroup}`}>
-                        <label>Titel: *</label>
+                        <label>Titel: </label>
                         <input
                             type="text"
                             required
@@ -155,7 +155,7 @@ Om du vill sätta en sluttid måste både datum och tid fyllas i.`);
 
 
                     <div className={`${styles.inputGroup}`}>
-                        <label>Start: *</label>
+                        <label>Start: </label>
                         <div className={`${styles.whenSection}`}>
 
                             <button type="button" className={`btn-small btn-outlined-primary`}
@@ -188,7 +188,7 @@ Om du vill sätta en sluttid måste både datum och tid fyllas i.`);
                     </div>
 
                     <div className={`${styles.inputGroup}`}>
-                        <label>Slut:</label>
+                        <label>Slut (frivilligt):</label>
                         <div className={`${styles.whenSection}`}>
                             <button type="button" className={`btn-small btn-outlined-primary`}
                                 onClick={() => {
@@ -221,7 +221,7 @@ Om du vill sätta en sluttid måste både datum och tid fyllas i.`);
 
                     </div>
                     <div className={`${styles.inputGroup}`}>
-                        <label>Extra info:</label>
+                        <label>Extra info (frivilligt):</label>
                         <textarea
                             value={extraInfo}
                             onChange={(e) => setExtraInfo(e.target.value)}
