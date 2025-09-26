@@ -17,8 +17,12 @@ import { useAuth } from "@clerk/clerk-react";
 import { useDbApi } from "../../api/useDbApi";
 
 import EditPersonalActivityFormModal from "../../components/Organisms/EditPersonalActivityForm/EditPersonalActivityFormModal";
-import type { PersonalActivityType } from "../../types";
+import type { EventActivityType, PersonalActivityType } from "../../types";
 
+
+type EventFeedItemType =
+  | { type: "eventActivity"; item: EventActivityType }
+  | { type: "personalActivity"; item: PersonalActivityType };
 
 const Event = () => {
 
@@ -38,11 +42,18 @@ const Event = () => {
   const [showEditPersonalActivityModal, setshowEditPersonalActivityModal] = useState(false)
   const [personalActivityToEdit, setPersonalActivityToEdit] = useState<PersonalActivityType | null>(null)
 
+  // Denna variabeln ska hålla alla objekt som ska visas i feedet. samt i rätt ordning.
+  // Denna variabeln används för att rendera ut grafiken rätt.
+  // denna variabeln innehåller aktiviteter men även eventuellt andra objekt. så som tidsmarkören.
+  const [sortedFeedItems, setSortedFeedItems] = useState<EventFeedItemType[]>([])
+
+
   const openEditPersonalActvityModal = (personalActivity: PersonalActivityType) => {
     console.log("modal ska Öppnas")
     setPersonalActivityToEdit(personalActivity)
     setshowEditPersonalActivityModal(true)
   }
+
 
 
 
@@ -63,6 +74,31 @@ const Event = () => {
     return () => clearTimeout(timeout);
 
   }, [context?.currentEventObjectDetailed?.event._id, eventId]);
+
+
+
+  // skapa feed att rendera:
+  useEffect(() => {
+
+    // slår ihop aktiviteter till aray av objekt med info om vilken typ av item det är.
+    let feed: EventFeedItemType[] = [
+      ...context?.currentEventObjectDetailed?.personalActivities?.map((item) => ({ type: "personalActivity" as const, item })) || [],
+      ...context?.currentEventObjectDetailed?.eventActivities?.map((item) => ({ type: "eventActivity" as const, item })) || []
+    ];
+    console.log(feed)
+
+    feed = feed.sort((a, b) => {
+
+      return new Date(a.item.startTime).getTime() - new Date(b.item.startTime).getTime();
+    });
+
+    console.log("kontroll av tid i sorterat feed:")
+    console.table(feed.map((i) => ({ type: i.type, itemStart: i.item.startTime })))
+
+    setSortedFeedItems(feed)
+  }, [context?.currentEventObjectDetailed?.eventActivities, context?.currentEventObjectDetailed?.personalActivities,])
+
+
 
   if (isLoading == true && timoeIsOut == false) {
     return (
@@ -115,97 +151,105 @@ const Event = () => {
         </div>
 
 
-        {/* detta är personal aktivitet rad. */}
+        {/* HÄR RENDERAS EVENEMANGETS FEED ITEMS BASERAT PÅ VAD DET ÄR FÅR NÅGOT */}
         <div>
-          {context?.currentEventObjectDetailed?.personalActivities.map((item, i) =>
-            <div key={i} className={`content-container-width-wrapper ${styles.personalActivityRow}`}>
-              <small >
-                <small>
-                  <span className={`${styles.dateSpan}`}>
-                    {new Date(item.startTime).toTimeString().slice(0, 5)}
-                    {item.endTime && (
+          {sortedFeedItems.map((item, i) => {
+
+            switch (item.type) {
+              case "personalActivity":
+                return <div key={i} className={`content-container-width-wrapper ${styles.personalActivityRow}`}>
+                  <small >
+                    <small>
+
+                      <span className={`${styles.dateSpan}`}>
+                        {new Date(item.item.startTime).toTimeString().slice(0, 5)}
+                        {item.item.endTime && (
+                          <>
+                            {"-"}
+                            {/* om annan dag: */}
+                            {new Date(item.item.startTime).toDateString() !== new Date(item.item.endTime).toDateString() &&
+                              new Date(item.item.endTime).toLocaleDateString("sv-SE", {
+                                day: "2-digit",
+                                month: "short",
+                              }) + " "}
+                            {/* tiden */}
+                            {new Date(item.item.endTime).toTimeString().slice(0, 5)}
+                          </>
+                        )}
+                      </span>
+                    </small>
+
+                    <span >
+                      <strong>@{getUserNameFromUserID(item.item.ownerUserAuthId)}</strong> ska <i>{item.item.title}</i>
+                    </span>
+                  </small>
+                  {userId == item.item.ownerUserAuthId && <button className={`${styles.personalActivityEditButton}`}
+                    onClick={() => {
+                      openEditPersonalActvityModal(item.item)
+
+                    }}>
+                    <Edit3 size={"1rem"} />
+                  </button>}
+
+
+                </div>
+
+              case "eventActivity":
+                return <div key={i} style={{
+                  backgroundColor: context?.currentEventObjectDetailed?.event.color,
+                  color: "white",
+                  borderRadius: "0.25rem",
+                  padding: "0.5rem",
+                  margin: "0.5rem 1rem",
+                  border: "1px, solid white"
+                }}>
+
+                  <small>
+                    {new Date(item.item.startTime).toTimeString().slice(0, 5)}
+                    {item.item.endTime && (
                       <>
-                        {" - "}
+                        {"-"}
                         {/* om annan dag: */}
-                        {new Date(item.startTime).toDateString() !== new Date(item.endTime).toDateString() &&
-                          new Date(item.endTime).toLocaleDateString("sv-SE", {
+                        {new Date(item.item.startTime).toDateString() !== new Date(item.item.endTime).toDateString() &&
+                          new Date(item.item.endTime).toLocaleDateString("sv-SE", {
                             day: "2-digit",
                             month: "short",
                           }) + " "}
                         {/* tiden */}
-                        {new Date(item.endTime).toTimeString().slice(0, 5)}
+                        {new Date(item.item.endTime).toTimeString().slice(0, 5)}
                       </>
                     )}
-                  </span>
-                </small>
 
-                <span >
-                  <strong>@{getUserNameFromUserID(item.ownerUserAuthId)}</strong> ska <i>{item.title}</i>
-                </span>
-              </small>
-              {userId == item.ownerUserAuthId && <button className={`${styles.personalActivityEditButton}`}
-                onClick={() => {
-                  openEditPersonalActvityModal(item)
+                  </small>
+                  <br />
 
-                }}>
-                <Edit3 size={"1rem"} />
-              </button>}
+                  <h3>{item.item.title}</h3>
+                  <p>{item.item.description}</p>
+                </div>
 
-
-            </div>
-
-
-
-
-
+              default:
+                break;
+            }
+          }
           )}
-
-
-          {context?.currentEventObjectDetailed?.eventActivities.map((item, i) =>
-            <div key={i} style={{
-              backgroundColor: context?.currentEventObjectDetailed?.event.color,
-              color: "white",
-              borderRadius: "0.25rem",
-              padding: "0.5rem",
-              margin: "1rem",
-              border: "1px, solid white"
-            }}>
-
-
-
-
-
-              <small>
-                {new Date(item.startTime).toTimeString().slice(0, 5)}
-                {item.endTime && (
-                  <>
-                    {" - "}
-                    {/* om annan dag: */}
-                    {new Date(item.startTime).toDateString() !== new Date(item.endTime).toDateString() &&
-                      new Date(item.endTime).toLocaleDateString("sv-SE", {
-                        day: "2-digit",
-                        month: "short",
-                      }) + " "}
-                    {/* tiden */}
-                    {new Date(item.endTime).toTimeString().slice(0, 5)}
-                  </>
-                )}
-
-              </small>
-              <br />
-
-
-
-              <h3>{item.title}</h3>
-              <p>{item.description}</p></div>
-          )}
-
         </div>
 
 
+        <br /><br /><br />
 
 
       </div >
+
+
+
+
+
+
+
+
+
+
+
 
     )
   }
