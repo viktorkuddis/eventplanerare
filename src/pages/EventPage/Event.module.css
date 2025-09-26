@@ -61,8 +61,11 @@
 
 .personalActivityRow {
     /* background-color: rgba(0, 255, 255, 0.13); */
-    line-height: normal;
-    padding: 0.5rem 2rem;
+    /* line-height: 1.5; */
+    line-height: 1.3;
+
+    /* line-height: inherit; */
+    padding: 0.2rem 2rem;
     /* margin: 0.5rem; */
 
     display: flex;
@@ -72,11 +75,14 @@
 
 
 
+
     .dateSpan {
         display: inline-block;
         /* background-color: antiquewhite; */
         min-width: 2.5rem;
-        margin-right: 0.25rem
+        margin-right: 0.5rem;
+        padding-bottom: 0.2rem;
+        color: var(--fg-color-secondary);
     }
 
 
