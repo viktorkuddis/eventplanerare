@@ -170,30 +170,38 @@ const Event = () => {
               margin: "1rem",
               border: "1px, solid white"
             }}>
-              <small>{item.startTime.toString()} - {item.endTime?.toString()}</small>
+
+
+
+
+
+              <small>
+                {new Date(item.startTime).toTimeString().slice(0, 5)}
+                {item.endTime && (
+                  <>
+                    {" - "}
+                    {/* om annan dag: */}
+                    {new Date(item.startTime).toDateString() !== new Date(item.endTime).toDateString() &&
+                      new Date(item.endTime).toLocaleDateString("sv-SE", {
+                        day: "2-digit",
+                        month: "short",
+                      }) + " "}
+                    {/* tiden */}
+                    {new Date(item.endTime).toTimeString().slice(0, 5)}
+                  </>
+                )}
+
+              </small>
+              <br />
+
+
+
               <h3>{item.title}</h3>
               <p>{item.description}</p></div>
           )}
 
         </div>
 
-
-
-        {/* <div className={styles.buttonGroup}
-
-          style={{
-            background: "linear-gradient(to top,  50%, transparent 100%)"
-          }}
-
-        >
-          <button className="btn-medium btn-filled-light-static">
-            <Users size={"1rem"} /> <span>Gruppaktivitet</span>
-          </button>
-          <button className="btn-medium btn-filled-primary">
-            <User size={"1rem"} /> <span>Egen aktivitet</span>
-          </button>
-
-        </div> */}
 
 
 
