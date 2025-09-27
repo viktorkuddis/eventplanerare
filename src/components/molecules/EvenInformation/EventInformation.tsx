@@ -43,32 +43,28 @@ const EventInformation = () => {
 
     return (
         <div className={styles.container}>
+
+
             <div>
-                <h2>{context?.currentEventObjectDetailed?.event.title}</h2>
-
-
                 <small>
-                    <b>Anslutningskod: </b><div className={styles.connectionCodeTag}>{context?.currentEventObjectDetailed?.event.connectionCode}</div>
+                    <p>
+                        <Calendar size={"0.80rem"} /> {startDate} kl. {startTime} - {endDate} kl. {endTime}
+                    </p>
+                    {context?.currentEventObjectDetailed?.event.location &&
+                        <p>
+                            <MapPin size={"0.80rem"} /> {context?.currentEventObjectDetailed?.event.location}
+                        </p>}
                 </small>
+
 
             </div>
 
-
-
             <small>
-                <p><Calendar size={"0.80rem"} /> {startDate} kl. {startTime} - {endDate} kl. {endTime}</p>
-
-                {context?.currentEventObjectDetailed?.event.location && <p><MapPin size={"0.80rem"} /> {context?.currentEventObjectDetailed?.event.location}</p>}
-
-
-
-
-
+                <b>Anslutningskod: </b><div className={styles.connectionCodeTag}>{context?.currentEventObjectDetailed?.event.connectionCode}</div>
             </small>
 
-
-            <small>
-                <div>
+            <div>
+                <small>
                     <p>
                         <b>Värd:</b>
 
@@ -78,10 +74,24 @@ const EventInformation = () => {
                                 <span className={styles.userNameTag}> @{item.user.username}</span>
                             </span>)}
                     </p>
+                </small >
+                <small>
+                    <p>2 deltagare</p>
+                </small>
+            </div>
 
 
-                </div ></small >
+
+
+
             <p>{context?.currentEventObjectDetailed?.event.description}</p>
+
+
+
+
+
+
+
 
 
 

@@ -1,0 +1,24 @@
+.dateBanner {
+    display: flex;
+    gap: 1rem;
+    flex-direction: row;
+    align-items: center;
+    background-color: rgba(0, 255, 255, 0.291);
+    font-weight: bold;
+    color: color-mix(in srgb, var(--fg-color-secondary) 80%, transparent);
+    text-align: center;
+    padding: 0.5rem 1rem;
+
+    position: sticky;
+    top: 4rem;
+    z-index: 10;
+}
+
+.dateBanner::before,
+.dateBanner::after {
+    content: "";
+    flex: 1;
+    display: block;
+    height: 1px;
+    background-color: rgba(128, 128, 128, 0.2);
+}

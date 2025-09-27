@@ -94,3 +94,7 @@ export type NotificationItemType = {
     date: Date;
     url: string;
 };
+
+export type DateBannerType = {
+    startTime: Date
+}
