@@ -1,0 +1,44 @@
+.personalActivityRow {
+    /* background-color: rgba(0, 255, 255, 0.13); */
+    /* line-height: 1.5; */
+    line-height: 1.3;
+
+    /* line-height: inherit; */
+    padding: 0.25rem 1rem;
+    margin: 0px 1rem;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* border-top: 1px solid rgba(125, 125, 125, 0.1); */
+
+
+    /* background-color: white; */
+
+    .dateSpan {
+        display: inline-block;
+        /* background-color: antiquewhite; */
+        min-width: 2.5rem;
+        margin-right: 0.5rem;
+        padding-bottom: 0.2rem;
+        color: var(--fg-color-secondary);
+    }
+
+
+    .personalActivityEditButton {
+
+        min-height: 24px;
+        aspect-ratio: 1/1;
+        display: grid;
+        place-items: center;
+        transform: translate(0.5rem);
+        z-index: 0;
+        cursor: pointer;
+        border-radius: 0.25rem;
+
+        &:hover {
+            background-color: rgba(128, 128, 128, 0.1);
+        }
+    }
+
+}

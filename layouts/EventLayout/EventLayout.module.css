@@ -128,7 +128,7 @@
 
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    /* exakt två kolumner */
+
     gap: 0.5rem;
     padding: 1rem;
     padding-bottom: 2rem;
