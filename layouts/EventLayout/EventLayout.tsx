@@ -126,7 +126,7 @@ const EventLayout = ({ children }: Props) => {
                             }}>
 
 
-                                <div>{context?.currentEventObjectDetailed?.event.title}</div>
+                                <div><b>{context?.currentEventObjectDetailed?.event.title}</b></div>
                             </div>
                             <div className={styles.headerRight}>
 
