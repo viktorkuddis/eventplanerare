@@ -80,7 +80,7 @@ const ShowEventActivityInfo = ({ item, isOpen, onCloseAction }: PropTypes) => {
 
 
                 {item.description &&
-                    <p style={{ marginTop: "0.5rem" }}>
+                    <p style={{ marginTop: "01rem", whiteSpace: "pre-line" }}>
                         {item.description}
 
                     </p>
