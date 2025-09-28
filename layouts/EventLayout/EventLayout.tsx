@@ -16,8 +16,8 @@ import { useAuth } from "@clerk/clerk-react";
 
 import { textColorMixVibrant, backgroundColorMixLight } from "../../src/utils/colorMix.utils";
 
-import AddNewPersonalActivityModal from "../../src/components/Organisms/AddNewPersonalActivityForm/AddNewPersonalActivityModal";
-import AddNewEventActivityFormModal from "../../src/components/Organisms/AddEventActivityForm/AddNewEventActivityFormModal";
+import AddNewPersonalActivityModal from "../../src/components/Organisms/PersonalActiviity/AddNewPersonalActivityForm/AddNewPersonalActivityModal";
+import AddNewEventActivityFormModal from "../../src/components/Organisms/EventActivity/AddEventActivityForm/AddNewEventActivityFormModal";
 
 
 type Props = {
