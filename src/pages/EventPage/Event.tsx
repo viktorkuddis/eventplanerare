@@ -11,6 +11,8 @@ import GroupActivityCard from "../../components/molecules/GroupActivityCard/Grou
 import PersonalActivityCard from "../../components/molecules/PersonalActivityCard/PersonalActivityCard";
 import DateBanner from "../../components/molecules/DateBanner/DateBanner";
 
+
+
 import styles from "./Event.module.css";
 
 import type { EventActivityType, PersonalActivityType, DateBannerType } from "../../types";
@@ -28,6 +30,7 @@ const Event = () => {
 
   const [isLoading, setIsLoading] = useState(true);
   const [timoeIsOut, setTimeIsOut] = useState(false);
+
 
 
   // Denna variabeln ska hålla alla objekt som ska visas i feedet. samt i rätt ordning.
@@ -126,6 +129,7 @@ const Event = () => {
   if (timoeIsOut == true && isLoading == false) {
     return (
       <div className={`content-container-width-wrapper ${styles.contentContainer}`}>
+
 
         <div className={`content-container-width-wrapper ${styles.eventInfoSection}`}>
           <EventInformation />

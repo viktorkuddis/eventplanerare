@@ -1,8 +1,12 @@
 import { AppContext } from "../../../context/AppContext";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 
 
 import type { EventActivityType } from "../../../types";
+import ShowEventActivityInfo from "../../Organisms/EventActivity/ShowEventActivityInfo/ShowEventActivityInfo";
+
+
+
 
 type Props = {
     item: EventActivityType
@@ -11,9 +15,26 @@ type Props = {
 
 function GroupActivityCard({ item }: Props) {
 
+    const [showEventActivityInfo, setShowEventActivityInfo] = useState(false)
+    const [activeItem, setActiveItem] = useState<EventActivityType>()
+
     const context = useContext(AppContext);
 
-    return (
+
+    const handleOpenEventActvityModal = (item: EventActivityType) => {
+        console.log("modal ska Öppnas")
+        setActiveItem(item)
+        setShowEventActivityInfo(true)
+    }
+    return (<>
+
+        {activeItem && <ShowEventActivityInfo
+            item={activeItem}
+            isOpen={showEventActivityInfo}
+            onCloseAction={() => setShowEventActivityInfo(false)}
+        />}
+
+
         <div style={{
             backgroundColor: context?.currentEventObjectDetailed?.event.color,
             color: "white",
@@ -21,7 +42,8 @@ function GroupActivityCard({ item }: Props) {
             padding: "0.5rem",
             margin: "0.5rem 1rem",
             border: "1px, solid white"
-        }}>
+        }}
+            onClick={() => handleOpenEventActvityModal(item)}>
 
             <small>
                 {new Date(item.startTime).toTimeString().slice(0, 5)}
@@ -45,7 +67,7 @@ function GroupActivityCard({ item }: Props) {
             <h3>{item.title}</h3>
             <p>{item.description}</p>
         </div>
-
+    </>
 
 
 

@@ -1,13 +1,14 @@
 
-import { useContext, useState } from "react";
-import Modal from "../Modal/Modal"
+import { useContext, useEffect, useState } from "react";
+import Modal from "../../Modal/Modal"
 
-import styles from "./AddNewPersonalActivityModal.module.css"
+import styles from "./EditPersonalActivityForm.module.css"
 
-import { useDbApi } from "../../../api/useDbApi";
-import type { PersonalActivityType } from "../../../types";
+
+import { useDbApi } from "../../../../api/useDbApi";
+import type { PersonalActivityType } from "../../../../types";
 import { useAuth } from "@clerk/clerk-react";
-import { AppContext } from "../../../context/AppContext";
+import { AppContext } from "../../../../context/AppContext";
 
 const getTodayDate = () => {
     const today = new Date();
@@ -25,15 +26,17 @@ const getTomorrowDate = () => {
 type Props = {
     isOpen: boolean;
     onClose: () => void;
+    oldPersonalActivity: PersonalActivityType
 };
 
 
-const AddNewPersonalActivityModal = ({ isOpen, onClose, }: Props) => {
+const EditPersonalActivityFormModal = ({ isOpen, onClose, oldPersonalActivity }: Props) => {
+
 
 
     const { userId } = useAuth();
 
-    const { createNewPersonalActivity } = useDbApi()
+    const { updatePersonalActivity, deletePersonalActivity } = useDbApi()
 
     const context = useContext(AppContext)
 
@@ -53,6 +56,20 @@ const AddNewPersonalActivityModal = ({ isOpen, onClose, }: Props) => {
     const [endTime, setEndTime] = useState("");
     const [extraInfo, setExtraInfo] = useState("");
 
+
+    useEffect(() => {
+        if (!oldPersonalActivity) return;
+
+        setTitle(oldPersonalActivity.title || "");
+        setStartDate(oldPersonalActivity.startTime ? new Date(oldPersonalActivity.startTime).toISOString().split("T")[0] : "");
+        setStartTime(oldPersonalActivity.startTime ? new Date(oldPersonalActivity.startTime).toTimeString().slice(0, 5) : "");
+        setEndDate(oldPersonalActivity.endTime ? new Date(oldPersonalActivity.endTime).toISOString().split("T")[0] : "");
+        setEndTime(oldPersonalActivity.endTime ? new Date(oldPersonalActivity.endTime).toTimeString().slice(0, 5) : "");
+        setExtraInfo(oldPersonalActivity.description || "");
+    }, [oldPersonalActivity]);
+
+
+
     const handleCancel = () => {
         setTitle("");
         setStartDate("");
@@ -63,6 +80,22 @@ const AddNewPersonalActivityModal = ({ isOpen, onClose, }: Props) => {
 
         onClose();
     };
+
+    const hadleDelete = async () => {
+
+        const isConfirmed = confirm("Vill du verkligen ta bort denna aktiviteten ?")
+        if (isConfirmed) {
+            const deleteSuccess = await deletePersonalActivity(oldPersonalActivity._id as string)
+            if (deleteSuccess) {
+                onClose()
+            }
+
+        }
+
+
+
+
+    }
 
     const handleSubmit = async (e: React.FormEvent) => {
 
@@ -106,7 +139,7 @@ Om du vill sätta en sluttid måste både datum och tid fyllas i.`);
         try {
 
             {
-                const successData = await createNewPersonalActivity(newActivity);
+                const successData = await updatePersonalActivity(oldPersonalActivity._id as string, newActivity);
                 console.log("ändrade till detta:", successData)
             }
 
@@ -115,8 +148,8 @@ Om du vill sätta en sluttid måste både datum och tid fyllas i.`);
             alert("Något gick fel. försök igen 🤔");
         }
 
-        handleCancel()
 
+        onClose();
     };
 
     return (
@@ -124,7 +157,7 @@ Om du vill sätta en sluttid måste både datum och tid fyllas i.`);
 
 
         <Modal isOpen={isOpen}
-            title={"Lägg till egen aktivitet"}
+            title={"Ändra aktivitet"}
             onCloseModal={onClose}
             type={"drawer"}
             size={"small"}
@@ -133,13 +166,13 @@ Om du vill sätta en sluttid måste både datum och tid fyllas i.`);
                 >
                     Avbryt
                 </button>
-                <button type="submit" form="add-activity-form" className="btn-medium btn-filled-primary">
-                    Skapa
+                <button type="submit" form="edit-activity-form" className="btn-medium btn-filled-primary">
+                    Ändra
                 </button>
             </div>}>
 
             <div className={`${styles.contentContainer}`}>
-                <form id="add-activity-form" onSubmit={handleSubmit}
+                <form id="edit-activity-form" onSubmit={handleSubmit}
                     style={{
                         display: "flex",
                         flexDirection: "column",
@@ -147,10 +180,10 @@ Om du vill sätta en sluttid måste både datum och tid fyllas i.`);
                     }}>
 
                     <div className={`${styles.inputGroup}`}>
-                        <label>Vad tänker du göra? </label>
+                        <label>Vad tänker du göra? *</label>
                         <input
                             type="text"
-                            required
+                            // required
                             value={title}
                             onChange={(e) => setTitle(e.target.value)}
                         />
@@ -158,7 +191,7 @@ Om du vill sätta en sluttid måste både datum och tid fyllas i.`);
 
 
                     <div className={`${styles.inputGroup}`}>
-                        <label>När? </label>
+                        <label>När? *</label>
                         <div className={`${styles.whenSection}`}>
 
                             <button type="button" className={`btn-small btn-outlined-primary`}
@@ -174,7 +207,7 @@ Om du vill sätta en sluttid måste både datum och tid fyllas i.`);
                         <div className={`${styles.timeSection}`}>
                             <input
                                 type="date"
-                                required
+                                // required
                                 value={startDate}
                                 min={eventStartDate?.toISOString().split("T")[0]}
                                 max={eventEndDate?.toISOString().split("T")[0]}
@@ -182,7 +215,7 @@ Om du vill sätta en sluttid måste både datum och tid fyllas i.`);
                             />
                             <input
                                 type="time"
-                                required
+                                // required
                                 value={startTime}
                                 onChange={(e) => setStartTime(e.target.value)}
                             />
@@ -191,7 +224,7 @@ Om du vill sätta en sluttid måste både datum och tid fyllas i.`);
                     </div>
 
                     <div className={`${styles.inputGroup}`}>
-                        <label>Vet du en sluttid? (frivilligt)</label>
+                        <label>Vet du en sluttid?</label>
                         <div className={`${styles.whenSection}`}>
                             <button type="button" className={`btn-small btn-outlined-primary`}
                                 onClick={() => {
@@ -222,6 +255,26 @@ Om du vill sätta en sluttid måste både datum och tid fyllas i.`);
                             />
                         </div>
 
+
+
+                    </div>
+
+                    <div className={`${styles.inputGroup} ${styles.dangerSection}`}>
+                        <br />
+                        <hr />
+                        <label>Ta bort</label>
+                        <p>Vill du ta bort denna aktiviteten?</p>
+
+                        <div>
+                            <button type="button" className="btn-small btn-outlined-light-static" onClick={hadleDelete}
+                            >
+                                Ta Bort
+                            </button>
+                        </div>
+
+
+
+
                     </div>
                     {/* <div className={`${styles.inputGroup}`}>
                         <label>extra info</label>
@@ -244,4 +297,4 @@ Om du vill sätta en sluttid måste både datum och tid fyllas i.`);
     )
 }
 
-export default AddNewPersonalActivityModal
+export default EditPersonalActivityFormModal

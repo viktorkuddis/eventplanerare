@@ -7,7 +7,7 @@ import type { PersonalActivityType } from "../../../types";
 
 import { Edit3 } from "react-feather";
 
-import EditPersonalActivityFormModal from "../../Organisms/EditPersonalActivityForm/EditPersonalActivityFormModal";
+import EditPersonalActivityFormModal from "../../Organisms/PersonalActiviity/EditPersonalActivityForm/EditPersonalActivityFormModal";
 
 import { useAuth } from "@clerk/clerk-react";
 
@@ -27,7 +27,7 @@ function PersonalActivityCard({ item }: Props) {
 
 
     const [showEditPersonalActivityModal, setshowEditPersonalActivityModal] = useState(false)
-    const [personalActivityToEdit, setPersonalActivityToEdit] = useState<PersonalActivityType | null>(null)
+    const [personalActivityToEdit, setPersonalActivityToEdit] = useState<PersonalActivityType>()
 
 
     const openEditPersonalActvityModal = (personalActivity: PersonalActivityType) => {
@@ -48,14 +48,15 @@ function PersonalActivityCard({ item }: Props) {
     return (
         <div className={styles.personalActivityRow}>
 
-            <EditPersonalActivityFormModal
+            {personalActivityToEdit && <EditPersonalActivityFormModal
                 isOpen={showEditPersonalActivityModal}
                 onClose={async () => {
                     setshowEditPersonalActivityModal(false)
                     const newEventDetails = await getEventDetailsById(context?.currentEventObjectDetailed?.event._id as string)
                     if (newEventDetails) context?.setCurrentEventObjectsDetailed(newEventDetails)
                 }}
-                oldPersonalActivity={personalActivityToEdit!} />
+                oldPersonalActivity={personalActivityToEdit}
+            />}
 
 
 
