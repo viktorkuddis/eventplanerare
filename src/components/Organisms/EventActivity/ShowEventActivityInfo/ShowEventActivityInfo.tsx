@@ -61,7 +61,7 @@ const ShowEventActivityInfo = ({ item, isOpen, onCloseAction }: PropTypes) => {
                     {new Date(item.startTime).toLocaleDateString("sv-SE", {
                         day: "2-digit",
                         month: "short",
-                    })}, kl. {new Date(item.startTime).toTimeString().slice(0, 5)}
+                    })} kl. {new Date(item.startTime).toTimeString().slice(0, 5)}
                     <br />
                     {item.endTime && (
                         <>
@@ -71,7 +71,7 @@ const ShowEventActivityInfo = ({ item, isOpen, onCloseAction }: PropTypes) => {
                                 new Date(item.endTime).toLocaleDateString("sv-SE", {
                                     day: "2-digit",
                                     month: "short",
-                                }) + ", "}
+                                }) + " "}
                             {/* tiden */}
                             kl. {new Date(item.endTime).toTimeString().slice(0, 5)}
                         </>
