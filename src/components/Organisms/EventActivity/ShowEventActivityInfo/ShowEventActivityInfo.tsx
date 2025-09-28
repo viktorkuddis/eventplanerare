@@ -1,6 +1,14 @@
 import Modal from "../../Modal/Modal"
 import type { EventActivityType } from "../../../../types"
 
+import { useAuth } from "@clerk/clerk-react"
+
+import { Edit3 } from "react-feather";
+
+
+import { AppContext } from "../../../../context/AppContext"
+import { useContext } from "react"
+
 type PropTypes = {
     item: EventActivityType
     isOpen: boolean
@@ -11,14 +19,35 @@ type PropTypes = {
 
 const ShowEventActivityInfo = ({ item, isOpen, onCloseAction }: PropTypes) => {
 
+    const { userId } = useAuth()
 
+    const appContext = useContext(AppContext)
 
-
+    // hitta användaren bland deltagarna:
+    const currentUserParticipant = appContext?.currentEventObjectDetailed?.eventParticipationsEnriched.find((ep) => ep.userId == userId)
 
     return (
         <Modal isOpen={isOpen}
 
-            footerContent={undefined}
+            footerContent={
+                currentUserParticipant?.role == "host"
+
+                    ? <div style={{
+                        // background: "green",
+                        display: "flex",
+                        justifyContent: "end",
+                        marginTop: "1rem",
+                        marginRight: "0.5rem"
+                    }}>
+                        <button className="btn-small btn-outlined-strong">
+                            <div style={{ display: "flex", gap: "0.5rem" }}>
+                                <Edit3 size={"1rem"} />  <p>Ändra</p>
+                            </div>
+
+                        </button>
+                    </div> : undefined
+            }
+
             title={item.title}
             onCloseModal={onCloseAction}
             type={"standard"}
@@ -56,6 +85,10 @@ const ShowEventActivityInfo = ({ item, isOpen, onCloseAction }: PropTypes) => {
 
                     </p>
                 }
+
+
+
+
 
 
             </div>
