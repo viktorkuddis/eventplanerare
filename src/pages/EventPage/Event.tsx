@@ -143,7 +143,7 @@ const Event = () => {
 
             switch (item.type) {
               case "personalActivity": return <PersonalActivityCard key={i} item={item.item} />
-              case "eventActivity": return <GroupActivityCard key={i} item={item.item} />
+              case "eventActivity": return <GroupActivityCard key={i} itemId={item?.item._id || ""} />
               case "dateBanner": return <DateBanner key={i} item={item.item} />
               default:
                 break;

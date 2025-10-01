@@ -18,6 +18,7 @@ export type EventActivityType = {
     endTime?: Date;           // kan vara undefined
     createdAt?: string;       // timestamps lägger till createdAt och updatedAt som ISO-strängar
     updatedAt?: string;
+    _id?: string;             // MongoDB _id som string, valfri
 };
 
 export type EventParticipationType = {

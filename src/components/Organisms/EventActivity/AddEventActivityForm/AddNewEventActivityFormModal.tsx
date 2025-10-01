@@ -1,5 +1,5 @@
 
-import { useContext, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import Modal from "../../Modal/Modal"
 
 import styles from "./AddNewEventActivityFormModal.module.css"
@@ -22,34 +22,65 @@ const getTomorrowDate = () => {
 
 
 type Props = {
+    itemId: string;
     isOpen: boolean;
     onClose: () => void;
+    isEditing?: boolean
+
 };
 
 
-const AddNewEventActivityFormModal = ({ isOpen, onClose, }: Props) => {
+const AddNewEventActivityFormModal = ({ isOpen, onClose, isEditing = false, itemId }: Props) => {
 
 
-
-    const { createNewEventActivity } = useDbApi()
+    const { createNewEventActivity, updateEventActivity } = useDbApi()
 
     const context = useContext(AppContext)
-
-
-
-
 
 
     const eventStartDate = context?.currentEventObjectDetailed?.event.start && new Date(context?.currentEventObjectDetailed?.event.start);
     const eventEndDate = context?.currentEventObjectDetailed?.event.end && new Date(context?.currentEventObjectDetailed?.event.end);
 
 
-    const [title, setTitle] = useState("");
-    const [startDate, setStartDate] = useState("");
-    const [startTime, setStartTime] = useState("");
-    const [endDate, setEndDate] = useState("");
-    const [endTime, setEndTime] = useState("");
-    const [extraInfo, setExtraInfo] = useState("");
+
+    // om de finns ett item to edit så lagras det här
+    const [itemToEdit, setItemToEdit] = useState<EventActivityType>()
+
+
+
+    // states för inputfälten:
+    const [title, setTitle] = useState(itemToEdit ? itemToEdit.title : "");
+    const [startDate, setStartDate] = useState(itemToEdit ? new Date(itemToEdit.startTime).toLocaleDateString() : "");
+    const [startTime, setStartTime] = useState(itemToEdit ? new Date(itemToEdit.startTime).toLocaleTimeString() : "");
+    const [endDate, setEndDate] = useState(itemToEdit?.endTime ? new Date(itemToEdit.endTime).toLocaleDateString() : "");
+    const [endTime, setEndTime] = useState(itemToEdit?.endTime ? new Date(itemToEdit.endTime).toLocaleTimeString() : "");
+    const [extraInfo, setExtraInfo] = useState(itemToEdit ? itemToEdit.description : "");
+
+    // både för att resetta states när man hoppar in och ut ur komponenten. men också för initialt state. 
+    const resetStates = useCallback(() => {
+        setTitle(itemToEdit ? itemToEdit.title : "");
+        setStartDate(itemToEdit ? new Date(itemToEdit.startTime).toLocaleDateString() : "");
+        setStartTime(itemToEdit ? new Date(itemToEdit.startTime).toLocaleTimeString() : "");
+        setEndDate(itemToEdit?.endTime ? new Date(itemToEdit.endTime).toLocaleDateString() : "");
+        setEndTime(itemToEdit?.endTime ? new Date(itemToEdit.endTime).toLocaleTimeString() : "");
+        setExtraInfo(itemToEdit ? itemToEdit.description : "");
+    }, [itemToEdit])
+
+
+    // returnerat ett item to edit att sätta om det är möjligt.
+    useEffect(() => {
+        if (isEditing) {
+            setItemToEdit(context?.currentEventObjectDetailed?.eventActivities.find(item => item._id == itemId))
+        }
+    }, [context?.currentEventObjectDetailed?.eventActivities, isEditing, itemId])
+
+    // om item to edit förändras, dvs om det sätt en så körs funktoin som uppdaterar inputfältens initialavärde.
+    useEffect(() => {
+        if (isEditing) {
+            resetStates()
+        }
+    }, [isEditing, itemToEdit, resetStates])
+
 
     const handleCancel = () => {
         setTitle("");
@@ -59,8 +90,15 @@ const AddNewEventActivityFormModal = ({ isOpen, onClose, }: Props) => {
         setEndTime("");
         setExtraInfo("");
 
-        onClose();
+        onClose()
     };
+
+    function closeModalAndResetStates() {
+        resetStates()
+        onClose()
+
+    }
+
 
     const handleSubmit = async (e: React.FormEvent) => {
 
@@ -96,148 +134,207 @@ Om du vill sätta en sluttid måste både datum och tid fyllas i.`);
             (eventStartDate && newActivity.startTime < eventStartDate) ||
             (eventEndDate && newActivity.endTime && newActivity.endTime > eventEndDate)
         ) {
+
+
+            console.log(
+                newActivity.startTime,
+                eventStartDate
+            )
             alert("oops. är du säker på att din aktivitet håller sig inom evenemangets tidsram?");
             return;
         }
 
-        try {
 
-            {
-                const successData = await createNewEventActivity(newActivity);
-                console.log("skapade detta:", successData)
+
+
+        if (isEditing && itemToEdit || !isEditing) {
+            console.log("vi är i editläge och försökte submitta.")
+            if (itemToEdit?._id) {
+                try {
+                    {
+                        const successData = await updateEventActivity(itemToEdit?._id, newActivity);
+                        console.log("detta ska skriva över aktiviteten::", successData)
+                    }
+
+                } catch (error) {
+                    console.error("Fel :", error);
+                    alert("Något gick fel. försök igen 🤔");
+                }
+            } else { alert("ERROR in CODE. Inget itemID tillgängligt. Rapportera till utvecklare!") }
+            closeModalAndResetStates()
+
+        } else {
+            console.log("VI är i skapaläge och försöker posta nytt till db....")
+
+            try {
+
+                {
+                    const successData = await createNewEventActivity(newActivity);
+                    console.log("skapade detta:", successData)
+                }
+
+            } catch (error) {
+                console.error("Fel :", error);
+                alert("Något gick fel. försök igen 🤔");
             }
-
-        } catch (error) {
-            console.error("Fel :", error);
-            alert("Något gick fel. försök igen 🤔");
+            handleCancel()
         }
 
 
-        handleCancel()
+
+
     };
+
+
+
 
     return (
 
 
 
         <Modal isOpen={isOpen}
-            title={"Lägg till gruppaktivitet"}
-            onCloseModal={onClose}
+            title={isEditing ? "Ändra gruppaktivitet" : "Lägg till gruppaktivitet"}
+            // om vi är i edit mode och stänger så resettas states. om de är ny  avtivity som håller på att skapas så sparas states så man får ha de kvar om man ångrar sig.
+            onCloseModal={isEditing ? closeModalAndResetStates : onClose}
             type={"drawer"}
             size={"small"}
-            footerContent={<div className={`${styles.footer}`}>
-                <button type="button" className="btn-medium btn-outlined-primary" onClick={handleCancel}
+            footerContent={< div className={`${styles.footer}`
+            }>
+                <button type="button" className="btn-medium btn-outlined-primary" onClick={isEditing ? closeModalAndResetStates : handleCancel}
                 >
                     Avbryt
                 </button>
                 <button type="submit" form="add-group-activity-form" className="btn-medium btn-filled-primary">
-                    Skapa
+                    {isEditing ? "Bekräfta Ändring" : "Skapa"}
                 </button>
-            </div>}>
+            </div >}>
 
             <div className={`${styles.contentContainer}`}>
-                <form id="add-group-activity-form" onSubmit={handleSubmit}
-                    style={{
-                        display: "flex",
-                        flexDirection: "column",
-                        width: "100%"
-                    }}>
 
-                    <div className={`${styles.inputGroup}`}>
-                        <label>Titel: </label>
-                        <input
-                            type="text"
-                            required
-                            value={title}
-                            onChange={(e) => setTitle(e.target.value)}
-                        />
-                    </div>
+                {isOpen &&
 
+                    <form id="add-group-activity-form" onSubmit={handleSubmit}
+                        style={{
+                            display: "flex",
+                            flexDirection: "column",
+                            width: "100%"
+                        }}>
 
-                    <div className={`${styles.inputGroup}`}>
-                        <label>Start: </label>
-                        <div className={`${styles.whenSection}`}>
-
-                            <button type="button" className={`btn-small btn-outlined-primary`}
-                                onClick={() => {
-                                    setStartDate(getTodayDate())
-                                }}>
-                                IDAG</button>
-                            <button type="button" className={`btn-small btn-outlined-primary`}
-                                onClick={() => {
-                                    setStartDate(getTomorrowDate())
-                                }}>IMORGON</button>
-                        </div>
-                        <div className={`${styles.timeSection}`}>
+                        <div className={`${styles.inputGroup}`}>
+                            <label>Titel: </label>
                             <input
-                                type="date"
+                                name="title"
+                                type="text"
                                 required
-                                value={startDate}
-                                min={eventStartDate?.toISOString().split("T")[0]}
-                                max={eventEndDate?.toISOString().split("T")[0]}
-                                onChange={(e) => setStartDate(e.target.value)}
-                            />
-                            <input
-                                type="time"
-                                required
-                                value={startTime}
-                                onChange={(e) => setStartTime(e.target.value)}
+                                value={title}
+                                onChange={(e) => setTitle(e.target.value)}
                             />
                         </div>
 
-                    </div>
 
-                    <div className={`${styles.inputGroup}`}>
-                        <label>Slut (frivilligt):</label>
-                        <div className={`${styles.whenSection}`}>
-                            <button type="button" className={`btn-small btn-outlined-primary`}
-                                onClick={() => {
-                                    setEndDate("")
-                                    setEndTime("")
-                                }}>INGEN SLUTTID</button>
-                            <button type="button" className={`btn-small btn-outlined-primary`}
-                                onClick={() => {
-                                    setEndDate(getTodayDate())
-                                }}>IDAG</button>
-                            <button type="button" className={`btn-small btn-outlined-primary`}
-                                onClick={() => {
-                                    setEndDate(getTomorrowDate())
-                                }}>IMORGON</button>
+                        <div className={`${styles.inputGroup}`}>
+                            <label>Start: </label>
+                            <div className={`${styles.whenSection}`}>
+
+                                <button type="button" className={`btn-small btn-outlined-primary`}
+                                    onClick={() => {
+                                        setStartDate(getTodayDate())
+                                    }}>
+                                    IDAG</button>
+                                <button type="button" className={`btn-small btn-outlined-primary`}
+                                    onClick={() => {
+                                        setStartDate(getTomorrowDate())
+                                    }}>IMORGON</button>
+                            </div>
+                            <div className={`${styles.timeSection}`}>
+                                <input
+                                    name="startDate"
+                                    type="date"
+                                    required
+                                    value={startDate}
+                                    min={eventStartDate?.toISOString().split("T")[0]}
+                                    max={eventEndDate?.toISOString().split("T")[0]}
+                                    onChange={(e) => setStartDate(e.target.value)}
+                                />
+                                <input
+                                    name="startTime"
+                                    type="time"
+                                    required
+                                    value={startTime}
+                                    onChange={(e) => setStartTime(e.target.value)}
+                                />
+                            </div>
+
                         </div>
-                        <div className={`${styles.timeSection}`}>
-                            <input
-                                type="date"
-                                value={endDate}
-                                min={eventStartDate?.toISOString().split("T")[0]}
-                                max={eventEndDate?.toISOString().split("T")[0]}
-                                onChange={(e) => setEndDate(e.target.value)}
-                            />
-                            <input
-                                type="time"
-                                value={endTime}
-                                onChange={(e) => setEndTime(e.target.value)}
-                            />
+
+                        <div className={`${styles.inputGroup}`}>
+                            <label>Slut (frivilligt):</label>
+                            <div className={`${styles.whenSection}`}>
+                                <button type="button" className={`btn-small btn-outlined-primary`}
+                                    onClick={() => {
+                                        setEndDate("")
+                                        setEndTime("")
+                                    }}>INGEN SLUTTID</button>
+                                <button type="button" className={`btn-small btn-outlined-primary`}
+                                    onClick={() => {
+                                        setEndDate(getTodayDate())
+                                    }}>IDAG</button>
+                                <button type="button" className={`btn-small btn-outlined-primary`}
+                                    onClick={() => {
+                                        setEndDate(getTomorrowDate())
+                                    }}>IMORGON</button>
+                            </div>
+                            <div className={`${styles.timeSection}`}>
+                                <input
+                                    name="endDate"
+                                    type="date"
+                                    value={endDate}
+                                    min={eventStartDate?.toISOString().split("T")[0]}
+                                    max={eventEndDate?.toISOString().split("T")[0]}
+                                    onChange={(e) => setEndDate(e.target.value)}
+                                />
+                                <input
+                                    name="endTime"
+                                    type="time"
+                                    value={endTime}
+                                    onChange={(e) => setEndTime(e.target.value)}
+                                />
+                            </div>
+
+                        </div>
+                        <div className={`${styles.inputGroup}`}>
+                            <label>Extra info (frivilligt):</label>
+                            <textarea
+                                value={extraInfo}
+                                onChange={(e) => setExtraInfo(e.target.value)}
+                            ></textarea>
                         </div>
 
-                    </div>
-                    <div className={`${styles.inputGroup}`}>
-                        <label>Extra info (frivilligt):</label>
-                        <textarea
-                            value={extraInfo}
-                            onChange={(e) => setExtraInfo(e.target.value)}
-                        ></textarea>
-                    </div>
 
 
 
+                        {isEditing &&
+                            <div className={`${styles.inputGroup} ${styles.dangerSection}`}>
+                                <br />
+                                <hr />
+                                <label>Ta bort</label>
+                                <p>Vill du ta bort denna aktiviteten?</p>
 
+                                <div>
+                                    <button type="button" className="btn-small btn-outlined-light-static"
 
+                                    >
+                                        Ta Bort
+                                    </button>
+                                </div>
 
-                </form>
+                            </div>}
 
+                    </form>
+                }
             </div>
 
-        </Modal>
+        </Modal >
     )
 }
 

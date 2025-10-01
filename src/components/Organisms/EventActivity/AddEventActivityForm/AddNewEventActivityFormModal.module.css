@@ -6,6 +6,10 @@
 .inputGroup {
     display: flex;
     flex-direction: column;
+
+    textarea {
+        min-height: 20vh;
+    }
 }
 
 
@@ -33,4 +37,12 @@
     gap: 0.5rem;
     justify-content: flex-end;
     width: 100%;
+}
+
+.dangerSection {
+    button {
+        margin-top: 0.5rem;
+        color: red;
+        border-color: red;
+    }
 }
