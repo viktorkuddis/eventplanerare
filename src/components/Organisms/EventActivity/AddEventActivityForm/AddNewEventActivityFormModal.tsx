@@ -22,7 +22,7 @@ const getTomorrowDate = () => {
 
 
 type Props = {
-    itemId: string;
+    itemId?: string;
     isOpen: boolean;
     onClose: () => void;
     isEditing?: boolean
